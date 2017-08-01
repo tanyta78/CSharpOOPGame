@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{728341C7-BB07-49F2-8AE6-303C8F364341}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>BACKTOBG</RootNamespace>
-    <AssemblyName>BACKTOBG</AssemblyName>
+    <ProjectGuid>{200974DC-91C0-4042-8D9B-A9DF9ACC2F4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BackToBg.Services</RootNamespace>
+    <AssemblyName>BackToBg.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,22 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\IItem.cs" />
-    <Compile Include="Models\ILocation.cs" />
-    <Compile Include="Models\IPlayer.cs" />
-    <Compile Include="Models\IPlayerQuest.cs" />
-    <Compile Include="Models\IQuest.cs" />
-    <Compile Include="Models\IQuestCompetionItem.cs" />
-    <Compile Include="StartUp.cs" />
+    <Compile Include="EntityServices\PlayerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Database\" />
-    <Folder Include="Utilities\" />
+    <ProjectReference Include="..\BackToBg.Business\BackToBg.Business.csproj">
+      <Project>{e5cea5c4-4480-44f5-878f-3d1841daaefb}</Project>
+      <Name>BackToBg.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BackToBg.Models\BackToBg.Models.csproj">
+      <Project>{fbaab8be-f8c6-492a-a4cd-4b13a49da918}</Project>
+      <Name>BackToBg.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

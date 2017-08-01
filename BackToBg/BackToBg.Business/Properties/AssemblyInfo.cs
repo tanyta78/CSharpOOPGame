@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BACKTOBG")]
+[assembly: AssemblyTitle("BackToBg.Business")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BACKTOBG")]
+[assembly: AssemblyProduct("BackToBg.Business")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("728341c7-bb07-49f2-8ae6-303c8f364341")]
+[assembly: Guid("e5cea5c4-4480-44f5-878f-3d1841daaefb")]
 
 // Version information for an assembly consists of the following four values:
 //
