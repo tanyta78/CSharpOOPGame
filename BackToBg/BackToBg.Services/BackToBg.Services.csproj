@@ -40,10 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityServices\PlayerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="EntityServices\" />
+    <ProjectReference Include="..\BackToBg.Business\BackToBg.Business.csproj">
+      <Project>{e5cea5c4-4480-44f5-878f-3d1841daaefb}</Project>
+      <Name>BackToBg.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BackToBg.Models\BackToBg.Models.csproj">
+      <Project>{fbaab8be-f8c6-492a-a4cd-4b13a49da918}</Project>
+      <Name>BackToBg.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
