@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using BackToBg.Models.EntityInterfaces;
 using BACKTOBG.Models;
-using IDrawable = BackToBg.Business.UtilityInterfaces.IDrawable;
 
 namespace BackToBg.Map
 {
     public class Map : IMap
     {
-        private static int mapSize = 200;
+        private static int mapSize = 30;
 
         private List<IBuilding> buildings;
 
@@ -23,7 +22,7 @@ namespace BackToBg.Map
             this.player = player;
         }
 
-        public void GetMap()
+        public char[][] GetMap()
         {
             //create the map array
             var map = new char[mapSize][];
@@ -39,9 +38,9 @@ namespace BackToBg.Map
                 var figure = info.figure;
                 var x = info.x;
                 var y = info.y;
-                for (int row = x; row < x + figure.GetLength(0); row++)
+                for (int row = x; row < Math.Min(x + figure.Length, mapSize - 1); row++)
                 {
-                    for (int col = y; col < y + figure.GetLength(1); col++)
+                    for (int col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
                     {
                         map[row][col] = figure[row - x][col - y];
                     }
@@ -58,10 +57,13 @@ namespace BackToBg.Map
             for (int i = 1; i < mapSize - 1; i++)
             {
                 map[i][0] = border;
+                map[i][map[0].Length - 1] = border;
             }
             map[mapSize - 1] = new string(border, mapSize).ToCharArray();
 
             //TODO: Center the camera
+
+            return map;
         }
 
         public void Update()

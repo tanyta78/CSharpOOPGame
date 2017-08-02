@@ -53,7 +53,9 @@
     <Compile Include="EntityInterfaces\IPlayerQuest.cs" />
     <Compile Include="EntityInterfaces\IQuest.cs" />
     <Compile Include="EntityInterfaces\IQuestCompetionItem.cs" />
+    <Compile Include="IMap.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerQuest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

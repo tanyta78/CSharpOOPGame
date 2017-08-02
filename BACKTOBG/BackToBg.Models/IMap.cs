@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BackToBg.Models.EntityInterfaces
+namespace BackToBg.Map
 {
-    public interface IBuilding : IDrawable
+    public interface IMap
     {
+        char[][] GetMap();
+
+        void Update();
     }
 }

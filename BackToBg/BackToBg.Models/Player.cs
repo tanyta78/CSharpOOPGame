@@ -10,7 +10,7 @@ namespace BackToBg.Models
         private int y;
         private char figure;
 
-        public Player(int x, int y, char figure = '*')
+        public Player(int x, int y, char figure = 'O')
         {
             this.x = x;
             this.y = y;

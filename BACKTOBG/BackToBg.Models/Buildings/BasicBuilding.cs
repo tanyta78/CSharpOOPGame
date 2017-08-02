@@ -12,7 +12,7 @@ namespace BackToBg.Models.Buildings
         private static char border = '*';
         private static char inner = 'O';
 
-        public BasicBuilding(int x, int y, int sizeFactor) : base(x, y, sizeFactor)
+        public BasicBuilding(int x, int y, int sizeFactor = 1) : base(x, y, sizeFactor)
         {
         }
 
@@ -26,6 +26,10 @@ namespace BackToBg.Models.Buildings
             var size = 5 * this.sizeFactor;
 
             var figure = new string[size];
+            for (int i = 0; i < size; i++)
+            {
+                
+            }
 
             figure[0] = new string(border, size);
             for (int i = 1; i < size - 1; i++)
