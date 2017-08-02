@@ -22,7 +22,7 @@ namespace BackToBg.Map
         {
             this.buildings = buildings;
             this.player = player;
-            this.playerActionFactory = new PlayerActionFactory();
+            this.playerActionFactory = new PlayerActionFactory(this, this.player);
             this.GenerateMap();
         }
 
@@ -32,7 +32,7 @@ namespace BackToBg.Map
             this.map = new char[mapSize][];
             for (int i = 0; i < mapSize; i++)
             {
-                this.map[i] = new char[mapSize];
+                this.map[i] = new string(' ', mapSize).ToCharArray();
             }
 
             //draw all buildings
@@ -80,7 +80,7 @@ namespace BackToBg.Map
             this.map[playerInfo.x][playerInfo.y] = ' ';
 
             //update the players coords
-            var movement = this.playerActionFactory.CreateAction(key, this.player);
+            var movement = this.playerActionFactory.CreateAction(key);
             movement.Execute();
 
             //add the updated player to the map again

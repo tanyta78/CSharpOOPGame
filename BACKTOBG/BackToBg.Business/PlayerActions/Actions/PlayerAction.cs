@@ -11,10 +11,12 @@ namespace BackToBg.Business.PlayerActions
     public abstract class PlayerAction : IPlayerAction
     {
         protected IPlayer player;
+        protected char[][] map;
 
-        protected PlayerAction(IPlayer player)
+        protected PlayerAction(IPlayer player, char[][] map)
         {
             this.player = player;
+            this.map = map;
         }
 
         public abstract void Execute();

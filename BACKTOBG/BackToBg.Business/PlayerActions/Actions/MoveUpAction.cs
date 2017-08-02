@@ -10,13 +10,19 @@ namespace BackToBg.Client.Core.PlayerActions
 {
     public class MoveUpAction : PlayerAction
     {
-        public MoveUpAction(IPlayer player) : base(player)
+        public MoveUpAction(IPlayer player, char[][] map) : base(player, map)
         {
         }
 
         public override void Execute()
         {
-            this.player.MoveNorth();
+            var info = this.player.GetDrawingInfo();
+            var x = info.x;
+            var y = info.y;
+            if (this.map[x - 1][y] == ' ')
+            {
+                this.player.MoveNorth();
+            }
         }
     }
 }
