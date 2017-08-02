@@ -8,11 +8,12 @@ using BackToBg.Business.PlayerActions.Actions;
 using BackToBg.Client.Core.PlayerActions;
 using BACKTOBG.Models;
 using BackToBg.Business;
+using BackToBg.Business.Contracts;
 using BackToBg.Map;
 
 namespace BackToBg.Client.Core
 {
-    public class PlayerActionFactory
+    public class PlayerActionFactory : IPlayerActionFactory
     {
         private IMap map;
         private IPlayer player;

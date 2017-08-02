@@ -14,11 +14,11 @@ namespace BackToBg.Map
     {
         private static int mapSize = 30;
         private char[][] map;
-        private List<IBuilding> buildings;
+        private IList<IBuilding> buildings;
         private IPlayer player;
         private PlayerActionFactory playerActionFactory;
 
-        public Map(List<IBuilding> buildings, IPlayer player)
+        public Map(IList<IBuilding> buildings, IPlayer player)
         {
             this.buildings = buildings;
             this.player = player;

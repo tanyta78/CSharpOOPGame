@@ -43,13 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UtilityInterfaces\IPlayerActionFactory.cs" />
     <Compile Include="Exceptions\InvalidKeyPressException.cs" />
-    <Compile Include="Map\IMap.cs" />
+    <Compile Include="UtilityInterfaces\IMap.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="PlayerActions\Actions\MoveDownAction.cs" />
     <Compile Include="PlayerActions\Actions\MoveLeftAction.cs" />
     <Compile Include="PlayerActions\Actions\MoveRightAction.cs" />
-    <Compile Include="PlayerActions\Actions\IPlayerAction.cs" />
+    <Compile Include="UtilityInterfaces\IPlayerAction.cs" />
     <Compile Include="PlayerActions\PlayerActionFactory.cs" />
     <Compile Include="PlayerActions\Actions\MoveUpAction.cs" />
     <Compile Include="PlayerActions\Actions\PlayerAction.cs" />
