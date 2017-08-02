@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BACKTOBG.Models;
 
 namespace BackToBg.Map
 {
@@ -10,6 +11,6 @@ namespace BackToBg.Map
     {
         char[][] GetMap();
 
-        void Update();
+        void Update(ConsoleKey key);
     }
 }

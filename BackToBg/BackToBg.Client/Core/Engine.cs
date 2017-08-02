@@ -26,13 +26,21 @@ namespace BackToBg.Client.Core
             this.PerformConsoleSetup();
             var buildings = new List<IBuilding>();
             buildings.Add(new BasicBuilding(5, 26));
-            buildings.Add(new BasicBuilding(10, 4));
-            //buildings.Add(new BasicBuilding(7, 6));
+            buildings.Add(new BasicBuilding(10, 4, 2));
+            buildings.Add(new BasicBuilding(13, 15));
+            buildings.Add(new BasicBuilding(20, 23));
             var player = new Player(3, 3);
             var map = new Map.Map(buildings, player);
-            foreach (char[] arr in map.GetMap())
+            
+            while (true)
             {
-                Console.WriteLine(arr);
+                Console.Clear();
+                foreach (char[] arr in map.GetMap())
+                {
+                    Console.WriteLine(arr);
+                }
+                var key = Console.ReadKey();
+                map.Update(key.Key);
             }
         }
     }

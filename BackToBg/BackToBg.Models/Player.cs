@@ -29,7 +29,7 @@ namespace BackToBg.Models
 
         public void MoveEast()
         {
-            throw new NotImplementedException();
+            this.y++;
         }
 
         public void MoveHome()
@@ -39,12 +39,12 @@ namespace BackToBg.Models
 
         public void MoveNorth()
         {
-            throw new NotImplementedException();
+            this.x--;
         }
 
         public void MoveSouth()
         {
-            throw new NotImplementedException();
+            this.x++;
         }
 
         public void MoveTo()
@@ -54,7 +54,7 @@ namespace BackToBg.Models
 
         public void MoveWest()
         {
-            throw new NotImplementedException();
+            this.y--;
         }
 
         public (int x, int y, string[] figure) GetDrawingInfo()
