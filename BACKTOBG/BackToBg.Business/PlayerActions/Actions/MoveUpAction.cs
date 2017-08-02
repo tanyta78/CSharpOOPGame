@@ -17,8 +17,8 @@ namespace BackToBg.Client.Core.PlayerActions
         public override void Execute()
         {
             var info = this.player.GetDrawingInfo();
-            var x = info.x;
-            var y = info.y;
+            var x = info.row;
+            var y = info.col;
             if (this.map[x - 1][y] == ' ')
             {
                 this.player.MoveNorth();

@@ -57,7 +57,7 @@ namespace BackToBg.Models
             this.y--;
         }
 
-        public (int x, int y, string[] figure) GetDrawingInfo()
+        public (int row, int col, string[] figure) GetDrawingInfo()
         {
             //TODO: COHERENT IMPLEMENTATION
             return (this.x, this.y, new[] { this.figure.ToString() });

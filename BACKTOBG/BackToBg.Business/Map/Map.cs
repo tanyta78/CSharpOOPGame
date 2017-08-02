@@ -12,7 +12,7 @@ namespace BackToBg.Map
 {
     public class Map : IMap
     {
-        private static int mapSize = 30;
+        private static int mapSize = 100;
         private char[][] map;
         private IList<IBuilding> buildings;
         private IPlayer player;
@@ -40,8 +40,8 @@ namespace BackToBg.Map
             {
                 var info = building.GetDrawingInfo();
                 var figure = info.figure;
-                var x = info.x;
-                var y = info.y;
+                var x = info.row;
+                var y = info.col;
                 for (int row = x; row < Math.Min(x + figure.Length, mapSize - 1); row++)
                 {
                     for (int col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
@@ -53,7 +53,7 @@ namespace BackToBg.Map
 
             //draw the player
             var playerInfo = this.player.GetDrawingInfo();
-            this.map[playerInfo.x][playerInfo.y] = playerInfo.figure[0][0];
+            this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
 
             //draw the borders
             var border = '*';
@@ -64,8 +64,6 @@ namespace BackToBg.Map
                 this.map[i][this.map[0].Length - 1] = border;
             }
             this.map[mapSize - 1] = new string(border, mapSize).ToCharArray();
-
-            //TODO: Center the camera
         }
 
         public char[][] GetMap()
@@ -77,7 +75,7 @@ namespace BackToBg.Map
         {
             //remove the player from map
             var playerInfo = this.player.GetDrawingInfo();
-            this.map[playerInfo.x][playerInfo.y] = ' ';
+            this.map[playerInfo.row][playerInfo.col] = ' ';
 
             //update the players coords
             var movement = this.playerActionFactory.CreateAction(key);
@@ -85,7 +83,7 @@ namespace BackToBg.Map
 
             //add the updated player to the map again
             playerInfo = this.player.GetDrawingInfo();
-            this.map[playerInfo.x][playerInfo.y] = playerInfo.figure[0][0];
+            this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
         }
     }
 }

@@ -14,7 +14,7 @@ namespace BackToBg.Models.Items
         private int intelligenceBonus;
         private int strengthBonus;
 
-        protected Item(int id, string name, int price, int strengthBonus, int intelligenceBonus, int agilityBonus, string  rarity)
+        protected Item(int id, string name, int price, int strengthBonus, int intelligenceBonus, int agilityBonus, string rarity)
         {
             this.Rarity = (Rarity)Enum.Parse(typeof(Rarity), rarity);
             this.ID = id;

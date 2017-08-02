@@ -16,7 +16,7 @@ namespace BackToBg.Models.Buildings
         {
         }
 
-        public override (int x, int y, string[] figure) GetDrawingInfo()
+        public override (int row, int col, string[] figure) GetDrawingInfo()
         {
             return (this.x, this.y, this.GenerateFigure());
         }

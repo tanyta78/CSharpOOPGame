@@ -19,6 +19,6 @@ namespace BackToBg.Models.EntityInterfaces
             this.sizeFactor = sizeFactor;
         }
 
-        public abstract (int x, int y, string[] figure) GetDrawingInfo();
+        public abstract (int row, int col, string[] figure) GetDrawingInfo();
     }
 }
