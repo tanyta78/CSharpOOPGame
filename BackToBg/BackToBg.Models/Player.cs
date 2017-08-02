@@ -6,6 +6,17 @@ namespace BackToBg.Models
 {
     public class Player : IPlayer
     {
+        private int x;
+        private int y;
+        private char figure;
+
+        public Player(int x, int y, char figure = 'O')
+        {
+            this.x = x;
+            this.y = y;
+            this.figure = figure;
+        }
+
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public int Money => throw new NotImplementedException();
@@ -18,7 +29,7 @@ namespace BackToBg.Models
 
         public void MoveEast()
         {
-            throw new NotImplementedException();
+            this.y++;
         }
 
         public void MoveHome()
@@ -28,12 +39,12 @@ namespace BackToBg.Models
 
         public void MoveNorth()
         {
-            throw new NotImplementedException();
+            this.x--;
         }
 
         public void MoveSouth()
         {
-            throw new NotImplementedException();
+            this.x++;
         }
 
         public void MoveTo()
@@ -43,7 +54,13 @@ namespace BackToBg.Models
 
         public void MoveWest()
         {
-            throw new NotImplementedException();
+            this.y--;
+        }
+
+        public (int x, int y, string[] figure) GetDrawingInfo()
+        {
+            //TODO: COHERENT IMPLEMENTATION
+            return (this.x, this.y, new[] { this.figure.ToString() });
         }
     }
 }
