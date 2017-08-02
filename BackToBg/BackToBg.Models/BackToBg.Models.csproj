@@ -46,11 +46,25 @@
     <Compile Include="EntityInterfaces\IPlayerQuest.cs" />
     <Compile Include="EntityInterfaces\IQuest.cs" />
     <Compile Include="EntityInterfaces\IQuestCompetionItem.cs" />
-    <Compile Include="Item.cs" />
+    <Compile Include="Enums\Rarity.cs" />
+    <Compile Include="Items\Books\Book.cs" />
+    <Compile Include="Items\Books\Booklet.cs" />
+    <Compile Include="Items\Books\Encyclopedia.cs" />
+    <Compile Include="Items\Books\Primer.cs" />
+    <Compile Include="Items\Boots\Boot.cs" />
+    <Compile Include="Items\Boots\HeavyBoot.cs" />
+    <Compile Include="Items\Boots\Overshoe.cs" />
+    <Compile Include="Items\Boots\Sneaker.cs" />
+    <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\Weapons\Axe.cs" />
+    <Compile Include="Items\Weapons\Hammer.cs" />
+    <Compile Include="Items\Weapons\Sword.cs" />
+    <Compile Include="Items\Weapons\Weapon.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerQuest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quest.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
