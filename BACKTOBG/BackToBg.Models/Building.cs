@@ -8,19 +8,17 @@ namespace BackToBg.Models.EntityInterfaces
 {
     public abstract class Building : IDrawable
     {
-        private int x;
-        private int y;
-        private int width;
-        private int height;
+        protected int x;
+        protected int y;
+        protected int sizeFactor; // coefficient of how big compared to the default size of the building the current instance should be
 
-        protected Building(int x, int y, int width, int height)
+        protected Building(int x, int y, int sizeFactor)
         {
             this.x = x;
             this.y = y;
-            this.width = width;
-            this.height = height;
+            this.sizeFactor = sizeFactor;
         }
 
-        public abstract (int x, int y, string figure) GetDrawingInfo();
+        public abstract (int x, int y, string[] figure) GetDrawingInfo();
     }
 }

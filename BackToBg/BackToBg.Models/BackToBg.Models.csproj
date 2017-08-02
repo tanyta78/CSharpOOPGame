@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
+    <Compile Include="Buildings\BasicBuilding.cs" />
     <Compile Include="EntityInterfaces\IBuilding.cs" />
     <Compile Include="EntityInterfaces\IDrawable.cs" />
     <Compile Include="EntityInterfaces\IItem.cs" />

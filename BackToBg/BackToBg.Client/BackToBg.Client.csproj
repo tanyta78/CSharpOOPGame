@@ -34,6 +34,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,11 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BackToBg.Business\BackToBg.Business.csproj">
       <Project>{e5cea5c4-4480-44f5-878f-3d1841daaefb}</Project>
       <Name>BackToBg.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BackToBg.Models\BackToBg.Models.csproj">
+      <Project>{FBAAB8BE-F8C6-492A-A4CD-4B13A49DA918}</Project>
+      <Name>BackToBg.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

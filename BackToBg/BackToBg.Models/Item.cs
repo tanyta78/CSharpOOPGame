@@ -3,7 +3,7 @@ using System;
 
 namespace BackToBg.Models
 {
-    public class Item : IItem
+    public abstract class Item : IItem
     {
         public int ID => throw new NotImplementedException();
 

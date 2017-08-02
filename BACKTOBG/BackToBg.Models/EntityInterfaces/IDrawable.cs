@@ -8,6 +8,6 @@ namespace BackToBg.Models.EntityInterfaces
 {
     public interface IDrawable
     {
-        (int x, int y, string figure) GetDrawingInfo();
+        (int x, int y, string[] figure) GetDrawingInfo();
     }
 }  
