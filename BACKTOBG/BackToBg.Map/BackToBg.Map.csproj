@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FBAAB8BE-F8C6-492A-A4CD-4B13A49DA918}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BackToBg.Models</RootNamespace>
-    <AssemblyName>BackToBg.Models</AssemblyName>
+    <ProjectGuid>{9407A6C4-861F-4CFC-A5B7-3AFBF409B6C0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BackToBg.Map</RootNamespace>
+    <AssemblyName>BackToBg.Map</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,9 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,23 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Building.cs" />
-    <Compile Include="EntityInterfaces\IBuilding.cs" />
-    <Compile Include="EntityInterfaces\IDrawable.cs" />
-    <Compile Include="EntityInterfaces\IItem.cs" />
-    <Compile Include="EntityInterfaces\ILocation.cs" />
-    <Compile Include="EntityInterfaces\IPlayer.cs" />
-    <Compile Include="EntityInterfaces\IPlayerQuest.cs" />
-    <Compile Include="EntityInterfaces\IQuest.cs" />
-    <Compile Include="EntityInterfaces\IQuestCompetionItem.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="PlayerQuest.cs" />
+    <Compile Include="IMap.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackToBg.Business\BackToBg.Business.csproj">
+      <Project>{E5CEA5C4-4480-44F5-878F-3D1841DAAEFB}</Project>
+      <Name>BackToBg.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BackToBg.Models\BackToBg.Models.csproj">
+      <Project>{FBAAB8BE-F8C6-492A-A4CD-4B13A49DA918}</Project>
+      <Name>BackToBg.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
