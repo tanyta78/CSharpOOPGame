@@ -8,10 +8,8 @@ namespace BackToBg.Client
     {
         private static void Main(string[] args)
         {
-            var building = new BasicBuilding(0, 0, 2);
-            Console.WriteLine(string.Join(Environment.NewLine, building.GetDrawingInfo().figure));
-            //Engine engine = new Engine();
-            //engine.Run();
+            Engine engine = new Engine();
+            engine.Run();
         }
     }
 }

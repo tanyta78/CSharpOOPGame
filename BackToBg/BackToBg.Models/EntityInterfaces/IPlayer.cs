@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using BackToBg.Models.EntityInterfaces;
 
 namespace BACKTOBG.Models
 {
-    public interface IPlayer
+    public interface IPlayer : IDrawable
     {
         string Name { get; set; }
         int Money { get; }
