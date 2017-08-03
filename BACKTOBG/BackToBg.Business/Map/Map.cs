@@ -4,7 +4,7 @@ using BackToBg.Business.PlayerActions;
 using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
 
-namespace BackToBg.Business.Map
+namespace BackToBg.Business
 {
     public class Map : IMap
     {
@@ -62,6 +62,8 @@ namespace BackToBg.Business.Map
             this.map[mapSize - 1] = new string(border, mapSize).ToCharArray();
         }
 
+        public IEnumerable<IBuilding> Drawables => this.buildings;
+
         public char[][] GetMap()
         {
             return this.map;
@@ -81,7 +83,7 @@ namespace BackToBg.Business.Map
                 //update the players coords
                 action.Execute();
             }
-            catch (NotImplementedException e)
+            catch (NotImplementedException)
             {
                 throw;
             }

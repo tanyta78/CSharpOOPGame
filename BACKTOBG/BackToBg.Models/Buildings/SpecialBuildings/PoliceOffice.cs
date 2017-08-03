@@ -22,14 +22,7 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
 
         public override (int row, int col, string[] figure) GetDrawingInfo()
         {
-            //TODO
             return (this.x, this.y, GetFigure());
-        }
-
-        public override void Interact()
-        {
-            //TODO
-            throw new NotImplementedException();
         }
 
         //********
@@ -54,6 +47,11 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
             figure[7] = "********";
 
             return figure;
+        }
+
+        public override void Interact()
+        {
+            throw new NotImplementedException("Interacting with a police station is not yet available.");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace BackToBg.Models.EntityInterfaces
 {
-    public interface IBuilding : IDrawable
+    public interface IBuilding : IDrawable, IInteractable
     {
     }
 }

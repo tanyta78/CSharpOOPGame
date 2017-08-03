@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using BackToBg.Business.Exceptions;
-using BackToBg.Business.Map;
+using BackToBg.Business;
 using BackToBg.Models.Buildings;
 using BackToBg.Models.EntityInterfaces;
 using BackToBg.Models;
@@ -45,7 +45,7 @@ namespace BackToBg.Client.Core
                 {
                     map.Update(key.Key);
                 }
-                catch (Exception e) when (e is NotImplementedException || e is InvalidKeyPressException)
+                catch (Exception e) when (e is NotImplementedException || e is InvalidActionException || e is NotSupportedException)
                 {
                     this.DisplayException(e.Message);
                     this.DrawMap();
@@ -59,7 +59,7 @@ namespace BackToBg.Client.Core
             Console.SetCursorPosition((ConsoleWidth - message.Length) / 2, ConsoleHeight / 2);
             Console.WriteLine(message);
             Console.ResetColor();
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
         }
 
         private void DrawMap()
@@ -67,8 +67,6 @@ namespace BackToBg.Client.Core
             Console.Clear();
             var map = this.map.GetMap();
             var playerInfo = this.player.GetDrawingInfo();
-            var drawnRows = 0;
-            var drawnCols = 0;
 
             var verticalCalculations = (map.Length - (ConsoleWidth - 1)) - (playerInfo.col - ConsoleWidth / 2);
             if (verticalCalculations > 0)

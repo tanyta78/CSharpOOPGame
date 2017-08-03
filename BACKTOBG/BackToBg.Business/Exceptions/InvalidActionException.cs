@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BackToBg.Business.Exceptions
 {
-    public class InvalidKeyPressException : InvalidActionException
+    public abstract class InvalidActionException : Exception
     {
-        public InvalidKeyPressException() : base("They key you just pressed does nothing!")
+        public InvalidActionException(string message) : base(message)
         {
         }
     }

@@ -7,7 +7,7 @@ namespace BackToBg.Models.EntityInterfaces
         int Money { get; }
         int Experiance { get; }
         ILocation CurrentLocation { get; set; }
-        List<IItem> PersonalInventory { get; }
+        IList<IItem> PersonalInventory { get; }
 
         void MoveHome();
 
@@ -20,5 +20,9 @@ namespace BackToBg.Models.EntityInterfaces
         void MoveWest();
 
         void MoveTo();
+
+        void Interact(IInteractable interactable);
+
+        bool AdjacentTo(IBuilding building);
     }
 }

@@ -30,7 +30,7 @@ namespace BackToBg.Business.PlayerActions
                 case ConsoleKey.RightArrow:
                     return new MoveRightAction(this.player, this.map.GetMap());
                 case ConsoleKey.Spacebar:
-                    return new InteractAction(this.player, this.map.GetMap());
+                    return new InteractAction(this.player, this.map.GetMap(), this.map);
                 default:
                     throw new InvalidKeyPressException();
             }

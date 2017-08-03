@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\InvalidActionException.cs" />
+    <Compile Include="Exceptions\PlayerNotNearAnyBuildingException.cs" />
     <Compile Include="PlayerActions\Actions\InteractAction.cs" />
     <Compile Include="UtilityInterfaces\IPlayerActionFactory.cs" />
     <Compile Include="Exceptions\InvalidKeyPressException.cs" />

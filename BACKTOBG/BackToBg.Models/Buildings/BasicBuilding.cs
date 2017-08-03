@@ -1,4 +1,5 @@
-﻿using BackToBg.Models.EntityInterfaces;
+﻿using System;
+using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models.Buildings
 {
@@ -14,6 +15,11 @@ namespace BackToBg.Models.Buildings
         public override (int row, int col, string[] figure) GetDrawingInfo()
         {
             return (this.x, this.y, GenerateFigure());
+        }
+
+        public override void Interact()
+        {
+            throw new NotSupportedException("You cannot interact with a basic building.");
         }
 
         private string[] GenerateFigure()

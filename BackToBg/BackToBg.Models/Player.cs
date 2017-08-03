@@ -38,7 +38,7 @@ namespace BackToBg.Models
             set => throw new NotImplementedException();
         }
 
-        public List<IItem> PersonalInventory => throw new NotImplementedException();
+        public IList<IItem> PersonalInventory => throw new NotImplementedException();
 
         public void MoveEast()
         {
@@ -65,6 +65,25 @@ namespace BackToBg.Models
             throw new NotImplementedException();
         }
 
+        public void Interact(IInteractable interactable)
+        {
+            interactable.Interact();
+        }
+
+        public bool AdjacentTo(IBuilding building)
+        {
+            var buildingInfo = building.GetDrawingInfo();
+            var buildingX = buildingInfo.row;
+            var buildingY = buildingInfo.col;
+            var buildingHeight = buildingInfo.figure.Length;
+            var buildingWidth = buildingInfo.figure[0].Length;
+
+            var horizontalCheck = this.x >= buildingX - 1 && this.x <= buildingX + buildingWidth + 1;
+            var verticalCheck = this.y >= buildingY - 1 && this.y <= buildingY + buildingHeight + 1;
+
+            return horizontalCheck && verticalCheck;
+        }
+
         public void MoveWest()
         {
             this.y--;
@@ -73,7 +92,7 @@ namespace BackToBg.Models
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
             //TODO: COHERENT IMPLEMENTATION
-            return (this.x, this.y, new[] {this.figure.ToString()});
+            return (this.x, this.y, new[] { this.figure.ToString() });
         }
     }
 }

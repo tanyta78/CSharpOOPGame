@@ -3,7 +3,7 @@ using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models.Buildings
 {
-    public abstract class SpecialBuilding : Building, ILocation, IInteractable
+    public abstract class SpecialBuilding : Building, ILocation
     {
         private int id;
         private string name;
@@ -19,7 +19,7 @@ namespace BackToBg.Models.Buildings
             this.sizeFactor = sizeFactor;
         }
 
-        public abstract void Interact();
+        public abstract override void Interact();
 
         public int ID
         {

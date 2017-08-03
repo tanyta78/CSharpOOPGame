@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BackToBg.Business.Exceptions
 {
-    public class InvalidKeyPressException : InvalidActionException
+    public class PlayerNotNearAnyBuildingException : InvalidActionException
     {
-        public InvalidKeyPressException() : base("They key you just pressed does nothing!")
+        public PlayerNotNearAnyBuildingException() : base("The player is not near any interactable building.")
         {
         }
     }
