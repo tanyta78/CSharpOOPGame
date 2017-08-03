@@ -3,9 +3,8 @@ using BackToBg.Models.EntityInterfaces;
 
 namespace BACKTOBG.Models
 {
-    public interface IPlayer : IDrawable
+    public interface IPlayer : ICreature
     {
-        string Name { get; set; }
         int Money { get; }
         int Experiance { get; }
         ILocation CurrentLocation { get; set; }

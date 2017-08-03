@@ -4,8 +4,8 @@ namespace BACKTOBG.Models
 {
     public interface IQuest
     {
-        int ID { get; set; }
-        string Name { get; set; }
+        int ID { get; }
+        string Name { get; }
         string Description { get; set; }
         int RewardExperiancePoints { get; set; }
         int RewardMoney { get; set; }
