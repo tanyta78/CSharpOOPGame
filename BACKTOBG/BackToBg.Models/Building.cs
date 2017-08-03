@@ -18,5 +18,7 @@ namespace BackToBg.Models
         }
 
         public abstract (int row, int col, string[] figure) GetDrawingInfo();
+        public abstract string[] GenerateFigure();
+
     }
 }

@@ -81,10 +81,6 @@ namespace BackToBg.Business.Map
                 //update the players coords
                 action.Execute();
             }
-            catch (NotImplementedException e)
-            {
-                throw;
-            }
             finally
             {
                 //add the updated player to the map again

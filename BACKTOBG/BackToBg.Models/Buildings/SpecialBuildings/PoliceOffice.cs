@@ -26,6 +26,11 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
             return (this.x, this.y, GetFigure());
         }
 
+        public override string[] GenerateFigure()
+        {
+            return this.GetFigure();
+        }
+
         public override void Interact()
         {
             //TODO

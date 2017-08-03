@@ -16,7 +16,7 @@ namespace BackToBg.Models.Buildings
             return (this.x, this.y, GenerateFigure());
         }
 
-        private string[] GenerateFigure()
+        public override string[] GenerateFigure()
         {
             var size = 5 * this.sizeFactor;
 
