@@ -1,89 +1,81 @@
 ﻿using BackToBg.Business.UtilityInterfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using BackToBg.Business.Exceptions;
 using BackToBg.Business;
 using BackToBg.Models.Buildings;
 using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models;
 using BackToBg.Models.Buildings.SpecialBuildings;
 
 namespace BackToBg.Client.Core
 {
     public class Engine : IEngine
     {
-        private static int ConsoleHeight = 41;
-        private static int ConsoleWidth = 61;
-
         private IPlayer player;
         private IList<IBuilding> buildings;
         private IMap map;
+        private IReader reader;
+        private IWriter writer;
 
-        public Engine()
+        public Engine(IPlayer player, IReader reader, IWriter writer)
         {
-            this.player = new Player(4, 38);
+            this.player = player;
+            this.reader = reader;
+            this.writer = writer;
         }
 
         public void Run()
         {
-            this.PerformConsoleSetup();
-            this.buildings = new List<IBuilding>();
-            this.buildings.Add(new BasicBuilding(5, 26));
-            this.buildings.Add(new BasicBuilding(10, 4, 2));
-            this.buildings.Add(new PoliceOffice(1, "Police Station", "Just a police station", 30, 15));
-            this.buildings.Add(new BasicBuilding(20, 23));
-
-            this.map = new Map(this.buildings, player);
+            this.InitializeBuildings();
+            this.map = new Map(this.buildings, this.player);
 
             while (true)
             {
                 this.DrawMap();
-                var key = Console.ReadKey();
+                var key = this.reader.ReadKey();
                 try
                 {
                     map.Update(key.Key);
                 }
                 catch (Exception e) when (e is NotImplementedException || e is InvalidActionException || e is NotSupportedException)
                 {
-                    this.DisplayException(e.Message);
+                    this.writer.DisplayException(e.Message);
                     this.DrawMap();
                 }
             }
         }
 
-        private void DisplayException(string message)
+        private void InitializeBuildings()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition((ConsoleWidth - message.Length) / 2, ConsoleHeight / 2);
-            Console.WriteLine(message);
-            Console.ResetColor();
-            Thread.Sleep(1000);
+            this.buildings = new List<IBuilding>();
+            this.buildings.Add(new BasicBuilding(5, 26));
+            this.buildings.Add(new BasicBuilding(10, 4, 2));
+            this.buildings.Add(new PoliceOffice(1, "Police Station", "Just a police station", 30, 15));
+            this.buildings.Add(new BasicBuilding(20, 23));
         }
 
         private void DrawMap()
         {
-            Console.Clear();
+            this.writer.Clear();
             var map = this.map.GetMap();
             var playerInfo = this.player.GetDrawingInfo();
 
-            var verticalCalculations = (map.Length - (ConsoleWidth - 1)) - (playerInfo.col - ConsoleWidth / 2);
+            var verticalCalculations = (map.Length - (this.writer.ConsoleWidth - 1)) - (playerInfo.col - this.writer.ConsoleWidth / 2);
             if (verticalCalculations > 0)
             {
                 verticalCalculations = 0;
             }
 
-            var horizontalCalculations = (map.Length - (ConsoleHeight - 1)) - (playerInfo.row - ConsoleHeight / 2);
+            var horizontalCalculations = (map.Length - (this.writer.ConsoleHeight - 1)) - (playerInfo.row - this.writer.ConsoleHeight / 2);
             if (horizontalCalculations > 0)
             {
                 horizontalCalculations = 0;
             }
 
-            for (int row = Math.Max(0, playerInfo.row - ConsoleHeight / 2), counter = 0; counter < (ConsoleHeight - 1 + horizontalCalculations); row++, counter++)
+            for (int row = Math.Max(0, playerInfo.row - this.writer.ConsoleHeight / 2), counter = 0; counter < (this.writer.ConsoleHeight - 1 + horizontalCalculations); row++, counter++)
             {
                 var line = string.Join("", map[row]);
-                Console.WriteLine(line.Substring(Math.Max(0, playerInfo.col - ConsoleWidth / 2), ConsoleWidth - 1 + verticalCalculations));
+                this.writer.WriteLine(line.Substring(Math.Max(0, playerInfo.col - this.writer.ConsoleWidth / 2), this.writer.ConsoleWidth - 1 + verticalCalculations));
             }
 
             //for (int i = playerInfo.row - ConsoleHeight / 2; i < playerInfo.row; i++)
@@ -107,17 +99,6 @@ namespace BackToBg.Client.Core
             //        drawnRows++;
             //    }
             //}
-
-        }
-
-        private void PerformConsoleSetup()
-        {
-            Console.CursorVisible = false;
-            Console.OutputEncoding = Encoding.Unicode;
-            Console.WindowHeight = ConsoleHeight;
-            Console.WindowWidth = ConsoleWidth;
-            Console.BufferHeight = ConsoleHeight;
-            Console.BufferWidth = ConsoleWidth;
         }
     }
 }
