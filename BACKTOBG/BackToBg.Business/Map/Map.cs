@@ -19,8 +19,8 @@ namespace BackToBg.Business
         {
             this.buildings = buildings;
             this.player = player;
-            this.playerActionFactory = new PlayerActionFactory(this, this.player);
             this.GenerateMap();
+            this.playerActionFactory = new PlayerActionFactory(this, this.player);
         }
 
         private void GenerateMap()

@@ -3,6 +3,7 @@ using BackToBg.Business.Exceptions;
 using BackToBg.Business.PlayerActions.Actions;
 using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
+using System.Collections.Generic;
 
 namespace BackToBg.Business.PlayerActions
 {
@@ -10,30 +11,35 @@ namespace BackToBg.Business.PlayerActions
     {
         private IMap map;
         private IPlayer player;
+        private Dictionary<ConsoleKey, IPlayerAction> actions;
 
         public PlayerActionFactory(IMap map, IPlayer player)
         {
             this.map = map;
             this.player = player;
+            this.InitializeActions();
+        }
+
+        private void InitializeActions()
+        {
+            this.actions = new Dictionary<ConsoleKey, IPlayerAction>
+            {
+                { ConsoleKey.UpArrow, new MoveUpAction(this.player, this.map.GetMap()) },
+                { ConsoleKey.DownArrow, new MoveDownAction(this.player, this.map.GetMap()) },
+                { ConsoleKey.LeftArrow, new MoveLeftAction(this.player, this.map.GetMap()) },
+                { ConsoleKey.RightArrow, new MoveRightAction(this.player, this.map.GetMap()) },
+                { ConsoleKey.Spacebar, new InteractAction(this.player, this.map.GetMap(), this.map) }
+            };
         }
 
         public IPlayerAction CreateAction(ConsoleKey key)
         {
-            switch (key)
+            if (!this.actions.ContainsKey(key))
             {
-                case ConsoleKey.UpArrow:
-                    return new MoveUpAction(this.player, this.map.GetMap());
-                case ConsoleKey.DownArrow:
-                    return new MoveDownAction(this.player, this.map.GetMap());
-                case ConsoleKey.LeftArrow:
-                    return new MoveLeftAction(this.player, this.map.GetMap());
-                case ConsoleKey.RightArrow:
-                    return new MoveRightAction(this.player, this.map.GetMap());
-                case ConsoleKey.Spacebar:
-                    return new InteractAction(this.player, this.map.GetMap(), this.map);
-                default:
-                    throw new InvalidKeyPressException();
+                throw new InvalidKeyPressException();                 
             }
+
+            return this.actions[key];            
         }
     }
 }
