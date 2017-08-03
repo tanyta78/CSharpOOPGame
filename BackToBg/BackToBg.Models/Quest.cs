@@ -1,5 +1,5 @@
-﻿using BACKTOBG.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models
 {
