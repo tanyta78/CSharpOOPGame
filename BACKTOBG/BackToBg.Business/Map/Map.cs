@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackToBg.Business.Exceptions;
 using BackToBg.Business.PlayerActions;
 using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
@@ -83,8 +84,7 @@ namespace BackToBg.Business
                 //update the players coords
                 action.Execute();
             }
-            catch (NotImplementedException)
-            }            finally
+            finally
             {
                 //add the updated player to the map again
                 playerInfo = this.player.GetDrawingInfo();

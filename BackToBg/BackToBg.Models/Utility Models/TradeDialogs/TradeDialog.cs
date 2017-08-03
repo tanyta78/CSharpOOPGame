@@ -14,7 +14,7 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
         //Location to draw from
 
-        protected TradeDialog(Point startingLocation,Player player, Shop shop)
+        protected TradeDialog(Point startingLocation, Player player, Shop shop)
         {
             this.Location = startingLocation;
         }

@@ -28,11 +28,6 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
             throw new NotImplementedException();
         }
 
-        public override string[] GenerateFigure()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Interact()
         {
             throw new NotImplementedException();
