@@ -58,7 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\EntityServiceInterfaces\IPlayerDataService.cs" />
     <Compile Include="ServiceInterfaces\IGenericDataService.cs" />
-    <Compile Include="UtilityInterfaces\IDrawable.cs" />
     <Compile Include="UtilityInterfaces\IEngine.cs" />
   </ItemGroup>
   <ItemGroup>

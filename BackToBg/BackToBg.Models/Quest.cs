@@ -1,6 +1,7 @@
 ﻿using System;
-using BACKTOBG.Models;
+using BackToBg.Models;
 using System.Collections.Generic;
+using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models
 {

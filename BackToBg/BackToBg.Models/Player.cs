@@ -17,11 +17,16 @@ namespace BackToBg.Models
             this.figure = figure;
         }
 
+        public int ID { get; }
+
         public string Name
         {
             get => throw new NotImplementedException();
             set => throw new NotImplementedException();
         }
+
+        public int CurrentHitPoints { get; }
+        public int MaxHitPoints { get; }
 
         public int Money => throw new NotImplementedException();
 

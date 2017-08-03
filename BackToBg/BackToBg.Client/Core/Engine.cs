@@ -47,14 +47,19 @@ namespace BackToBg.Client.Core
                 }
                 catch (Exception e) when (e is NotImplementedException || e is InvalidKeyPressException)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message);
-                    Console.ResetColor();
-                    Thread.Sleep(750);
+                    this.DisplayException(e.Message);
                     this.DrawMap();
                 }
             }
+        }
+
+        private void DisplayException(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition((ConsoleWidth - message.Length) / 2, ConsoleHeight / 2);
+            Console.WriteLine(message);
+            Console.ResetColor();
+            Thread.Sleep(500);
         }
 
         private void DrawMap()
