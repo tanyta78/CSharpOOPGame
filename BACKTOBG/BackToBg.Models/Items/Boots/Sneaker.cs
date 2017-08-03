@@ -6,7 +6,7 @@
         private const int AgilityGain = 15;
         private const int IntelligenceGain = 2;
 
-        public Sneaker(int id, string name, int price, string rarity) 
+        public Sneaker(int id, string name, int price, string rarity)
             : base(id, name, price, StrengthGain, IntelligenceGain, AgilityGain, rarity)
         {
         }

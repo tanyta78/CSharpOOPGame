@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Client.Core;
+using BackToBg.Business.PlayerActions;
+using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
-using BACKTOBG.Models;
 
-namespace BackToBg.Map
+namespace BackToBg.Business.Map
 {
     public class Map : IMap
     {
@@ -73,17 +69,28 @@ namespace BackToBg.Map
 
         public void Update(ConsoleKey key)
         {
+            //crucial code that throws exception
+            var action = this.playerActionFactory.CreateAction(key);
+
             //remove the player from map
             var playerInfo = this.player.GetDrawingInfo();
             this.map[playerInfo.row][playerInfo.col] = ' ';
 
-            //update the players coords
-            var movement = this.playerActionFactory.CreateAction(key);
-            movement.Execute();
-
-            //add the updated player to the map again
-            playerInfo = this.player.GetDrawingInfo();
-            this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
+            try
+            {
+                //update the players coords
+                action.Execute();
+            }
+            catch (NotImplementedException e)
+            {
+                throw;
+            }
+            finally
+            {
+                //add the updated player to the map again
+                playerInfo = this.player.GetDrawingInfo();
+                this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
+            }
         }
     }
 }

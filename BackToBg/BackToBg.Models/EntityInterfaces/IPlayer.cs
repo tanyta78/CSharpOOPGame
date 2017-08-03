@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using BackToBg.Models.EntityInterfaces;
 
-namespace BACKTOBG.Models
+namespace BackToBg.Models.EntityInterfaces
 {
     public interface IPlayer : ICreature
     {

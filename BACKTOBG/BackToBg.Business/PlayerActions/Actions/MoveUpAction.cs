@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Business.PlayerActions;
-using BACKTOBG.Models;
+﻿using BackToBg.Models.EntityInterfaces;
 
-namespace BackToBg.Client.Core.PlayerActions
+namespace BackToBg.Business.PlayerActions.Actions
 {
     public class MoveUpAction : PlayerAction
     {

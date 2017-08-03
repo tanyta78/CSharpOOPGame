@@ -6,7 +6,7 @@
         private const int AgilityGain = 3;
         private const int IntelligenceGain = 1;
 
-        public HeavyBoot(int id, string name, int price, string rarity) 
+        public HeavyBoot(int id, string name, int price, string rarity)
             : base(id, name, price, StrengthGain, IntelligenceGain, AgilityGain, rarity)
         {
         }

@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BackToBg.Business.Exceptions;
 using BackToBg.Business.PlayerActions.Actions;
-using BackToBg.Client.Core.PlayerActions;
-using BACKTOBG.Models;
-using BackToBg.Business;
-using BackToBg.Business.Contracts;
-using BackToBg.Map;
+using BackToBg.Business.UtilityInterfaces;
+using BackToBg.Models.EntityInterfaces;
 
-namespace BackToBg.Client.Core
+namespace BackToBg.Business.PlayerActions
 {
     public class PlayerActionFactory : IPlayerActionFactory
     {
@@ -36,6 +29,8 @@ namespace BackToBg.Client.Core
                     return new MoveLeftAction(this.player, this.map.GetMap());
                 case ConsoleKey.RightArrow:
                     return new MoveRightAction(this.player, this.map.GetMap());
+                case ConsoleKey.Spacebar:
+                    return new InteractAction(this.player, this.map.GetMap());
                 default:
                     throw new InvalidKeyPressException();
             }

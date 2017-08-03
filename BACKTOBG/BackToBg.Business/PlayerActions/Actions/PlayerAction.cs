@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Client.Core;
-using BACKTOBG.Models;
+﻿using BackToBg.Business.UtilityInterfaces;
+using BackToBg.Models.EntityInterfaces;
 
-namespace BackToBg.Business.PlayerActions
+namespace BackToBg.Business.PlayerActions.Actions
 {
     public abstract class PlayerAction : IPlayerAction
     {

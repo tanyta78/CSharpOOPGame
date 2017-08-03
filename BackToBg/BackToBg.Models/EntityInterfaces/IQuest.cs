@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BACKTOBG.Models
+namespace BackToBg.Models.EntityInterfaces
 {
     public interface IQuest
     {
