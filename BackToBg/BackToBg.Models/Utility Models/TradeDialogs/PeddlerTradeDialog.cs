@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BackToBg.Models.Buildings.SpecialBuildings;
 using BackToBg.Models.Items;
 
 namespace BackToBg.Models.Utility_Models.TradeDialogs
 {
-    //class PeddlerTradeDialog : TradeDialog
-    //{
-    //    public PeddlerTradeDialog(Point startingLocation, List<Item> _playerItems, List<Item> _shopItems) : base(startingLocation, _playerItems, _shopItems)
-    //    {
-    //    }
+    public class PeddlerTradeDialog : TradeDialog
+    {
+        public PeddlerTradeDialog(Point startingLocation, Player player, Shop shop) : base(startingLocation, player, shop)
+        {
+        }
 
-    //    public override string[] GenerateFigure()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
+        public override string[] GenerateFigure()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
