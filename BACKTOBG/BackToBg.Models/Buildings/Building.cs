@@ -1,6 +1,6 @@
 ﻿using BackToBg.Models.EntityInterfaces;
 
-namespace BackToBg.Models
+namespace BackToBg.Models.Buildings
 {
     public abstract class Building : IBuilding
     {

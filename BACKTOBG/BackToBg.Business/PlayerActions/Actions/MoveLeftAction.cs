@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BackToBg.Business.Attributes;
 using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Business.PlayerActions.Actions
 {
+    [PlayerAction("LeftArrow")]
     public class MoveLeftAction : PlayerAction
     {
         public MoveLeftAction(IPlayer player, char[][] map) : base(player, map)

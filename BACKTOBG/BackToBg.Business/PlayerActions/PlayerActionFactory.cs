@@ -1,8 +1,10 @@
 ﻿using System;
 using BackToBg.Business.Exceptions;
-using BackToBg.Business.PlayerActions.Actions;
 using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
+using System.Reflection;
+using System.Linq;
+using BackToBg.Business.Attributes;
 using System.Collections.Generic;
 
 namespace BackToBg.Business.PlayerActions
@@ -11,35 +13,52 @@ namespace BackToBg.Business.PlayerActions
     {
         private IMap map;
         private IPlayer player;
-        private Dictionary<ConsoleKey, IPlayerAction> actions;
+        private IEnumerable<IBuilding> buildings;
 
         public PlayerActionFactory(IMap map, IPlayer player)
         {
             this.map = map;
             this.player = player;
-            this.InitializeActions();
-        }
-
-        private void InitializeActions()
-        {
-            this.actions = new Dictionary<ConsoleKey, IPlayerAction>
-            {
-                { ConsoleKey.UpArrow, new MoveUpAction(this.player, this.map.GetMap()) },
-                { ConsoleKey.DownArrow, new MoveDownAction(this.player, this.map.GetMap()) },
-                { ConsoleKey.LeftArrow, new MoveLeftAction(this.player, this.map.GetMap()) },
-                { ConsoleKey.RightArrow, new MoveRightAction(this.player, this.map.GetMap()) },
-                { ConsoleKey.Spacebar, new InteractAction(this.player, this.map.GetMap(), this.map) }
-            };
+            this.buildings = this.map.Drawables;
         }
 
         public IPlayerAction CreateAction(ConsoleKey key)
         {
-            if (!this.actions.ContainsKey(key))
+            var actionType = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(t => t.GetCustomAttribute<PlayerActionAttribute>() != null)
+                .FirstOrDefault(t => t.GetCustomAttribute<PlayerActionAttribute>().ActionKeyName == key.ToString());
+
+            if (actionType == null)
             {
-                throw new InvalidKeyPressException();                 
+                throw new InvalidKeyPressException();
             }
 
-            return this.actions[key];            
+            IPlayerAction action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { this.player, this.map.GetMap() });
+            action = this.InjectDependencies(action);
+
+            return action;
+        }
+
+        private IPlayerAction InjectDependencies(IPlayerAction action)
+        {
+            var actionFields = action.GetType()
+                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Where(f => f.GetCustomAttribute<InjectAttribute>() != null);
+
+            var factoryFields = typeof(PlayerActionFactory).
+                GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+
+            foreach (var field in actionFields)
+            {
+                if (factoryFields.Any(f => f.FieldType == field.FieldType))
+                {
+                    field.SetValue(action,
+                        factoryFields.First(f => f.FieldType == field.FieldType).GetValue(this));
+                }
+            }
+
+            return action;
         }
     }
 }

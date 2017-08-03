@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\InjectAttribute.cs" />
+    <Compile Include="Attributes\PlayerActionAttribute.cs" />
     <Compile Include="Exceptions\InvalidActionException.cs" />
     <Compile Include="Exceptions\PlayerNotNearAnyBuildingException.cs" />
     <Compile Include="PlayerActions\Actions\InteractAction.cs" />

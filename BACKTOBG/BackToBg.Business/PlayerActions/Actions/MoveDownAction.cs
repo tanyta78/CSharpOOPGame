@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Models.EntityInterfaces;
+﻿using BackToBg.Models.EntityInterfaces;
+using BackToBg.Business.Attributes;
 
 namespace BackToBg.Business.PlayerActions.Actions
 {
+    [PlayerAction("DownArrow")]
     public class MoveDownAction : PlayerAction
     {
         public MoveDownAction(IPlayer player, char[][] map) : base(player, map)

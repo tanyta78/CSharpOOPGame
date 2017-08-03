@@ -1,7 +1,9 @@
-﻿using BackToBg.Models.EntityInterfaces;
+﻿using BackToBg.Business.Attributes;
+using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Business.PlayerActions.Actions
 {
+    [PlayerAction("UpArrow")]
     public class MoveUpAction : PlayerAction
     {
         public MoveUpAction(IPlayer player, char[][] map) : base(player, map)

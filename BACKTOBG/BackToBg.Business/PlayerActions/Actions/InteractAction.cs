@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BackToBg.Business.Exceptions;
 using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
+using BackToBg.Business.Attributes;
 
 namespace BackToBg.Business.PlayerActions.Actions
 {
+    [PlayerAction("Spacebar")]
     public class InteractAction : PlayerAction
     {
+        [Inject]
         private IEnumerable<IBuilding> buildings;
 
-        public InteractAction(IPlayer player, char[][] mapArray, IMap map) : base(player, mapArray)
+        public InteractAction(IPlayer player, char[][] mapArray) : base(player, mapArray)
         {
-            this.buildings = map.Drawables;
+            //this.buildings = map.Drawables;
         }
 
         public override void Execute()
