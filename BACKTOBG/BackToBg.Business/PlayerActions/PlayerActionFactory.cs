@@ -36,6 +36,8 @@ namespace BackToBg.Client.Core
                     return new MoveLeftAction(this.player, this.map.GetMap());
                 case ConsoleKey.RightArrow:
                     return new MoveRightAction(this.player, this.map.GetMap());
+                case ConsoleKey.Spacebar:
+                    return new InteractAction(this.player, this.map.GetMap());
                 default:
                     throw new InvalidKeyPressException();
             }

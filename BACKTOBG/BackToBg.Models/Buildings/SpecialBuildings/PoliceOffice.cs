@@ -19,19 +19,43 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
         {
             this.QuestAvailableHere = PoliceQuest;
             this.ItemRequeredToEnter = ItemToEnter;
-            this.QuestAvailableHere.RewardItem = new HeavyBoot(1, "PoliceBoots", 0, "Epic");
+            this.QuestAvailableHere.RewardItem = new HeavyBoot(1, "PoliceBoots", 1, "Epic");
         }
 
         public override (int row, int col, string[] figure) GetDrawingInfo()
         {
-            //TO DO
-            throw new NotImplementedException();
+            //TODO
+            return (this.x, this.y, this.GetFigure());
         }
 
         public override void Interact()
         {
-            //TO DO
+            //TODO
             throw new NotImplementedException();
+        }
+
+        //********
+        //* PPP  *
+        //* P  P *
+        //* PP   *
+        //* P    *
+        //* P    *
+        //*      *
+        //********
+        private string[] GetFigure()
+        {
+            var figure = new string[8];
+
+            figure[0] = "********";
+            figure[1] = "* PPP  *";
+            figure[2] = "* P  P *";
+            figure[3] = "* PP   *";
+            figure[4] = "* P    *";
+            figure[5] = "* P    *";
+            figure[6] = "* P    *";
+            figure[7] = "********";
+
+            return figure;
         }
     }
 }

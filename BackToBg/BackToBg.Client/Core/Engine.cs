@@ -1,10 +1,13 @@
 ﻿using BackToBg.Business.UtilityInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using BackToBg.Business.Exceptions;
 using BackToBg.Models.Buildings;
 using BackToBg.Models.EntityInterfaces;
 using BackToBg.Map;
 using BackToBg.Models;
+using BackToBg.Models.Buildings.SpecialBuildings;
 using BACKTOBG.Models;
 
 namespace BackToBg.Client.Core
@@ -29,7 +32,7 @@ namespace BackToBg.Client.Core
             this.buildings = new List<IBuilding>();
             this.buildings.Add(new BasicBuilding(5, 26));
             this.buildings.Add(new BasicBuilding(10, 4, 2));
-            this.buildings.Add(new BasicBuilding(13, 15));
+            this.buildings.Add(new PoliceOffice(1, "Police Station", "Just a police station", 30, 15));
             this.buildings.Add(new BasicBuilding(20, 23));
 
             this.map = new Map.Map(this.buildings, player);
@@ -38,7 +41,19 @@ namespace BackToBg.Client.Core
             {
                 this.DrawMap();
                 var key = Console.ReadKey();
-                map.Update(key.Key);
+                try
+                {
+                    map.Update(key.Key);
+                }
+                catch (Exception e) when (e is NotImplementedException || e is InvalidKeyPressException)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.Message);
+                    Console.ResetColor();
+                    Thread.Sleep(750);
+                    this.DrawMap();
+                }
             }
         }
 
@@ -94,6 +109,7 @@ namespace BackToBg.Client.Core
 
         private void PerformConsoleSetup()
         {
+            Console.CursorVisible = false;
             Console.WindowHeight = ConsoleHeight;
             Console.WindowWidth = ConsoleWidth;
             Console.BufferHeight = ConsoleHeight;
