@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using BackToBg.Business.Exceptions;
-using BackToBg.Client.Core;
+using BackToBg.Business.PlayerActions;
+using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
-using BACKTOBG.Models;
 
-namespace BackToBg.Map
+namespace BackToBg.Business.Map
 {
     public class Map : IMap
     {

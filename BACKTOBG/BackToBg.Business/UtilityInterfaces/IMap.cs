@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BACKTOBG.Models;
 
-namespace BackToBg.Map
+namespace BackToBg.Business.UtilityInterfaces
 {
     public interface IMap
     {

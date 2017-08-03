@@ -1,14 +1,14 @@
 ﻿using BackToBg.Business.UtilityInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using BackToBg.Business.Exceptions;
+using BackToBg.Business.Map;
 using BackToBg.Models.Buildings;
 using BackToBg.Models.EntityInterfaces;
-using BackToBg.Map;
 using BackToBg.Models;
 using BackToBg.Models.Buildings.SpecialBuildings;
-using BACKTOBG.Models;
 
 namespace BackToBg.Client.Core
 {
@@ -35,7 +35,7 @@ namespace BackToBg.Client.Core
             this.buildings.Add(new PoliceOffice(1, "Police Station", "Just a police station", 30, 15));
             this.buildings.Add(new BasicBuilding(20, 23));
 
-            this.map = new Map.Map(this.buildings, player);
+            this.map = new Map(this.buildings, player);
 
             while (true)
             {
@@ -110,6 +110,7 @@ namespace BackToBg.Client.Core
         private void PerformConsoleSetup()
         {
             Console.CursorVisible = false;
+            Console.OutputEncoding = Encoding.Unicode;
             Console.WindowHeight = ConsoleHeight;
             Console.WindowWidth = ConsoleWidth;
             Console.BufferHeight = ConsoleHeight;
