@@ -58,6 +58,7 @@
     <Compile Include="EntityInterfaces\IPlayerQuest.cs" />
     <Compile Include="EntityInterfaces\IQuest.cs" />
     <Compile Include="EntityInterfaces\IQuestCompetionItem.cs" />
+    <Compile Include="EntityInterfaces\ITradingEntity.cs" />
     <Compile Include="Enums\Rarity.cs" />
     <Compile Include="Items\Books\Book.cs" />
     <Compile Include="Items\Books\Booklet.cs" />
@@ -76,6 +77,8 @@
     <Compile Include="PlayerQuest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quest.cs" />
+    <Compile Include="Utility Models\Point.cs" />
+    <Compile Include="Utility Models\TradeDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

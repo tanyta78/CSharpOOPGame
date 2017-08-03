@@ -17,13 +17,13 @@ namespace BackToBg.Models.Buildings
             return (this.x, this.y, GenerateFigure());
         }
 
+
         public override void Interact()
         {
             throw new NotSupportedException("You cannot interact with a basic building.");
         }
 
-        private string[] GenerateFigure()
-        {
+        private string[] GenerateFigure()        {
             var size = 5 * this.sizeFactor;
 
             var figure = new string[size];

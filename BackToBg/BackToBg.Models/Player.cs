@@ -94,5 +94,10 @@ namespace BackToBg.Models
             //TODO: COHERENT IMPLEMENTATION
             return (this.x, this.y, new[] { this.figure.ToString() });
         }
+
+        public string[] GenerateFigure()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

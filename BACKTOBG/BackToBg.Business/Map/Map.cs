@@ -84,10 +84,7 @@ namespace BackToBg.Business
                 action.Execute();
             }
             catch (NotImplementedException)
-            {
-                throw;
-            }
-            finally
+            }            finally
             {
                 //add the updated player to the map again
                 playerInfo = this.player.GetDrawingInfo();

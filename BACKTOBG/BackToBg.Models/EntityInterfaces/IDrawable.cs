@@ -3,5 +3,6 @@
     public interface IDrawable
     {
         (int row, int col, string[] figure) GetDrawingInfo();
+        string[] GenerateFigure();
     }
 }

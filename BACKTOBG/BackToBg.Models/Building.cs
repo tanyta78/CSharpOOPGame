@@ -16,8 +16,5 @@ namespace BackToBg.Models
             this.sizeFactor = sizeFactor;
         }
 
-        public abstract (int row, int col, string[] figure) GetDrawingInfo();
-
-        public abstract void Interact();
-    }
+        public abstract (int row, int col, string[] figure) GetDrawingInfo();		public abstract void Interact();    }
 }
