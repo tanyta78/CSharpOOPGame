@@ -45,8 +45,11 @@
   <ItemGroup>
     <Compile Include="Building.cs" />
     <Compile Include="Buildings\BasicBuilding.cs" />
+    <Compile Include="Buildings\SpecialBuilding.cs" />
+    <Compile Include="Buildings\SpecialBuildings\PoliceOffice.cs" />
     <Compile Include="EntityInterfaces\IBuilding.cs" />
     <Compile Include="EntityInterfaces\IDrawable.cs" />
+    <Compile Include="EntityInterfaces\IInteractable.cs" />
     <Compile Include="EntityInterfaces\IItem.cs" />
     <Compile Include="EntityInterfaces\ILocation.cs" />
     <Compile Include="EntityInterfaces\IPlayer.cs" />
