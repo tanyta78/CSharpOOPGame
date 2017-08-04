@@ -1,5 +1,4 @@
 ﻿using System;
-using BackToBg.Models;
 using System.Collections.Generic;
 using BackToBg.Models.EntityInterfaces;
 
@@ -22,14 +21,12 @@ namespace BackToBg.Models
 
         public int ID
         {
-            get { return this.id; }
+            get => this.id;
 
             private set
             {
                 if (value <= 0)
-                {
                     throw new ArgumentException($"{nameof(this.id)} should be positive integer!");
-                }
 
                 this.id = value;
             }
@@ -37,14 +34,12 @@ namespace BackToBg.Models
 
         public string Name
         {
-            get { return this.name; }
+            get => this.name;
 
             private set
             {
                 if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-                {
                     throw new ArgumentException($"{nameof(this.name)} should not be null empty or white space!");
-                }
 
                 this.name = value;
             }

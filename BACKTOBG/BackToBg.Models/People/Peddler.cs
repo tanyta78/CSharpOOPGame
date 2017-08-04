@@ -8,16 +8,12 @@ namespace BackToBg.Models.People
     public class Peddler : ITradingEntity
     {
         //TODO
-        private List<Item> items;
 
-        public List<Item> Items
-        {
-            get { return this.items; }
-            set { this.items = value; }
-        }
+        public List<Item> Items { get; set; }
 
         public IList<IItem> Inventory { get; set; }
         public string Name { get; set; }
+
         public void Trade()
         {
             throw new NotImplementedException();

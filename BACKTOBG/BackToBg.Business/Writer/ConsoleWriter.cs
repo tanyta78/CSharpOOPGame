@@ -1,46 +1,27 @@
-﻿using BackToBg.Business.UtilityInterfaces;
-using System;
+﻿using System;
 using System.Text;
 using System.Threading;
+using BackToBg.Business.UtilityInterfaces;
 
 namespace BackToBg.Business.Writer
 {
     public class ConsoleWriter : IWriter
     {
-        private readonly int consoleHeight;
-        private readonly int consoleWidth;
-
         public ConsoleWriter(int consoleHeight, int consoleWidth)
         {
-            this.consoleHeight = consoleHeight;
-            this.consoleWidth = consoleWidth;
-            this.PerformConsoleSetup();
+            this.ConsoleHeight = consoleHeight;
+            this.ConsoleWidth = consoleWidth;
+            PerformConsoleSetup();
         }
 
-        public int ConsoleHeight
-        {
-            get { return this.consoleHeight; }
-        }
+        public int ConsoleHeight { get; }
 
-        public int ConsoleWidth
-        {
-            get { return this.consoleWidth; }
-        }
-
-        private void PerformConsoleSetup()
-        {
-            Console.CursorVisible = false;
-            Console.OutputEncoding = Encoding.Unicode;
-            Console.WindowHeight = this.consoleHeight;
-            Console.WindowWidth = this.consoleWidth;
-            Console.BufferHeight = this.consoleHeight;
-            Console.BufferWidth = this.consoleWidth;
-        }
+        public int ConsoleWidth { get; }
 
         public void DisplayException(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition((this.consoleWidth - message.Length) / 2, this.consoleHeight / 2);
+            Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
             Console.WriteLine(message);
             Console.ResetColor();
             Thread.Sleep(1000);
@@ -54,6 +35,16 @@ namespace BackToBg.Business.Writer
         public void Clear()
         {
             Console.Clear();
+        }
+
+        private void PerformConsoleSetup()
+        {
+            Console.CursorVisible = false;
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.WindowHeight = this.ConsoleHeight;
+            Console.WindowWidth = this.ConsoleWidth;
+            Console.BufferHeight = this.ConsoleHeight;
+            Console.BufferWidth = this.ConsoleWidth;
         }
     }
 }

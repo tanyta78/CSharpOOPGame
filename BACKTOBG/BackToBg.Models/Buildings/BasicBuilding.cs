@@ -1,5 +1,4 @@
 ﻿using System;
-using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models.Buildings
 {

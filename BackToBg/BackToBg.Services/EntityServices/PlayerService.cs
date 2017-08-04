@@ -1,28 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using BackToBg.Business.ServiceInterfaces.EntityServiceInterfaces;
 using BackToBg.Models;
-using System.Linq.Expressions;
 
 namespace BackToBg.Services.EntityServices
 {
-    class PlayerService : IPlayerDataService
+    internal class PlayerService : IPlayerDataService
     {
         public void Add(params Player[] items)
         {
             throw new NotImplementedException();
         }
 
-        public System.Collections.Generic.IList<Player> GetAll(params Expression<Func<Player, object>>[] navigationProperties)
+        public IList<Player> GetAll(params Expression<Func<Player, object>>[] navigationProperties)
         {
             throw new NotImplementedException();
         }
 
-        public System.Collections.Generic.IList<Player> GetList(Func<Player, bool> where, params Expression<Func<Player, object>>[] navigationProperties)
+        public IList<Player> GetList(Func<Player, bool> where,
+            params Expression<Func<Player, object>>[] navigationProperties)
         {
             throw new NotImplementedException();
         }
 
-        public Player GetSingle(Func<Player, bool> where, params Expression<Func<Player, object>>[] navigationProperties)
+        public Player GetSingle(Func<Player, bool> where,
+            params Expression<Func<Player, object>>[] navigationProperties)
         {
             throw new NotImplementedException();
         }

@@ -19,8 +19,6 @@ namespace BackToBg.Models.Buildings
             this.sizeFactor = sizeFactor;
         }
 
-        public abstract override void Interact();
-
         public int ID
         {
             get => this.id;
@@ -50,5 +48,7 @@ namespace BackToBg.Models.Buildings
         public string Description { get; set; }
         public IItem ItemRequeredToEnter { get; set; }
         public IQuest QuestAvailableHere { get; set; }
+
+        public abstract override void Interact();
     }
 }

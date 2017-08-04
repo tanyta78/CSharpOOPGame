@@ -2,7 +2,7 @@
 
 namespace BackToBg.Business.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class,AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class PlayerActionAttribute : Attribute
     {
         public PlayerActionAttribute(string actionKeyName)
@@ -10,6 +10,6 @@ namespace BackToBg.Business.Attributes
             this.ActionKeyName = actionKeyName;
         }
 
-        public string ActionKeyName { get; private set; }
+        public string ActionKeyName { get; }
     }
 }

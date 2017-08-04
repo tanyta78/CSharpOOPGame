@@ -1,10 +1,10 @@
-﻿using BackToBg.Client.Core;
+﻿using BackToBg.Business.Common;
+using BackToBg.Business.Reader;
+using BackToBg.Business.UtilityInterfaces;
+using BackToBg.Business.Writer;
+using BackToBg.Client.Core;
 using BackToBg.Models;
 using BackToBg.Models.EntityInterfaces;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Business.Reader;
-using BackToBg.Business.Writer;
-using BackToBg.Business.Common;
 
 namespace BackToBg.Client
 {
@@ -16,7 +16,7 @@ namespace BackToBg.Client
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
 
-            Engine engine = new Engine(player, reader, writer);
+            var engine = new Engine(player, reader, writer);
             engine.Run();
         }
     }

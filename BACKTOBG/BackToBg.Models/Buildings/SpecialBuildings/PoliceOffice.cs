@@ -1,4 +1,5 @@
 ﻿using System;
+using BackToBg.Models.Enums;
 using BackToBg.Models.Items;
 using BackToBg.Models.Items.Boots;
 
@@ -17,7 +18,7 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
         {
             this.QuestAvailableHere = PoliceQuest;
             this.ItemRequeredToEnter = ItemToEnter;
-            this.QuestAvailableHere.RewardItem = new HeavyBoot(1, "PoliceBoots", 1, "Epic");
+            this.QuestAvailableHere.RewardItem = new HeavyBoot(1, "PoliceBoots", 1, Rarity.Epic);
         }
 
         public override (int row, int col, string[] figure) GetDrawingInfo()

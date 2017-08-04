@@ -7,11 +7,9 @@ namespace BackToBg.Business.PlayerActions.Actions
     [PlayerAction("UpArrow")]
     public class MoveUpAction : PlayerAction
     {
-        [Inject]
-        private readonly IPlayer player;
+        [Inject] private readonly IMap map;
 
-        [Inject]
-        private readonly IMap map;
+        [Inject] private readonly IPlayer player;
 
         public override void Execute()
         {
@@ -19,9 +17,7 @@ namespace BackToBg.Business.PlayerActions.Actions
             var x = info.row;
             var y = info.col;
             if (this.map.GetMap()[x - 1][y] == ' ')
-            {
                 this.player.MoveNorth();
-            }
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using BackToBg.Business.UtilityInterfaces;
-using System;
+﻿using System;
+using BackToBg.Business.UtilityInterfaces;
 
 namespace BackToBg.Business.Reader
 {

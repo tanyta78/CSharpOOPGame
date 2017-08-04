@@ -8,32 +8,29 @@ using BackToBg.Models.Utilities;
 namespace BackToBg.Models.Utility_Models.TradeDialogs
 {
     /// <summary>
-    /// The whole dialog window to display the trade. Consists of two InventarDialogs (Player's and Trader's)
+    ///     The whole dialog window to display the trade. Consists of two InventarDialogs (Player's and Trader's)
     /// </summary>
     public class TradeDialog : IDrawable
     {
-
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="startingLocation">Upper left corner of figure</param>
         /// <param name="player">The first member of the trade.</param>
         /// <param name="trader">The second member of the trade. Could be another player, shop, peddlar, etc.</param>
-        /// 
         public TradeDialog(Point startingLocation, IPlayer player, ITradingEntity trader)
         {
             this.Location = startingLocation;
             this.Player = player as Player;
             this.Trader = trader;
         }
-        
+
         #region Properties
 
         public Point Location { get; set; }
 
-        private ITradingEntity Trader { get; set; }
+        private ITradingEntity Trader { get; }
 
-        private Player Player { get; set; }
+        private Player Player { get; }
 
         private InventoryDialog<Shop> TraderInventoryDialog { get; set; }
 
@@ -55,34 +52,26 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
         //TODO: should be able to move selection from shop items to player items
         private string[] GenerateFigure()
         {
-            int rows = Constants.TradeDialogRows + 1;
+            var rows = Constants.TradeDialogRows + 1;
             IList<string> figureRows = new List<string>(rows);
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             //            figureRows[0] = 1[0] + spaces + 2[0]
 
-            for (int i = 1; i < rows; i++)
-            {
+            for (var i = 1; i < rows; i++)
                 //append middle two rows that are for the ---> <--- arrows
                 if (i == rows / 2)
-                {
                     sb.Append(new string('-', Constants.TradeDialogSpacingColumns - 1) + '>');
-                }
                 else if (i == rows / 2 + 1)
-                {
                     sb.Append('<' + new string('-', Constants.TradeDialogSpacingColumns - 1));
-                }
                 else
-                {
                     sb.Append(new string(' ', Constants.TradeDialogSpacingColumns));
-                }
-            }
             return figureRows.ToArray();
         }
 
         protected virtual string[] GetFigure()
         {
-            return this.GenerateFigure();
+            return GenerateFigure();
         }
 
         #endregion

@@ -1,5 +1,5 @@
-using BackToBg.Models;
 using System.Data.Entity;
+using BackToBg.Models;
 
 namespace BackToBg.Data
 {

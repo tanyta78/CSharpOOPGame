@@ -4,6 +4,5 @@
     {
         public const int ConsoleHeight = 41;
         public const int ConsoleWidth = 61;
-
     }
 }

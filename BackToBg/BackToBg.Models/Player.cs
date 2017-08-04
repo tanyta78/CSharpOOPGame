@@ -92,13 +92,12 @@ namespace BackToBg.Models
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
             //TODO: COHERENT IMPLEMENTATION
-            return (this.x, this.y, new[] { this.figure.ToString() });
+            return (this.x, this.y, new[] {this.figure.ToString()});
         }
 
         public string[] GenerateFigure()
         {
             throw new NotImplementedException();
         }
-
     }
 }

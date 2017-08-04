@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace BackToBg.Models.EntityInterfaces
+﻿namespace BackToBg.Models.EntityInterfaces
 {
-    public interface IPlayer : ICreature,ITradingEntity
+    public interface IPlayer : ICreature, ITradingEntity
     {
         double Money { get; }
         int Experience { get; }

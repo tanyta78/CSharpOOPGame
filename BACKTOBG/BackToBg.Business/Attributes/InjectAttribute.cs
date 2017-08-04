@@ -2,7 +2,7 @@
 
 namespace BackToBg.Business.Attributes
 {
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Field)]
     public class InjectAttribute : Attribute
     {
     }

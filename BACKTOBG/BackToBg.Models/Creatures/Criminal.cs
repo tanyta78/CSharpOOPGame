@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models.Creatures
@@ -11,11 +7,11 @@ namespace BackToBg.Models.Creatures
     {
         private const int MoneyReward = 50;
         private const int ExperiancePointReward = 50;
+        private int currentHitPoints;
 
         private int id;
-        private string name;
-        private int currentHitPoints;
         private int maxHitPoints;
+        private string name;
 
         public Criminal(int id, string name, int currentHitPoints, int maxHitPoints)
         {
@@ -27,6 +23,10 @@ namespace BackToBg.Models.Creatures
             this.RewardMoney = ExperiancePointReward;
         }
 
+        public int RewardExperiancePoints { get; set; }
+
+        public int RewardMoney { get; set; }
+
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
             throw new NotImplementedException();
@@ -34,14 +34,12 @@ namespace BackToBg.Models.Creatures
 
         public int ID
         {
-            get { return this.id; }
+            get => this.id;
 
             private set
             {
                 if (value <= 0)
-                {
                     throw new ArgumentException($"{nameof(this.id)} should be positive integer!");
-                }
 
                 this.id = value;
             }
@@ -49,14 +47,12 @@ namespace BackToBg.Models.Creatures
 
         public string Name
         {
-            get { return this.name; }
+            get => this.name;
 
             private set
             {
                 if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-                {
                     throw new ArgumentException($"{nameof(this.name)} should not be null empty or white space!");
-                }
 
                 this.name = value;
             }
@@ -64,14 +60,12 @@ namespace BackToBg.Models.Creatures
 
         public int CurrentHitPoints
         {
-            get { return this.currentHitPoints; }
+            get => this.currentHitPoints;
 
             private set
             {
                 if (value <= 0)
-                {
                     throw new ArgumentException($"{nameof(this.currentHitPoints)} should be positive integer!");
-                }
 
                 this.currentHitPoints = value;
             }
@@ -79,21 +73,15 @@ namespace BackToBg.Models.Creatures
 
         public int MaxHitPoints
         {
-            get { return this.maxHitPoints; }
+            get => this.maxHitPoints;
 
             private set
             {
                 if (value <= 0)
-                {
                     throw new ArgumentException($"{nameof(this.maxHitPoints)} should be positive integer!");
-                }
 
                 this.maxHitPoints = value;
             }
         }
-
-        public int RewardExperiancePoints { get; set; }
-
-        public int RewardMoney { get; set; }
     }
 }
