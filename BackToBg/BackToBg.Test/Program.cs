@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackToBg.Models;
 using BackToBg.Models.Buildings.SpecialBuildings;
+using BackToBg.Models.Buildings.SpecialBuildings.Shops;
 using BackToBg.Models.EntityInterfaces;
 using BackToBg.Models.Enums;
 using BackToBg.Models.Items.Books;
@@ -17,7 +18,7 @@ namespace BackToBg.Test
         static void Main(string[] args)
         {
             TradeDialog td = new TradeDialog(new Point(0, 0),
-                new Player()
+                new Player("Pesho")
                 {
                     Inventory = new List<IItem>
                     {
@@ -25,7 +26,7 @@ namespace BackToBg.Test
                         new Encyclopedia(2, "Za dinozavrite", 15, Rarity.Epic)
                     }
                 },
-                new Shop(1, "Mall of Sofia", null, 10, 10)
+                new MallShop(1, "Mall of Sofia", null, 10, 10)
                 {
                     Inventory = new List<IItem>
                     {
@@ -41,6 +42,11 @@ namespace BackToBg.Test
             {
                 Console.WriteLine(figure[i]);
             }
+
+
+
+            Console.WriteLine("Praznite redove sa za6toto sym hardcodenal w constanta broq na itemi per page");
+            Console.WriteLine("TODO: add pagination + Active inventory selection + Item selection");
         }
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="Buildings\SpecialBuilding.cs" />
     <Compile Include="Buildings\SpecialBuildings\PoliceOffice.cs" />
     <Compile Include="Buildings\SpecialBuildings\Shop.cs" />
+    <Compile Include="Buildings\SpecialBuildings\Shops\MallShop.cs" />
     <Compile Include="Creatures\Criminal.cs" />
     <Compile Include="EntityInterfaces\IBuilding.cs" />
     <Compile Include="EntityInterfaces\ICreature.cs" />
@@ -80,7 +81,9 @@
     <Compile Include="PlayerQuest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quest.cs" />
+    <Compile Include="Utilities\Alignment.cs" />
     <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="Utilities\Functions.cs" />
     <Compile Include="Utility Models\Point.cs" />
     <Compile Include="Utility Models\TradeDialogs\InventoryDialog.cs" />
     <Compile Include="Utility Models\TradeDialogs\TradeDialog.cs" />

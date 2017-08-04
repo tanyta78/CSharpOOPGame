@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BackToBg.Models.Buildings.SpecialBuildings;
 using BackToBg.Models.EntityInterfaces;
 using BackToBg.Models.Utilities;
 
@@ -66,27 +65,55 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
         //TODO: should be able to move selection from shop items to player items
         private string[] GenerateFigure()
         {
-            var rows = Constants.TradeDialogRows + 1;
+            var rows = Constants.TradeDialogRows + 2;
             var traderDialogFigure = this.TraderInventoryDialog.GetDrawingInfo().figure;
             var playerDialogFigure = this.PlayerInventoryDialog.GetDrawingInfo().figure;
 
             IList<string> figureRows = new List<string>(rows);
-            var sb = new StringBuilder();
             figureRows.Add(traderDialogFigure[0] + new string(' ', Constants.TradeDialogSpacingColumns) +
-                            playerDialogFigure[0]);
+                           playerDialogFigure[0]);
 
             for (var i = 1; i < rows; i++)
             {
-                //append middle two rows that are for the ---> <--- arrows
-                if (i == rows / 2)
-                    sb.Append(new string('-', Constants.TradeDialogSpacingColumns - 1) + '>');
-                else if (i == rows / 2 + 1)
-                    sb.Append('<' + new string('-', Constants.TradeDialogSpacingColumns - 1));
+                var sb = new StringBuilder();
+
+                if (i <= traderDialogFigure.Length - 1)
+                {
+                    sb.Append(traderDialogFigure[i]);
+                }
                 else
-                    sb.Append(new string(' ', Constants.TradeDialogSpacingColumns));
+                {
+                    sb.Append(Functions.AlignLine("", Constants.TradeDialogItemMaxLength));
+                }
+
+                //append middle separators that are for the ---> <--- arrows
+                AppendSeparatorColumns(sb, i, rows);
+
+                if (i <= playerDialogFigure.Length - 1)
+                {
+                    sb.Append(playerDialogFigure[i]);
+                }
+
+                if (!string.IsNullOrEmpty(sb.ToString()))
+                {
+                    figureRows.Add(sb.ToString());
+                }
             }
 
             return figureRows.ToArray();
+        }
+
+        private void AppendSeparatorColumns(StringBuilder sb, int i, int rows)
+        {
+            var rightArrow = new string('-', Constants.TradeDialogSpacingColumns - 1) + '>';
+            var leftArrow = '<' + new string('-', Constants.TradeDialogSpacingColumns - 1);
+
+            if (i == rows / 2)
+                sb.Append(rightArrow);
+            else if (i == rows / 2 + 1)
+                sb.Append(leftArrow);
+            else
+                sb.Append(new string(' ', Constants.TradeDialogSpacingColumns));
         }
 
         protected virtual string[] GetFigure()

@@ -27,29 +27,44 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
         private string[] GenerateFigure()
         {
-            var rows = Constants.TradeDialogRows + 1;
+            var rows = Constants.TradeDialogRows +
+                       2; // one for the name row (top) + two for the ------- lines underneath and above it
+
+            string nameRow = $"{this.TradingEntity.Name}'s items" +
+                             new string(' ', Constants.TradeDialogSpacingColumns);
+            nameRow = Functions.AlignLine(nameRow, Constants.TradeDialogItemMaxLength);
+
             IList<string> figureRows = new List<string>()
             {
-                $"{this.TradingEntity.Name}'s items" + new string(' ', Constants.TradeDialogSpacingColumns)
+                $"{new string('-', Constants.TradeDialogItemMaxLength)}",
+                nameRow,
+                $"{new string('-', Constants.TradeDialogItemMaxLength)}"
             };
 
-            for (var i = 1; i < rows; i++)
+            if (rows > this.TradingEntity.Inventory.Count)
+            {
+                rows = this.TradingEntity.Inventory.Count; //info row (top)
+            }
+
+            for (var i = 0; i < rows; i++)
             {
                 //Build inventory item string
                 var sb = new StringBuilder();
 
-                if (this.TradingEntity.Inventory.Count - 1 >= i) //shop has such index in items collection
+                if (this.TradingEntity.Inventory.Count - 1 >= i) //entity has such index in items collection
                 {
                     var item = this.TradingEntity.Inventory[i];
                     var shopItemText = $"{i}. {item.Name} {item.Price}";
 
-                    if (shopItemText.Length > Constants.TradeDialogItemMaxLength)
-                        shopItemText = shopItemText.Substring(0, Constants.TradeDialogItemMaxLength - 3) + "...";
+                    shopItemText = Functions.AlignLine(shopItemText, Constants.TradeDialogItemMaxLength);
 
                     sb.Append(shopItemText);
                 }
 
-                figureRows.Add(sb.ToString());
+                if (!string.IsNullOrEmpty(sb.ToString()))
+                {
+                    figureRows.Add(sb.ToString());
+                }
             }
 
             return figureRows.ToArray();

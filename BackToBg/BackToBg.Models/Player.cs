@@ -24,8 +24,23 @@ namespace BackToBg.Models
             this.Inventory = new List<IItem>();
         }
 
+        public Player(string name)
+        {
+            this.Name = name;
+            this.figure = '☻';
+            this.Inventory = new List<IItem>();
+        }
+
         public int ID { get; }
+
         public string Name { get; set; }
+
+        //intended hiding (to use IInventoryOwner's Name property)
+        string IInventoryOwner.Name
+        {
+            get { return this.Name; }
+            set { }
+        }
 
         public void Trade()
         {
