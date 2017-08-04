@@ -6,32 +6,30 @@ using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.Buildings;
 using BackToBg.Models.Buildings.SpecialBuildings;
 using BackToBg.Models.EntityInterfaces;
+using BackToBg.Business.Common;
 
 namespace BackToBg.Client.Core
 {
     public class Engine : IEngine
     {
-        private IList<IBuilding> buildings;
         private IMap map;
         private readonly IPlayer player;
         private readonly IReader reader;
         private readonly IWriter writer;
 
-        public Engine(IPlayer player, IReader reader, IWriter writer)
+        public Engine(IPlayer player, IReader reader, IWriter writer, IMap map)
         {
             this.player = player;
             this.reader = reader;
             this.writer = writer;
+            this.map = map;
         }
 
         public void Run()
         {
-            InitializeBuildings();
-            this.map = new Map(this.buildings, this.player);
-
             while (true)
             {
-                DrawMap();
+                this.map.DrawMap();
                 var key = this.reader.ReadKey();
                 try
                 {
@@ -41,66 +39,9 @@ namespace BackToBg.Client.Core
                                           e is NotSupportedException)
                 {
                     this.writer.DisplayException(e.Message);
-                    DrawMap();
+                    this.map.DrawMap();
                 }
             }
-        }
-
-        private void InitializeBuildings()
-        {
-            this.buildings = new List<IBuilding>();
-            this.buildings.Add(new BasicBuilding(5, 26));
-            this.buildings.Add(new BasicBuilding(10, 4, 2));
-            this.buildings.Add(new PoliceOffice(1, "Police Station", "Just a police station", 30, 15));
-            this.buildings.Add(new BasicBuilding(20, 23));
-        }
-
-        private void DrawMap()
-        {
-            this.writer.Clear();
-            var map = this.map.GetMap();
-            var playerInfo = this.player.GetDrawingInfo();
-
-            var verticalCalculations = map.Length - (this.writer.ConsoleWidth - 1) -
-                                       (playerInfo.col - this.writer.ConsoleWidth / 2);
-            if (verticalCalculations > 0)
-                verticalCalculations = 0;
-
-            var horizontalCalculations = map.Length - (this.writer.ConsoleHeight - 1) -
-                                         (playerInfo.row - this.writer.ConsoleHeight / 2);
-            if (horizontalCalculations > 0)
-                horizontalCalculations = 0;
-
-            for (int row = Math.Max(0, playerInfo.row - this.writer.ConsoleHeight / 2), counter = 0;
-                counter < this.writer.ConsoleHeight - 1 + horizontalCalculations;
-                row++, counter++)
-            {
-                var line = string.Join("", map[row]);
-                this.writer.WriteLine(line.Substring(Math.Max(0, playerInfo.col - this.writer.ConsoleWidth / 2),
-                    this.writer.ConsoleWidth - 1 + verticalCalculations));
-            }
-
-            //for (int i = playerInfo.row - ConsoleHeight / 2; i < playerInfo.row; i++)
-            //{
-            //    if (i >= 0 && i < map.Length)
-            //    {
-            //        var line = string.Join("", map[i]);
-            //        Console.WriteLine(line.Substring(Math.Max(0, playerInfo.col - ConsoleWidth / 2), ConsoleWidth - 1 + verticalCalculations));
-            //        drawnRows++;
-            //    }
-            //}
-
-            //var remainder = drawnRows - ConsoleHeight / 2 + 1;
-
-            //for (int i = playerInfo.row; i <= playerInfo.row + ConsoleHeight / 2 - remainder; i++)
-            //{
-            //    if (i >= 0 && i < map.Length)
-            //    {
-            //        var line = string.Join("", map[i]);
-            //        Console.WriteLine(line.Substring(Math.Max(0, playerInfo.col - ConsoleWidth / 2), ConsoleWidth - 1 + verticalCalculations));
-            //        drawnRows++;
-            //    }
-            //}
         }
     }
 }

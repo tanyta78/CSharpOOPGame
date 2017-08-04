@@ -11,5 +11,7 @@ namespace BackToBg.Business.UtilityInterfaces
         char[][] GetMap();
 
         void Update(ConsoleKey key);
+
+        void DrawMap();
     }
 }

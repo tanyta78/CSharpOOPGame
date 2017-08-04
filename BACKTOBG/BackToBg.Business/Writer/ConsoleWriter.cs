@@ -37,6 +37,11 @@ namespace BackToBg.Business.Writer
             Console.Clear();
         }
 
+        public void SetCursorPosition(int left, int top)
+        {
+            Console.SetCursorPosition(left, top);
+        }
+        
         private void PerformConsoleSetup()
         {
             Console.CursorVisible = false;

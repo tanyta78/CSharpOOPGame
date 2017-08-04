@@ -12,11 +12,15 @@ namespace BackToBg.Business.PlayerActions
     {
         private IMap map;
         private IPlayer player;
+        private IReader reader;
+        private IWriter writer;
 
-        public PlayerActionFactory(IMap map, IPlayer player)
+        public PlayerActionFactory(IMap map, IPlayer player, IReader reader, IWriter writer)
         {
             this.map = map;
             this.player = player;
+            this.reader = reader;
+            this.writer = writer;
         }
 
         public IPlayerAction CreateAction(ConsoleKey key)
@@ -29,7 +33,7 @@ namespace BackToBg.Business.PlayerActions
             if (actionType == null)
                 throw new InvalidKeyPressException();
 
-            var action = (IPlayerAction) Activator.CreateInstance(actionType, new object[] { });
+            var action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { });
             action = InjectDependencies(action);
 
             return action;

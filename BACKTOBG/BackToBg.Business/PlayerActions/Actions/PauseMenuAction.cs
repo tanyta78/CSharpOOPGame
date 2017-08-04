@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackToBg.Business.Attributes;
+using BackToBg.Business.UtilityInterfaces;
 
 namespace BackToBg.Business.PlayerActions.Actions
 {
     [PlayerAction("Escape")]
     public class PauseMenuAction : PlayerAction
     {
+        [Inject] IReader reader;
+
+        [Inject] IWriter writer;
+
         private static bool shouldBeRunning = true;
 
         private readonly IDictionary<int, Action> actions = new Dictionary<int, Action>
@@ -32,13 +37,11 @@ namespace BackToBg.Business.PlayerActions.Actions
 
         private int selectedIndex;
 
-
         public override void Execute()
         {
             while (shouldBeRunning)
             {
                 PrintMenu();
-
                 ReadKeyInput();
             }
             shouldBeRunning = true;
@@ -46,16 +49,16 @@ namespace BackToBg.Business.PlayerActions.Actions
 
         private void PrintMenu()
         {
-            Console.Clear();
+            this.writer.Clear();
             for (var i = 0; i < this.menuText.Count; i++)
             {
                 //set-up so that the menu is drawn on the middle of the screen
-                Console.SetCursorPosition(Console.WindowWidth / 2 - this.menuText[0].Length,
+                this.writer.SetCursorPosition(Console.WindowWidth / 2 - this.menuText[0].Length,
                     (Console.WindowHeight - this.menuText.Count) / 2 + i);
                 if (i == this.selectedIndex)
-                    Console.WriteLine($">{this.menuText[i]}<");
+                    this.writer.WriteLine($">{this.menuText[i]}<");
                 else
-                    Console.WriteLine(this.menuText[i]);
+                    this.writer.WriteLine(this.menuText[i]);
             }
         }
 
@@ -65,16 +68,12 @@ namespace BackToBg.Business.PlayerActions.Actions
             switch (key.Key)
             {
                 case ConsoleKey.UpArrow:
-                    if (this.selectedIndex == 0)
-                        this.selectedIndex = this.menuText.Count - 1;
-                    else
-                        this.selectedIndex--;
+                    this.selectedIndex--;
+                    this.selectedIndex = (this.menuText.Count + this.selectedIndex) % this.menuText.Count;
                     break;
                 case ConsoleKey.DownArrow:
-                    if (this.selectedIndex == this.menuText.Count - 1)
-                        this.selectedIndex = 0;
-                    else
-                        this.selectedIndex++;
+                    this.selectedIndex++;
+                    this.selectedIndex %= this.menuText.Count;
                     break;
                 case ConsoleKey.Enter:
                     if (!this.actions.ContainsKey(this.selectedIndex))

@@ -7,5 +7,6 @@
         void Clear();
         void DisplayException(string message);
         void WriteLine(string message);
+        void SetCursorPosition(int left, int top);
     }
 }

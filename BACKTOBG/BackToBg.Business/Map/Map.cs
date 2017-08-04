@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackToBg.Business.PlayerActions;
 using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
+using BackToBg.Business.PlayerActions;
 
 namespace BackToBg.Business
 {
@@ -12,14 +12,18 @@ namespace BackToBg.Business
         private readonly IList<IBuilding> buildings;
         private char[][] map;
         private readonly IPlayer player;
-        private readonly PlayerActionFactory playerActionFactory;
+        private readonly IReader reader;
+        private readonly IWriter writer;
+        private readonly IPlayerActionFactory playerActionFactory;
 
-        public Map(IList<IBuilding> buildings, IPlayer player)
+        public Map(IList<IBuilding> buildings, IPlayer player, IReader reader, IWriter writer)
         {
             this.buildings = buildings;
             this.player = player;
+            this.reader = reader;
+            this.writer = writer;
             GenerateMap();
-            this.playerActionFactory = new PlayerActionFactory(this, this.player);
+            this.playerActionFactory = new PlayerActionFactory(this, this.player, this.reader, this.writer);
         }
 
         public IEnumerable<IBuilding> Drawables => this.buildings;
@@ -51,6 +55,54 @@ namespace BackToBg.Business
             }
         }
 
+        public void DrawMap()
+        {
+            this.writer.Clear();
+            var map = this.map;
+            var playerInfo = this.player.GetDrawingInfo();
+
+            var verticalCalculations = map.Length - (this.writer.ConsoleWidth - 1) -
+                                       (playerInfo.col - this.writer.ConsoleWidth / 2);
+            if (verticalCalculations > 0)
+                verticalCalculations = 0;
+
+            var horizontalCalculations = map.Length - (this.writer.ConsoleHeight - 1) -
+                                         (playerInfo.row - this.writer.ConsoleHeight / 2);
+            if (horizontalCalculations > 0)
+                horizontalCalculations = 0;
+
+            for (int row = Math.Max(0, playerInfo.row - this.writer.ConsoleHeight / 2), counter = 0;
+                counter < this.writer.ConsoleHeight - 1 + horizontalCalculations;
+                row++, counter++)
+            {
+                var line = string.Join("", map[row]);
+                this.writer.WriteLine(line.Substring(Math.Max(0, playerInfo.col - this.writer.ConsoleWidth / 2),
+                    this.writer.ConsoleWidth - 1 + verticalCalculations));
+            }
+
+            //for (int i = playerInfo.row - ConsoleHeight / 2; i < playerInfo.row; i++)
+            //{
+            //    if (i >= 0 && i < map.Length)
+            //    {
+            //        var line = string.Join("", map[i]);
+            //        Console.WriteLine(line.Substring(Math.Max(0, playerInfo.col - ConsoleWidth / 2), ConsoleWidth - 1 + verticalCalculations));
+            //        drawnRows++;
+            //    }
+            //}
+
+            //var remainder = drawnRows - ConsoleHeight / 2 + 1;
+
+            //for (int i = playerInfo.row; i <= playerInfo.row + ConsoleHeight / 2 - remainder; i++)
+            //{
+            //    if (i >= 0 && i < map.Length)
+            //    {
+            //        var line = string.Join("", map[i]);
+            //        Console.WriteLine(line.Substring(Math.Max(0, playerInfo.col - ConsoleWidth / 2), ConsoleWidth - 1 + verticalCalculations));
+            //        drawnRows++;
+            //    }
+            //}
+        }
+
         private void GenerateMap()
         {
             //create the map array
@@ -66,8 +118,8 @@ namespace BackToBg.Business
                 var x = info.row;
                 var y = info.col;
                 for (var row = x; row < Math.Min(x + figure.Length, mapSize - 1); row++)
-                for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
-                    this.map[row][col] = figure[row - x][col - y];
+                    for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
+                        this.map[row][col] = figure[row - x][col - y];
             }
 
             //draw the player
