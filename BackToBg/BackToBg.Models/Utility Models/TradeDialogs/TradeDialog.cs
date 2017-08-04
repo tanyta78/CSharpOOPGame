@@ -14,6 +14,12 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
         //Location to draw from
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="startingLocation">Upper left corner of figure</param>
+            /// <param name="player"></param>
+            /// <param name="shop"></param>
         protected TradeDialog(Point startingLocation, Player player, Shop shop)
         {
             this.Location = startingLocation;

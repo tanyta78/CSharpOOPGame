@@ -15,30 +15,24 @@ namespace BackToBg.Models
             this.x = x;
             this.y = y;
             this.figure = figure;
+            this.Inventory = new List<IItem>();
+        }
+
+        public Player()
+        {
+            this.figure = '☻';
+            this.Inventory = new List<IItem>();
         }
 
         public int ID { get; }
-
-        public string Name
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
-
+        public string Name { get; set; }
         public int CurrentHitPoints { get; }
         public int MaxHitPoints { get; }
+        public double Money { get; set; }
+        public int Experience { get; set; }
+        public ILocation CurrentLocation { get; set; }
 
-        public int Money => throw new NotImplementedException();
-
-        public int Experiance => throw new NotImplementedException();
-
-        public ILocation CurrentLocation
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
-
-        public IList<IItem> PersonalInventory => throw new NotImplementedException();
+        public IList<IItem> Inventory { get; set; }
 
         public void MoveEast()
         {
@@ -99,5 +93,6 @@ namespace BackToBg.Models
         {
             throw new NotImplementedException();
         }
+
     }
 }

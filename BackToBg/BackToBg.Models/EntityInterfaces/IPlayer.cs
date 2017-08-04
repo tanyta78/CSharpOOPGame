@@ -2,12 +2,11 @@
 
 namespace BackToBg.Models.EntityInterfaces
 {
-    public interface IPlayer : ICreature
+    public interface IPlayer : ICreature,IInventoryOwner
     {
-        int Money { get; }
-        int Experiance { get; }
+        double Money { get; }
+        int Experience { get; }
         ILocation CurrentLocation { get; set; }
-        IList<IItem> PersonalInventory { get; }
 
         void MoveHome();
 
