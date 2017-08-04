@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BackToBg.Business.Exceptions;
+﻿using BackToBg.Business.Exceptions;
 using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
 using BackToBg.Business.Attributes;
@@ -10,13 +9,11 @@ namespace BackToBg.Business.PlayerActions.Actions
     public class InteractAction : PlayerAction
     {
         [Inject]
-        private IEnumerable<IBuilding> buildings;
+        private readonly IPlayer player;
 
-        public InteractAction(IPlayer player, char[][] mapArray) : base(player, mapArray)
-        {
-            //this.buildings = map.Drawables;
-        }
-
+        [Inject]
+        private readonly IMap map;
+        
         public override void Execute()
         {
             var building = this.GetAdjacentBuilding();
@@ -25,7 +22,7 @@ namespace BackToBg.Business.PlayerActions.Actions
 
         private IBuilding GetAdjacentBuilding()
         {
-            foreach (var building in this.buildings)
+            foreach (var building in this.map.Drawables)
             {
                 if (this.player.AdjacentTo(building))
                 {

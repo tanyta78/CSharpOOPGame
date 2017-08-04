@@ -5,7 +5,6 @@ using BackToBg.Models.EntityInterfaces;
 using System.Reflection;
 using System.Linq;
 using BackToBg.Business.Attributes;
-using System.Collections.Generic;
 
 namespace BackToBg.Business.PlayerActions
 {
@@ -13,13 +12,11 @@ namespace BackToBg.Business.PlayerActions
     {
         private IMap map;
         private IPlayer player;
-        private IEnumerable<IBuilding> buildings;
 
         public PlayerActionFactory(IMap map, IPlayer player)
         {
             this.map = map;
             this.player = player;
-            this.buildings = this.map.Drawables;
         }
 
         public IPlayerAction CreateAction(ConsoleKey key)
@@ -34,7 +31,7 @@ namespace BackToBg.Business.PlayerActions
                 throw new InvalidKeyPressException();
             }
 
-            IPlayerAction action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { this.player, this.map.GetMap() });
+            IPlayerAction action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { });
             action = this.InjectDependencies(action);
 
             return action;
