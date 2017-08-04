@@ -16,14 +16,7 @@ namespace BackToBg.Test
     {
         static void Main(string[] args)
         {
-            TradeDialog td = new ShopTradeDialog(new Point(0,0),new Player()
-            {
-                PersonalInventory = new List<IItem>()
-                {
-                    new Axe(0,"Sekachkata",59,"Rare"),
-                    new Hammer(1,"Chukaloto",99,"Normal")
-                }
-            },new Shop(1,"Mall of Sofia",null,));
+//            TradeDialog td = new ShopTradeDialog(new Point(0,0),new Player()
         }
     }
 }

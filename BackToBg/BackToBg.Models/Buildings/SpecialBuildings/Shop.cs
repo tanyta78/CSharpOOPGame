@@ -8,12 +8,17 @@ using BackToBg.Models.Items;
 
 namespace BackToBg.Models.Buildings.SpecialBuildings
 {
-    public class Shop : SpecialBuilding,IInventoryOwner
+    public class Shop : SpecialBuilding, IInventoryOwner
     {
         public IList<IItem> Inventory { get; set; }
 
-        public Shop(int id, string name, string description, int x, int y, int sizeFactor = 1) : base(id, name, description, x, y, sizeFactor)
+        //intended hiding (to use IInventoryOwner's Name property)
+        public new string Name { get; set; }
+
+        public Shop(int id, string name, string description, int x, int y, int sizeFactor = 1) : base(id, name,
+            description, x, y, sizeFactor)
         {
+            this.Inventory = new List<IItem>();
         }
 
         public override (int row, int col, string[] figure) GetDrawingInfo()
@@ -25,6 +30,5 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
         {
             throw new NotImplementedException();
         }
-
     }
 }

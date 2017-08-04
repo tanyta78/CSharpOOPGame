@@ -23,29 +23,12 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
         {
             int rows = Constants.TradeDialogRows + 1;
             IList<string> figureRows = new List<string>(rows);
-            figureRows[0] = $"{this.Shop.Name} items" + new string(' ', Constants.TradeDialogSpacingColumns) +
-                            $"{this.Player.Name}'s items";
+            StringBuilder sb = new StringBuilder();
+//            figureRows[0] = 1[0] + spaces + 2[0]
 
             for (int i = 1; i < rows; i++)
             {
-                StringBuilder sb = new StringBuilder();
-
-                //Build shop item string
-                if (this.Shop.Items.Count - 1 >= i) //shop has such index in items collection
-                {
-                    var shopItem = this.Shop.Items[i];
-                    //TODO: add some popup to display items details
-                    string shopItemText = $"{i}. {shopItem.Name} {shopItem.Price}";
-
-                    if (shopItemText.Length > Constants.TradeDialogItemMaxLength)
-                    {
-                        shopItemText = shopItemText.Substring(0, Constants.TradeDialogItemMaxLength - 3) + "...";
-                    }
-
-                    sb.Append(shopItemText);
-                }
-
-                //middle two rows are for the ---> <--- arrows
+                //append middle two rows that are for the ---> <--- arrows
                 if (i == rows / 2)
                 {
                     sb.Append(new string('-', Constants.TradeDialogSpacingColumns - 1) + '>');
@@ -57,21 +40,6 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
                 else
                 {
                     sb.Append(new string(' ', Constants.TradeDialogSpacingColumns));
-                }
-
-                //Build player item string
-                if (this.Player.PersonalInventory.Count - 1 >= i) //player has such index in items collection
-                {
-                    var shopItem = this.Shop.Items[i];
-                    //TODO: add some popup to display items details
-                    string shopItemText = $"{i}. {shopItem.Name} {shopItem.Price}";
-
-                    if (shopItemText.Length > Constants.TradeDialogItemMaxLength)
-                    {
-                        shopItemText = shopItemText.Substring(0, Constants.TradeDialogItemMaxLength - 3) + "...";
-                    }
-
-                    sb.Append(shopItemText);
                 }
             }
 
