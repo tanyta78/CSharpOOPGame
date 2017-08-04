@@ -22,6 +22,20 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
             this.Location = startingLocation;
             this.Player = player as Player;
             this.Trader = trader;
+            this.PlayerInventoryDialog = new InventoryDialog<Player>(this.Player, new Point(0, 0));
+            this.TraderInventoryDialog = new InventoryDialog<ITradingEntity>(trader,
+                new Point(Constants.TradeDialogItemMaxLength + Constants.TradeDialogSpacingColumns, 0));
+        }
+
+        public TradeDialog(Point startingLocation, IPlayer player, ITradingEntity trader, Point location)
+        {
+            this.Location = startingLocation;
+            this.Player = player as Player;
+            this.Trader = trader;
+            this.PlayerInventoryDialog = new InventoryDialog<Player>(this.Player, location);
+            this.TraderInventoryDialog = new InventoryDialog<ITradingEntity>(trader,
+                new Point(location.X + Constants.TradeDialogItemMaxLength + Constants.TradeDialogSpacingColumns,
+                    location.Y));
         }
 
         #region Properties
@@ -32,7 +46,7 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
         private Player Player { get; }
 
-        private InventoryDialog<Shop> TraderInventoryDialog { get; set; }
+        private InventoryDialog<ITradingEntity> TraderInventoryDialog { get; set; }
 
         private InventoryDialog<Player> PlayerInventoryDialog { get; set; }
 
@@ -53,12 +67,16 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
         private string[] GenerateFigure()
         {
             var rows = Constants.TradeDialogRows + 1;
-            IList<string> figureRows = new List<string>(rows);
+            var traderDialogFigure = this.TraderInventoryDialog.GetDrawingInfo().figure;
+            var playerDialogFigure = this.PlayerInventoryDialog.GetDrawingInfo().figure;
 
+            IList<string> figureRows = new List<string>(rows);
             var sb = new StringBuilder();
-            //            figureRows[0] = 1[0] + spaces + 2[0]
+            figureRows.Add(traderDialogFigure[0] + new string(' ', Constants.TradeDialogSpacingColumns) +
+                            playerDialogFigure[0]);
 
             for (var i = 1; i < rows; i++)
+            {
                 //append middle two rows that are for the ---> <--- arrows
                 if (i == rows / 2)
                     sb.Append(new string('-', Constants.TradeDialogSpacingColumns - 1) + '>');
@@ -66,6 +84,8 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
                     sb.Append('<' + new string('-', Constants.TradeDialogSpacingColumns - 1));
                 else
                     sb.Append(new string(' ', Constants.TradeDialogSpacingColumns));
+            }
+
             return figureRows.ToArray();
         }
 

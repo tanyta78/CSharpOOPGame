@@ -36,6 +36,7 @@ namespace BackToBg.Test
 
             var figureInfo = td.GetDrawingInfo();
             var figure = figureInfo.figure;
+
             for (int i = 0; i < figure.Length; i++)
             {
                 Console.WriteLine(figure[i]);

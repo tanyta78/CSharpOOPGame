@@ -28,21 +28,19 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
         private string[] GenerateFigure()
         {
             var rows = Constants.TradeDialogRows + 1;
-            IList<string> figureRows = new List<string>(rows)
+            IList<string> figureRows = new List<string>()
             {
-                [0] = $"{this.TradingEntity.Name}'s items" + new string(' ', Constants.TradeDialogSpacingColumns)
+                $"{this.TradingEntity.Name}'s items" + new string(' ', Constants.TradeDialogSpacingColumns)
             };
 
             for (var i = 1; i < rows; i++)
             {
+                //Build inventory item string
                 var sb = new StringBuilder();
 
-                //Build inventory item string
                 if (this.TradingEntity.Inventory.Count - 1 >= i) //shop has such index in items collection
                 {
                     var item = this.TradingEntity.Inventory[i];
-
-                    //TODO: add some popup to display items details
                     var shopItemText = $"{i}. {item.Name} {item.Price}";
 
                     if (shopItemText.Length > Constants.TradeDialogItemMaxLength)
@@ -50,6 +48,8 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
                     sb.Append(shopItemText);
                 }
+
+                figureRows.Add(sb.ToString());
             }
 
             return figureRows.ToArray();
