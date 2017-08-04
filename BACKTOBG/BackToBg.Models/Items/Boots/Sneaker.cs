@@ -1,4 +1,6 @@
-﻿namespace BackToBg.Models.Items.Boots
+﻿using BackToBg.Models.Enums;
+
+namespace BackToBg.Models.Items.Boots
 {
     public class Sneaker : Boot
     {
@@ -6,7 +8,7 @@
         private const int AgilityGain = 15;
         private const int IntelligenceGain = 2;
 
-        public Sneaker(int id, string name, int price, string rarity)
+        public Sneaker(int id, string name, int price, Rarity rarity)
             : base(id, name, price, StrengthGain, IntelligenceGain, AgilityGain, rarity)
         {
         }

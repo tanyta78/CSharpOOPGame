@@ -7,43 +7,44 @@ using BackToBg.Models.Utilities;
 
 namespace BackToBg.Models.Utility_Models.TradeDialogs
 {
-    public class InventoryDialog : IDrawable
+    public class InventoryDialog<T> : IDrawable where T : ITradingEntity
     {
+        public InventoryDialog(T tradingEntity, Point location)
+        {
+            this.TradingEntity = tradingEntity;
+            this.Location = location;
+        }
+
+        #region Properties
+
         public Point Location { get; set; }
 
-        //Could be Shop or Player
-        public IInventoryOwner InventoryOwner { get; set; }
+        //Could be Shop, Player, Peddlar
+        private T TradingEntity { get; set; }
 
-        public InventoryDialog(IInventoryOwner p, Point location)
-        {
-            this.InventoryOwner = p;
-        }
+        #endregion
 
-        public (int row, int col, string[] figure) GetDrawingInfo()
-        {
-            return (this.Location.X, this.Location.Y, GenerateFigure());
-
-        }
+        #region Methods
 
         private string[] GenerateFigure()
         {
             int rows = Constants.TradeDialogRows + 1;
             IList<string> figureRows = new List<string>(rows)
             {
-                [0] = $"{this.InventoryOwner.Name} items" + new string(' ', Constants.TradeDialogSpacingColumns) +
-                            $"{this.InventoryOwner.Name}'s items"
+                [0] = $"{this.TradingEntity.Name}'s items" + new string(' ', Constants.TradeDialogSpacingColumns)
             };
 
             for (int i = 1; i < rows; i++)
             {
                 StringBuilder sb = new StringBuilder();
 
-                //Build shop item string
-                if (this.InventoryOwner.Inventory.Count - 1 >= i) //shop has such index in items collection
+                //Build inventory item string
+                if (this.TradingEntity.Inventory.Count - 1 >= i) //shop has such index in items collection
                 {
-                    var shopItem = this.InventoryOwner.Inventory[i];
+                    var item = this.TradingEntity.Inventory[i];
+
                     //TODO: add some popup to display items details
-                    string shopItemText = $"{i}. {shopItem.Name} {shopItem.Price}";
+                    string shopItemText = $"{i}. {item.Name} {item.Price}";
 
                     if (shopItemText.Length > Constants.TradeDialogItemMaxLength)
                     {
@@ -56,5 +57,12 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
             return figureRows.ToArray();
         }
+
+        public (int row, int col, string[] figure) GetDrawingInfo()
+        {
+            return (this.Location.X, this.Location.Y, GenerateFigure());
+        }
+
+        #endregion
     }
 }

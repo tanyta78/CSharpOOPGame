@@ -1,4 +1,6 @@
-﻿namespace BackToBg.Models.Items.Boots
+﻿using BackToBg.Models.Enums;
+
+namespace BackToBg.Models.Items.Boots
 {
     public class HeavyBoot : Boot
     {
@@ -6,7 +8,7 @@
         private const int AgilityGain = 3;
         private const int IntelligenceGain = 1;
 
-        public HeavyBoot(int id, string name, int price, string rarity)
+        public HeavyBoot(int id, string name, int price, Rarity rarity)
             : base(id, name, price, StrengthGain, IntelligenceGain, AgilityGain, rarity)
         {
         }

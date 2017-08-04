@@ -1,4 +1,6 @@
-﻿namespace BackToBg.Models.Items.Weapons
+﻿using BackToBg.Models.Enums;
+
+namespace BackToBg.Models.Items.Weapons
 {
     public class Axe : Weapon
     {
@@ -6,7 +8,7 @@
         private const int AgilityGain = 3;
         private const int IntelligenceGain = 2;
 
-        public Axe(int id, string name, int price, string rarity)
+        public Axe(int id, string name, int price, Rarity rarity)
             : base(id, name, price, StrengthGain, IntelligenceGain, AgilityGain, rarity)
         {
         }

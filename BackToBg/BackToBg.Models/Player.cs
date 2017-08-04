@@ -26,6 +26,12 @@ namespace BackToBg.Models
 
         public int ID { get; }
         public string Name { get; set; }
+
+        public void Trade()
+        {
+            throw new NotImplementedException();
+        }
+
         public int CurrentHitPoints { get; }
         public int MaxHitPoints { get; }
         public double Money { get; set; }

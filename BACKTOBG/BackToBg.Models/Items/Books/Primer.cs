@@ -1,4 +1,6 @@
-﻿namespace BackToBg.Models.Items.Books
+﻿using BackToBg.Models.Enums;
+
+namespace BackToBg.Models.Items.Books
 {
     public class Primer : Book
     {
@@ -6,7 +8,7 @@
         private const int AgilityGain = 3;
         private const int IntelligenceGain = 18;
 
-        public Primer(int id, string name, int price, string rarity)
+        public Primer(int id, string name, int price, Rarity rarity)
             : base(id, name, price, StrengthGain, IntelligenceGain, AgilityGain, rarity)
         {
         }

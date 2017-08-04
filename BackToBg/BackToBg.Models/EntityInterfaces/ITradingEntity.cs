@@ -1,8 +1,7 @@
 ﻿namespace BackToBg.Models.EntityInterfaces
 {
-    interface ITradingEntity
+    public interface ITradingEntity : IInventoryOwner
     {
         void Trade();
-        void DrawTradeDialog();
     }
 }

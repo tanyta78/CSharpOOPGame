@@ -83,8 +83,6 @@
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utility Models\Point.cs" />
     <Compile Include="Utility Models\TradeDialogs\InventoryDialog.cs" />
-    <Compile Include="Utility Models\TradeDialogs\PeddlerTradeDialog.cs" />
-    <Compile Include="Utility Models\TradeDialogs\ShopTradeDialog.cs" />
     <Compile Include="Utility Models\TradeDialogs\TradeDialog.cs" />
   </ItemGroup>
   <ItemGroup>
