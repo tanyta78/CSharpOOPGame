@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackToBg.Models\BackToBg.Models.csproj">
+      <Project>{fbaab8be-f8c6-492a-a4cd-4b13a49da918}</Project>
+      <Name>BackToBg.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -55,6 +55,7 @@
     <Compile Include="EntityInterfaces\IInteractable.cs" />
     <Compile Include="EntityInterfaces\IItem.cs" />
     <Compile Include="EntityInterfaces\ILocation.cs" />
+    <Compile Include="EntityInterfaces\IInventoryOwner.cs" />
     <Compile Include="EntityInterfaces\IPlayer.cs" />
     <Compile Include="EntityInterfaces\IPlayerQuest.cs" />
     <Compile Include="EntityInterfaces\IQuest.cs" />
@@ -79,7 +80,9 @@
     <Compile Include="PlayerQuest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quest.cs" />
+    <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utility Models\Point.cs" />
+    <Compile Include="Utility Models\TradeDialogs\InventoryDialog.cs" />
     <Compile Include="Utility Models\TradeDialogs\PeddlerTradeDialog.cs" />
     <Compile Include="Utility Models\TradeDialogs\ShopTradeDialog.cs" />
     <Compile Include="Utility Models\TradeDialogs\TradeDialog.cs" />
