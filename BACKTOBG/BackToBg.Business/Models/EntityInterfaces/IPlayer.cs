@@ -1,4 +1,6 @@
-﻿namespace BackToBg.Models.EntityInterfaces
+﻿using BackToBg.Business.Models.EntityInterfaces;
+
+namespace BackToBg.Models.EntityInterfaces
 {
     public interface IPlayer : ICreature, ITradingEntity
     {
@@ -21,5 +23,7 @@
         void Interact(IInteractable interactable);
 
         bool AdjacentTo(IBuilding building);
+
+        void Attack(IPunchable target);
     }
 }

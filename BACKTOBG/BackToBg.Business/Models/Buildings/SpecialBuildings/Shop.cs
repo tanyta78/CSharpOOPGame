@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models.Buildings.SpecialBuildings

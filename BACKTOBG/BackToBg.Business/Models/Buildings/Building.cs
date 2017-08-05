@@ -1,4 +1,5 @@
-﻿using BackToBg.Models.EntityInterfaces;
+﻿using BackToBg.Business.UtilityInterfaces;
+using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models.Buildings
 {

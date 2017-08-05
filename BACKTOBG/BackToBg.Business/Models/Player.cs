@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackToBg.Business.Common;
+using BackToBg.Business.Models.EntityInterfaces;
+using BackToBg.Business.UtilityInterfaces;
 using BackToBg.Models.EntityInterfaces;
+using BackToBg.Models.Utilities;
 
 namespace BackToBg.Models
 {
@@ -9,12 +13,14 @@ namespace BackToBg.Models
         private readonly char figure;
         private int x;
         private int y;
+        private int attackDamage;
 
-        public Player(int x, int y, char figure = '☻')
+        public Player(int x, int y, char figure = Constants.DefaultPlayerFigure)
         {
             this.x = x;
             this.y = y;
             this.figure = figure;
+            this.attackDamage = Constants.DefaultPlayerAttack;
             this.Inventory = new List<IItem>();
         }
 
@@ -99,6 +105,11 @@ namespace BackToBg.Models
             return horizontalCheck && verticalCheck;
         }
 
+        public void Attack(IPunchable target)
+        {
+            target.TakeDamage(this.attackDamage);
+        }
+
         public void MoveWest()
         {
             this.y--;
@@ -107,12 +118,7 @@ namespace BackToBg.Models
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
             //TODO: COHERENT IMPLEMENTATION
-            return (this.x, this.y, new[] {this.figure.ToString()});
-        }
-
-        public string[] GenerateFigure()
-        {
-            throw new NotImplementedException();
+            return (this.x, this.y, new[] { this.figure.ToString() });
         }
     }
 }

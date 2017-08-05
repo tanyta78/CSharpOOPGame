@@ -10,6 +10,8 @@ namespace BackToBg.Models.EntityInterfaces
         int RewardExperiancePoints { get; set; }
         int RewardMoney { get; set; }
         IItem RewardItem { get; set; }
-        List<IQuestCompetionItem> QuestCompetionItems { get; set; }
+        IList<IQuestCompetionItem> QuestCompetionItems { get; set; }
+        bool IsFinished { get; }
+        void StartQuest();
     }
 }

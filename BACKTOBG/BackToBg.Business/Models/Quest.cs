@@ -4,7 +4,7 @@ using BackToBg.Models.EntityInterfaces;
 
 namespace BackToBg.Models
 {
-    public class Quest : IQuest
+    public abstract class Quest : IQuest
     {
         private int id;
         private string name;
@@ -49,6 +49,8 @@ namespace BackToBg.Models
         public int RewardExperiancePoints { get; set; }
         public int RewardMoney { get; set; }
         public IItem RewardItem { get; set; }
-        public List<IQuestCompetionItem> QuestCompetionItems { get; set; }
+        public IList<IQuestCompetionItem> QuestCompetionItems { get; set; }
+        public bool IsFinished { get; set; }
+        public abstract void StartQuest();
     }
 }
