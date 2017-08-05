@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace BackToBg.Business.ServiceInterfaces
+namespace BackToBg.Core.Business.ServiceInterfaces
 {
     public interface IGenericDataService<T> where T : class
     {

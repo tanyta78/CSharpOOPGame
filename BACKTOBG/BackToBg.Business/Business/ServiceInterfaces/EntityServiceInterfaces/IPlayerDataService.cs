@@ -1,6 +1,6 @@
-﻿using BackToBg.Models;
+﻿using BackToBg.Core.Models;
 
-namespace BackToBg.Business.ServiceInterfaces.EntityServiceInterfaces
+namespace BackToBg.Core.Business.ServiceInterfaces.EntityServiceInterfaces
 {
     public interface IPlayerDataService : IGenericDataService<Player>
     {

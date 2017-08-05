@@ -1,4 +1,4 @@
-﻿namespace BackToBg.Models.Utility_Models
+﻿namespace BackToBg.Core.Models.Utility_Models
 {
     public class Point
     {

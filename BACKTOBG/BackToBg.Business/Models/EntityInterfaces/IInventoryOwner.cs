@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BackToBg.Models.EntityInterfaces
+namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface IInventoryOwner
     {

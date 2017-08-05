@@ -1,4 +1,4 @@
-﻿namespace BackToBg.Models.Enums
+﻿namespace BackToBg.Core.Models.Enums
 {
     public enum Rarity
     {

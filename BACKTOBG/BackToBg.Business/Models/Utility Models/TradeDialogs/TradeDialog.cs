@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models.Utilities;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
-namespace BackToBg.Models.Utility_Models.TradeDialogs
+namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 {
     /// <summary>
     ///     The whole dialog window to display the trade. Consists of two InventarDialogs (Player's and Trader's)
@@ -55,7 +55,7 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.Location.X, this.Location.Y, GenerateFigure());
+            return (this.Location.X, this.Location.Y, this.GenerateFigure());
         }
 
         //*Shop items      Player Items
@@ -87,7 +87,7 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
                 }
 
                 //append middle separators that are for the ---> <--- arrows
-                AppendSeparatorColumns(sb, i, rows);
+                this.AppendSeparatorColumns(sb, i, rows);
 
                 if (i <= playerDialogFigure.Length - 1)
                 {
@@ -118,7 +118,7 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
         protected virtual string[] GetFigure()
         {
-            return GenerateFigure();
+            return this.GenerateFigure();
         }
 
         #endregion

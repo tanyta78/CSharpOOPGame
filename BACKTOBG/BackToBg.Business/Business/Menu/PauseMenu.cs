@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Business.UtilityInterfaces;
+using BackToBg.Core.Business.UtilityInterfaces;
 
-namespace BackToBg.Business.Menu
+namespace BackToBg.Core.Business.Menu
 {
     public class PauseMenu : Menu
     {

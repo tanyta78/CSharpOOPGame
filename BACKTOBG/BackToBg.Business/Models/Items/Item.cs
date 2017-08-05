@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models.Enums;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Enums;
 
-namespace BackToBg.Models.Items
+namespace BackToBg.Core.Models.Items
 {
     public abstract class Item : IItem
     {

@@ -1,6 +1,6 @@
-﻿using BackToBg.Models.Enums;
+﻿using BackToBg.Core.Models.Enums;
 
-namespace BackToBg.Models.EntityInterfaces
+namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface IItem
     {

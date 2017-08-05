@@ -1,6 +1,6 @@
-﻿using BackToBg.Models.Enums;
+﻿using BackToBg.Core.Models.Enums;
 
-namespace BackToBg.Models.Items.Books
+namespace BackToBg.Core.Models.Items.Books
 {
     public class Encyclopedia : Book
     {

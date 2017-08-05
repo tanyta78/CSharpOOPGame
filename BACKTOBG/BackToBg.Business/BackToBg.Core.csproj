@@ -7,8 +7,8 @@
     <ProjectGuid>{E5CEA5C4-4480-44F5-878F-3D1841DAAEFB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BackToBg.Business</RootNamespace>
-    <AssemblyName>BackToBg.Business</AssemblyName>
+    <RootNamespace>BackToBg.Core</RootNamespace>
+    <AssemblyName>BackToBg.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -1,4 +1,4 @@
-﻿namespace BackToBg.Models.Utilities
+﻿namespace BackToBg.Core.Models.Utilities
 {
     public static class Functions
     {

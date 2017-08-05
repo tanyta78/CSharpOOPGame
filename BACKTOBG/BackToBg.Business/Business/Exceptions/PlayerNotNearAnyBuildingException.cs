@@ -1,4 +1,4 @@
-﻿namespace BackToBg.Business.Exceptions
+﻿namespace BackToBg.Business.Business.Exceptions
 {
     public class PlayerNotNearAnyBuildingException : InvalidActionException
     {

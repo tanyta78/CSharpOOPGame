@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BackToBg.Business.Exceptions
+namespace BackToBg.Core.Business.Exceptions
 {
     public abstract class InvalidActionException : Exception
     {

@@ -1,6 +1,6 @@
-﻿using BackToBg.Models.Enums;
+﻿using BackToBg.Core.Models.Enums;
 
-namespace BackToBg.Models.Items.Weapons
+namespace BackToBg.Core.Models.Items.Weapons
 {
     public class Hammer : Weapon
     {

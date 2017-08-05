@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models.Utilities;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
-namespace BackToBg.Models.Utility_Models.TradeDialogs
+namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 {
     public class InventoryDialog<T> : IDrawable where T : ITradingEntity
     {
@@ -72,7 +72,7 @@ namespace BackToBg.Models.Utility_Models.TradeDialogs
 
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.Location.X, this.Location.Y, GenerateFigure());
+            return (this.Location.X, this.Location.Y, this.GenerateFigure());
         }
 
         #endregion

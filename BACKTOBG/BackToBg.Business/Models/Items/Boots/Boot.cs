@@ -1,6 +1,6 @@
-﻿using BackToBg.Models.Enums;
+﻿using BackToBg.Core.Models.Enums;
 
-namespace BackToBg.Models.Items.Boots
+namespace BackToBg.Core.Models.Items.Boots
 {
     public abstract class Boot : Item
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BackToBg.Business.Attributes
+namespace BackToBg.Business.Business.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class PlayerActionAttribute : Attribute
