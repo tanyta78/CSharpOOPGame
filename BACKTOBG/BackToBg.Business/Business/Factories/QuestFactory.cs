@@ -16,20 +16,54 @@ namespace BackToBg.Core.Business.Factories
             this.map = map;
         }
 
-        //public IQuest CreateQuest(Type questType, object[] parameters)
-        //{
-        //    var quest = (IQuest)Activator.CreateInstance(questType, parameters);
+        public IQuest InjectQuest(Type buildingType)
+        {
+            var fieldAttribute = buildingType
+                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
+                .First(f => f.GetCustomAttribute<QuestAttribute>() != null)
+                .GetCustomAttribute<QuestAttribute>();
 
-        //    if (quest == null)
-        //    {
-        //        throw new ArgumentException("Unsupported quest type");
-        //    }
+            var paramenters = new object[]
+            {
+                fieldAttribute.Name,
+                fieldAttribute.Description,
+                fieldAttribute.RewardExperiancePoints,
+                fieldAttribute.RewardMoney
+            };
 
-        //    this.InjectDependencies(quest);
+            var quest = (IQuest)Activator.CreateInstance(fieldAttribute.QuestType, paramenters);
+            this.InjectDependencies(quest);
 
-        //    return quest;
-        //}
+            return quest;
+        }
 
-        
+        private void InjectDependencies(IQuest quest)
+        {
+            var questFields = quest.GetType()
+                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
+                .Where(t => t.GetCustomAttribute<InjectAttribute>() != null);
+
+            var questMethods = quest.GetType()
+                .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
+                .Where(m => m.GetCustomAttribute<InvokeAttribute>() != null);
+
+            var factoryFields = typeof(QuestFactory)
+                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
+
+            foreach (var field in questFields)
+            {
+                if (factoryFields.Any(f => f.FieldType == field.FieldType))
+                {
+                    field.SetValue(quest, factoryFields
+                        .First(f => f.FieldType == field.FieldType)
+                        .GetValue(this));
+                }
+            }
+
+            foreach (var method in questMethods)
+            {
+                method.Invoke(quest, new object[] { });
+            }
+        }
     }
 }
