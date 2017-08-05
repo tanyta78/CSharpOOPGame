@@ -2,6 +2,7 @@
 using BackToBg.Core.Business.Reader;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Business.Writer;
+using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Items;
 using BackToBg.Core.Models.Quests;
 using BackToBg.Core.Models.Utilities;
@@ -11,17 +12,18 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
     public class PoliceOffice : SpecialBuilding
     {
         private const Item ItemToEnter = null;
-
-        private IMap map;
+        private readonly IQuest quest;
+        private readonly IMap map;
 
         //private static readonly Quest PoliceQuest = new Quest(1, "Police Quest",
         //    "Now you are in Police office.The police need you. Your mission, if you accept it, is to arrest three famous criminals. Go and find them. The mission will end up bringing three pairs of boots. You will receive boot, 50 experience and 500 money",
         //    50, 500);
 
-        public PoliceOffice(IMap map, int id, string name, string description, int x, int y, int sizeFactor = 1) : base(id, name,
-            description, x, y, sizeFactor)
+        public PoliceOffice(IMap map, int id, string name, string description, int x, int y, IQuest quest, int sizeFactor = 1)
+            : base(id, name, description, x, y, sizeFactor)
         {
             this.map = map;
+            this.quest = quest;
             //this.QuestAvailableHere = PoliceQuest;
             //this.ItemRequeredToEnter = ItemToEnter;
             //this.QuestAvailableHere.RewardItem = new HeavyBoot(1, "PoliceBoots", 1, Rarity.Epic);
@@ -58,7 +60,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 
         public override void Interact()
         {
-            var menu = new TakeOnQuestMenu<BanditQuest>("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.map);
+            var menu = new TakeOnQuestMenu<BanditQuest>("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.map, this.quest);
             menu.StartMenu();
         }
     }

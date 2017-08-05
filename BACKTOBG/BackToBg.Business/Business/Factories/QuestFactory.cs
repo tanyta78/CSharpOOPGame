@@ -16,23 +16,21 @@ namespace BackToBg.Core.Business.Factories
             this.map = map;
         }
 
-        public IQuest CreateQuest(Type questType)
-        {
-            var parameters = new object[] { "Bandit Quest", "Finding the bandits and punching them to death", 100, 10 };
+        //public IQuest CreateQuest(Type questType, object[] parameters)
+        //{
+        //    var quest = (IQuest)Activator.CreateInstance(questType, parameters);
 
-            var quest = (IQuest)Activator.CreateInstance(questType, parameters);
+        //    if (quest == null)
+        //    {
+        //        throw new ArgumentException("Unsupported quest type");
+        //    }
 
-            if (quest == null)
-            {
-                throw new ArgumentException("Unsupported quest type");
-            }
+        //    this.InjectDependencies(quest);
 
-            this.InjectDependencies(quest);
+        //    return quest;
+        //}
 
-            return quest;
-        }
-
-        private void InjectDependencies(IQuest quest)
+        public void InjectDependencies(IQuest quest)
         {
             var questFields = quest.GetType()
                 .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)

@@ -7,6 +7,7 @@ using BackToBg.Core.Core;
 using BackToBg.Core.Models;
 using BackToBg.Core.Models.Buildings.SpecialBuildings;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Quests;
 using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core
@@ -21,7 +22,8 @@ namespace BackToBg.Core
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
             IMap map = new Map(buildings, player, reader, writer);
-            map.AddBuilding(new PoliceOffice(map, 1, "Police Station", "Just a police station", 30, 15));
+            IQuest quest = new BanditQuest("Bandit Quest", "Finding the bandits and punching them to death", 100, 10);
+            map.AddBuilding(new PoliceOffice(map, 1, "Police Station", "Just a police station", 30, 15, quest));
 
             var engine = new Engine(player, reader, writer, map);
             engine.Run();
