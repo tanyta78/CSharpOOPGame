@@ -2,7 +2,7 @@
 
 namespace BackToBg.Core.Business.Attributes
 {
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class QuestAttribute : Attribute
     {
         public QuestAttribute(Type questType, string name, string description, int rewardExperiancePoints, int rewardMoney)

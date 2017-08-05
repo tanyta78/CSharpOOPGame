@@ -10,12 +10,10 @@ using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 {
+    [Quest(typeof(BanditQuest), "Bandit Quest", "Finding the bandits and punching them to death", 100, 10)]
     public class PoliceOffice : SpecialBuilding
     {
         private const Item ItemToEnter = null;
-
-        [Quest(typeof(BanditQuest), "Bandit Quest", "Finding the bandits and punching them to death", 100, 10)]
-        private readonly IQuest quest;
         private readonly IMap map;
 
         //private static readonly Quest PoliceQuest = new Quest(1, "Police Quest",

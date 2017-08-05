@@ -19,11 +19,9 @@ namespace BackToBg.Core.Business.Factories
         public IQuest InjectQuest(Type buildingType)
         {
             var fieldAttribute = buildingType
-                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
-                .First(f => f.GetCustomAttribute<QuestAttribute>() != null)
                 .GetCustomAttribute<QuestAttribute>();
 
-            var paramenters = new object[]
+            var parameters = new object[]
             {
                 fieldAttribute.Name,
                 fieldAttribute.Description,
@@ -31,7 +29,7 @@ namespace BackToBg.Core.Business.Factories
                 fieldAttribute.RewardMoney
             };
 
-            var quest = (IQuest)Activator.CreateInstance(fieldAttribute.QuestType, paramenters);
+            var quest = (IQuest)Activator.CreateInstance(fieldAttribute.QuestType, parameters);
             this.InjectDependencies(quest);
 
             return quest;
