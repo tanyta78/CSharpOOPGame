@@ -22,8 +22,7 @@ namespace BackToBg.Core
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
             IMap map = new Map(buildings, player, reader, writer);
-            IQuest quest = new BanditQuest("Bandit Quest", "Finding the bandits and punching them to death", 100, 10);
-            map.AddBuilding(new PoliceOffice(map, 1, "Police Station", "Just a police station", 30, 15, quest));
+            map.AddBuilding(new PoliceOffice(map, 1, "Police Station", "Just a police station", 30, 15));
 
             var engine = new Engine(player, reader, writer, map);
             engine.Run();
