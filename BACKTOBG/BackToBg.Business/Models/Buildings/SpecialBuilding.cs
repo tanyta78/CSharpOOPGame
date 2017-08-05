@@ -8,8 +8,8 @@ namespace BackToBg.Core.Models.Buildings
         private int id;
         private string name;
 
-        protected SpecialBuilding(int id, string name, string description, int x, int y, int sizeFactor = 1) : base(x, y,
-            sizeFactor)
+        protected SpecialBuilding(int id, string name, string description, int x, int y, int sizeFactor = 1)
+            : base(x, y, sizeFactor)
         {
             this.ID = id;
             this.Name = name;

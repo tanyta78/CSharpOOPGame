@@ -31,7 +31,9 @@ namespace BackToBg.Core.Business.Factories
                 .FirstOrDefault(t => t.GetCustomAttribute<PlayerActionAttribute>().ActionKeyName == key.ToString());
 
             if (actionType == null)
+            {
                 throw new InvalidKeyPressException();
+            }
 
             var action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { });
             action = this.InjectDependencies(action);
@@ -45,13 +47,18 @@ namespace BackToBg.Core.Business.Factories
                 .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
                 .Where(f => f.GetCustomAttribute<InjectAttribute>() != null);
 
-            var factoryFields = typeof(PlayerActionFactory).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+            var factoryFields = typeof(PlayerActionFactory)
+                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
 
             foreach (var field in actionFields)
+            {
                 if (factoryFields.Any(f => f.FieldType == field.FieldType))
-                    field.SetValue(action,
-                        factoryFields.First(f => f.FieldType == field.FieldType).GetValue(this));
-
+                {
+                    field.SetValue(action, factoryFields
+                        .First(f => f.FieldType == field.FieldType)
+                        .GetValue(this));
+                }
+            }
             return action;
         }
     }

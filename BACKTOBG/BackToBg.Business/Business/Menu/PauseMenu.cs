@@ -27,7 +27,8 @@ namespace BackToBg.Core.Business.Menu
             "Exit"
         };
 
-        public PauseMenu(IReader reader, IWriter writer) : base("Pause", reader, writer)
+        public PauseMenu(IReader reader, IWriter writer) 
+            : base("Pause", reader, writer)
         {
         }
 

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Attributes\InjectAttribute.cs" />
+    <Compile Include="Business\Attributes\InvokeAttribute.cs" />
     <Compile Include="Business\Attributes\PlayerActionAttribute.cs" />
     <Compile Include="Business\Common\Initializer.cs" />
     <Compile Include="Business\Exceptions\InvalidActionException.cs" />

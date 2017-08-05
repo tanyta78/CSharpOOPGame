@@ -9,9 +9,11 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
     [PlayerAction("Enter")]
     public class PunchAction : PlayerAction
     {
-        [Inject] private readonly IMap map;
+        [Inject]
+        private readonly IMap map;
 
-        [Inject] private readonly IPlayer player;
+        [Inject]
+        private readonly IPlayer player;
 
         public override void Execute()
         {

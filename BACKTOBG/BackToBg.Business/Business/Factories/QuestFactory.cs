@@ -1,32 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BackToBg.Core.Business.Attributes;
 using BackToBg.Core.Business.UtilityInterfaces;
-using BackToBg.Core.Models;
-using BackToBg.Core.Models.Quests;
+using BackToBg.Core.Models.EntityInterfaces;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace BackToBg.Core.Business.Factories
 {
     public class QuestFactory
     {
-        private IMap map;
+        private readonly IMap map;
 
         public QuestFactory(IMap map)
         {
             this.map = map;
         }
 
-        public Quest CreateQuest(Type questType)
+        public IQuest CreateQuest(Type questType)
         {
-            switch (questType.Name)
+            var parameters = new object[] { "Bandit Quest", "Finding the bandits and punching them to death", 100, 10 };
+
+            var quest = (IQuest)Activator.CreateInstance(questType, parameters);
+
+            if (quest == null)
             {
-                case "BanditQuest":
-                    return new BanditQuest("Bandit Quest", "Finding the bandits and punching them to death", 100, 10, this.map);
-                default:
-                    throw new ArgumentException("Unsupported quest type");
+                throw new ArgumentException("Unsupported quest type");
             }
+
+            quest = this.InjectDependencies(quest);
+
+            return quest;
+        }
+
+        private IQuest InjectDependencies(IQuest quest)
+        {
+            var questFields = quest.GetType()
+                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
+                .Where(t => t.GetCustomAttribute<InjectAttribute>() != null);
+
+            var questMethods = quest.GetType()
+                .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
+                .Where(m=>m.GetCustomAttribute<InvokeAttribute>() != null);
+
+            var factoryFields = typeof(QuestFactory)
+                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
+
+            foreach (var field in questFields)
+            {
+                if (factoryFields.Any(f => f.FieldType == field.FieldType))
+                {
+                    field.SetValue(quest, factoryFields
+                        .First(f => f.FieldType == field.FieldType)
+                        .GetValue(this));
+                }
+            }
+
+            foreach (var method in questMethods)
+            {
+                method.Invoke(quest, new object[] { });
+            }
+
+            return quest;
         }
     }
 }

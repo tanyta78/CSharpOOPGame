@@ -8,12 +8,14 @@ using BackToBg.Core.Models.Quests;
 
 namespace BackToBg.Core.Business.Menu
 {
-    public class TakeOnQuestMenu<T> : Menu where T : Quest
+    public class TakeOnQuestMenu<T> : Menu 
+        where T : IQuest
     {
         private IMap map;
         private QuestFactory questFactory;
 
-        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, IMap map) : base(name, reader, writer)
+        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, IMap map) 
+            : base(name, reader, writer)
         {
             this.map = map;
             this.questFactory = new QuestFactory(this.map);
