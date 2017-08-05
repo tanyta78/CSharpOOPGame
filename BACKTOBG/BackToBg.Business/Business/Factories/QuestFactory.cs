@@ -27,12 +27,12 @@ namespace BackToBg.Core.Business.Factories
                 throw new ArgumentException("Unsupported quest type");
             }
 
-            quest = this.InjectDependencies(quest);
+            this.InjectDependencies(quest);
 
             return quest;
         }
 
-        private IQuest InjectDependencies(IQuest quest)
+        private void InjectDependencies(IQuest quest)
         {
             var questFields = quest.GetType()
                 .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
@@ -59,8 +59,6 @@ namespace BackToBg.Core.Business.Factories
             {
                 method.Invoke(quest, new object[] { });
             }
-
-            return quest;
         }
     }
 }

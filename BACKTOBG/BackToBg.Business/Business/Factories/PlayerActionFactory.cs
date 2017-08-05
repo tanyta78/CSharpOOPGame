@@ -36,12 +36,12 @@ namespace BackToBg.Core.Business.Factories
             }
 
             var action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { });
-            action = this.InjectDependencies(action);
+            this.InjectDependencies(action);
 
             return action;
         }
 
-        private IPlayerAction InjectDependencies(IPlayerAction action)
+        private void InjectDependencies(IPlayerAction action)
         {
             var actionFields = action.GetType()
                 .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
@@ -59,7 +59,6 @@ namespace BackToBg.Core.Business.Factories
                         .GetValue(this));
                 }
             }
-            return action;
         }
     }
 }
