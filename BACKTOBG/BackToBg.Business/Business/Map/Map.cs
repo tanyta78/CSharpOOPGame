@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using BackToBg.Business.Models.EntityInterfaces;
-using BackToBg.Business.Models.People;
-using BackToBg.Business.Models.Quests;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Business.PlayerActions;
-using BackToBg.Business.Writer;
+using BackToBg.Core.Business.PlayerActions;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Business
+namespace BackToBg.Core.Business.Map
 {
     public class Map : IMap
     {
@@ -31,7 +26,7 @@ namespace BackToBg.Business
             this.player = player;
             this.reader = reader;
             this.writer = writer;
-            GenerateMap();
+            this.GenerateMap();
             this.playerActionFactory = new PlayerActionFactory(this, this.player, this.reader, this.writer);
             this.quests = new List<IQuest>() { };
         }

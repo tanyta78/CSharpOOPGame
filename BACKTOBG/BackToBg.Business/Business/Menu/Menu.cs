@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Business.Attributes;
-using BackToBg.Business.Common;
-using BackToBg.Business.Reader;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Business.Writer;
+using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.UtilityInterfaces;
 
-namespace BackToBg.Business.Menu
+namespace BackToBg.Core.Business.Menu
 {
     public abstract class Menu : IMenu
     {

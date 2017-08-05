@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using BackToBg.Business;
-using BackToBg.Business.Exceptions;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.Buildings;
-using BackToBg.Models.Buildings.SpecialBuildings;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Business.Common;
+using BackToBg.Core.Business.Exceptions;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Client.Core
+namespace BackToBg.Core.Core
 {
     public class Engine : IEngine
     {

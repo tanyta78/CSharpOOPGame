@@ -1,7 +1,7 @@
 ﻿using System;
-using BackToBg.Models.EntityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Models
+namespace BackToBg.Core.Models
 {
     public class PlayerQuest : IPlayerQuest
     {

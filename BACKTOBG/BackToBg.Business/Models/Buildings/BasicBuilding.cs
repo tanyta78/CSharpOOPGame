@@ -1,7 +1,6 @@
 ﻿using System;
-using BackToBg.Business.UtilityInterfaces;
 
-namespace BackToBg.Models.Buildings
+namespace BackToBg.Core.Models.Buildings
 {
     public class BasicBuilding : Building
     {
@@ -14,7 +13,7 @@ namespace BackToBg.Models.Buildings
 
         public override (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.x, this.y, GenerateFigure());
+            return (this.x, this.y, this.GenerateFigure());
         }
 
 

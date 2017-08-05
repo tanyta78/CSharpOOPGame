@@ -1,9 +1,9 @@
-﻿using BackToBg.Business.Attributes;
-using BackToBg.Business.Exceptions;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.EntityInterfaces;
+﻿using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.Exceptions;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Business.PlayerActions.Actions
+namespace BackToBg.Core.Business.PlayerActions.Actions
 {
     [PlayerAction("Spacebar")]
     public class InteractAction : PlayerAction
@@ -14,7 +14,7 @@ namespace BackToBg.Business.PlayerActions.Actions
 
         public override void Execute()
         {
-            var building = GetAdjacentBuilding();
+            var building = this.GetAdjacentBuilding();
             this.player.Interact(building);
         }
 

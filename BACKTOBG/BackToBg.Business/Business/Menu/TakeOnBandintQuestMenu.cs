@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Business.Models.Quests;
-using BackToBg.Business.UtilityInterfaces;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Models.Quests;
 
-namespace BackToBg.Business.Menu
+namespace BackToBg.Core.Business.Menu
 {
     public class TakeOnBandintQuestMenu : Menu
     {

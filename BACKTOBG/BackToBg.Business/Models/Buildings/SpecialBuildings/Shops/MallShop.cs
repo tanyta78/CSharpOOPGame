@@ -1,4 +1,4 @@
-﻿namespace BackToBg.Models.Buildings.SpecialBuildings.Shops
+﻿namespace BackToBg.Core.Models.Buildings.SpecialBuildings.Shops
 {
     public class MallShop : Shop
     {

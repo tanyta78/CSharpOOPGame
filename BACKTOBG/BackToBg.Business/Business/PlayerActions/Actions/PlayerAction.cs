@@ -1,6 +1,6 @@
-﻿using BackToBg.Business.UtilityInterfaces;
+﻿using BackToBg.Core.Business.UtilityInterfaces;
 
-namespace BackToBg.Business.PlayerActions.Actions
+namespace BackToBg.Core.Business.PlayerActions.Actions
 {
     public abstract class PlayerAction : IPlayerAction
     {

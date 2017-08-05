@@ -1,16 +1,15 @@
-﻿using BackToBg.Business;
-using BackToBg.Business.Common;
-using BackToBg.Business.PlayerActions;
-using BackToBg.Business.Reader;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Business.Writer;
-using BackToBg.Client.Core;
-using BackToBg.Models;
-using BackToBg.Models.Buildings.SpecialBuildings;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models.Utilities;
+﻿using BackToBg.Core.Business.Common;
+using BackToBg.Core.Business.Map;
+using BackToBg.Core.Business.Reader;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Business.Writer;
+using BackToBg.Core.Core;
+using BackToBg.Core.Models;
+using BackToBg.Core.Models.Buildings.SpecialBuildings;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
-namespace BackToBg.Client
+namespace BackToBg.Core
 {
     internal class Startup
     {

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using BackToBg.Business.Attributes;
-using BackToBg.Business.Exceptions;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.EntityInterfaces;
+using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.Exceptions;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Business.PlayerActions
+namespace BackToBg.Core.Business.PlayerActions
 {
     public class PlayerActionFactory : IPlayerActionFactory
     {
@@ -34,7 +34,7 @@ namespace BackToBg.Business.PlayerActions
                 throw new InvalidKeyPressException();
 
             var action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { });
-            action = InjectDependencies(action);
+            action = this.InjectDependencies(action);
 
             return action;
         }

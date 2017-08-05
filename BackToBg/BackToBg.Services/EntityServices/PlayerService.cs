@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using BackToBg.Business.ServiceInterfaces.EntityServiceInterfaces;
-using BackToBg.Models;
+using BackToBg.Core.Business.ServiceInterfaces.EntityServiceInterfaces;
+using BackToBg.Core.Models;
 
 namespace BackToBg.Services.EntityServices
 {

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Models.EntityInterfaces;
-
-namespace BackToBg.Business.Models.EntityInterfaces
+﻿namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface IPunchable : ICreature
     {

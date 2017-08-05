@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Business.Models.EntityInterfaces;
-using BackToBg.Business.Models.Quests;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models.Utilities;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Quests;
+using BackToBg.Core.Models.Utilities;
 
-namespace BackToBg.Business.Models.People
+namespace BackToBg.Core.Models.People
 {
     public class Bandit : IPunchable
     {
@@ -25,7 +19,7 @@ namespace BackToBg.Business.Models.People
             this.row = row;
             this.col = col;
             this.figure = figure;
-            this.health = MaxHitPoints;
+            this.health = this.MaxHitPoints;
         }
 
         public (int row, int col, string[] figure) GetDrawingInfo()

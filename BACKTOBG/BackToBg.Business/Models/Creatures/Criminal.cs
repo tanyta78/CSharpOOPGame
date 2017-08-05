@@ -1,7 +1,7 @@
 ﻿using System;
-using BackToBg.Models.EntityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Models.Creatures
+namespace BackToBg.Core.Models.Creatures
 {
     public class Criminal : ICreature
     {

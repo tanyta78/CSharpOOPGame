@@ -1,10 +1,8 @@
-﻿using BackToBg.Models.Buildings;
-using BackToBg.Models.Buildings.SpecialBuildings;
-using BackToBg.Models.EntityInterfaces;
-using System.Collections.Generic;
-using BackToBg.Business.UtilityInterfaces;
+﻿using System.Collections.Generic;
+using BackToBg.Core.Models.Buildings;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Business.Common
+namespace BackToBg.Core.Business.Common
 {
     public static class Initializer
     {

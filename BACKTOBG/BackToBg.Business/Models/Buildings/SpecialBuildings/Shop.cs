@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.EntityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Models.Buildings.SpecialBuildings
+namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 {
     public abstract class Shop : SpecialBuilding, ITradingEntity
     {

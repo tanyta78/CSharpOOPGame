@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BackToBg.Business.Business.Attributes
+namespace BackToBg.Core.Business.Attributes
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class InjectAttribute : Attribute

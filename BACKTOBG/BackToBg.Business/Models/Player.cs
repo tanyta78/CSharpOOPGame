@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackToBg.Business.Common;
-using BackToBg.Business.Models.EntityInterfaces;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models.Utilities;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
-namespace BackToBg.Models
+namespace BackToBg.Core.Models
 {
     public class Player : IPlayer
     {

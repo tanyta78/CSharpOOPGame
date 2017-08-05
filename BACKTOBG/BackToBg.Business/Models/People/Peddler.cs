@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models.Items;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Items;
 
-namespace BackToBg.Models.People
+namespace BackToBg.Core.Models.People
 {
     public class Peddler : ITradingEntity
     {

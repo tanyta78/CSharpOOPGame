@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackToBg.Models;
-using BackToBg.Models.Buildings.SpecialBuildings.Shops;
-using BackToBg.Models.EntityInterfaces;
-using BackToBg.Models.Enums;
-using BackToBg.Models.Items.Books;
-using BackToBg.Models.Items.Boots;
-using BackToBg.Models.Items.Weapons;
-using BackToBg.Models.Utility_Models;
-using BackToBg.Models.Utility_Models.TradeDialogs;
+using BackToBg.Core.Models;
+using BackToBg.Core.Models.Buildings.SpecialBuildings.Shops;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Enums;
+using BackToBg.Core.Models.Items.Books;
+using BackToBg.Core.Models.Items.Boots;
+using BackToBg.Core.Models.Items.Weapons;
+using BackToBg.Core.Models.Utility_Models;
+using BackToBg.Core.Models.Utility_Models.TradeDialogs;
 
 namespace BackToBg.Test
 {

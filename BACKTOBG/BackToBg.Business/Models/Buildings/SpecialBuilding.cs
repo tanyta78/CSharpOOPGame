@@ -1,8 +1,7 @@
 ﻿using System;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.EntityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Models.Buildings
+namespace BackToBg.Core.Models.Buildings
 {
     public abstract class SpecialBuilding : Building, ILocation
     {

@@ -1,6 +1,4 @@
-﻿using BackToBg.Business.Models.EntityInterfaces;
-
-namespace BackToBg.Models.EntityInterfaces
+﻿namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface IPlayer : ICreature, ITradingEntity
     {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackToBg.Business.Models.EntityInterfaces;
-using BackToBg.Business.Models.People;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models;
+﻿using System.Collections.Generic;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.People;
 
-namespace BackToBg.Business.Models.Quests
+namespace BackToBg.Core.Models.Quests
 {
     public class BanditQuest : Quest
     {

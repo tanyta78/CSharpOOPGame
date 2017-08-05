@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackToBg.Business.Models.EntityInterfaces;
-using BackToBg.Business.Models.Quests;
-using BackToBg.Models;
-using BackToBg.Models.Buildings.SpecialBuildings;
-using BackToBg.Models.EntityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Business.UtilityInterfaces
+namespace BackToBg.Core.Business.UtilityInterfaces
 {
     public interface IMap
     {

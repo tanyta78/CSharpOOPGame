@@ -1,4 +1,4 @@
-﻿namespace BackToBg.Business.UtilityInterfaces
+﻿namespace BackToBg.Core.Business.UtilityInterfaces
 {
     public interface IEngine
     {

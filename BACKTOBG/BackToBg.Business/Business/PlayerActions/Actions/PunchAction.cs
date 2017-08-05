@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackToBg.Business.Attributes;
-using BackToBg.Business.Models.EntityInterfaces;
-using BackToBg.Business.PlayerActions.Actions;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.EntityInterfaces;
+using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Business.Business.PlayerActions.Actions
+namespace BackToBg.Core.Business.PlayerActions.Actions
 {
     [PlayerAction("Enter")]
     public class PunchAction : PlayerAction

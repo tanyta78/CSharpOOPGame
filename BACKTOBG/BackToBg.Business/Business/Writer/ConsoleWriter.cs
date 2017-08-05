@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Threading;
-using BackToBg.Business.UtilityInterfaces;
+using BackToBg.Core.Business.UtilityInterfaces;
 
-namespace BackToBg.Business.Writer
+namespace BackToBg.Core.Business.Writer
 {
     public class ConsoleWriter : IWriter
     {
@@ -11,7 +11,7 @@ namespace BackToBg.Business.Writer
         {
             this.ConsoleHeight = consoleHeight;
             this.ConsoleWidth = consoleWidth;
-            PerformConsoleSetup();
+            this.PerformConsoleSetup();
         }
 
         public int ConsoleHeight { get; }

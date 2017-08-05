@@ -1,6 +1,4 @@
-﻿using BackToBg.Business.UtilityInterfaces;
-
-namespace BackToBg.Models.EntityInterfaces
+﻿namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface IInteractable
     {

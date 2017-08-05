@@ -1,8 +1,8 @@
-﻿using BackToBg.Business.Attributes;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Models.EntityInterfaces;
+﻿using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Business.PlayerActions.Actions
+namespace BackToBg.Core.Business.PlayerActions.Actions
 {
     [PlayerAction("LeftArrow")]
     public class MoveLeftAction : PlayerAction

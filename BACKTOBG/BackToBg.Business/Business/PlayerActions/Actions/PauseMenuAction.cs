@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using BackToBg.Business.Attributes;
-using BackToBg.Business.Common;
-using BackToBg.Business.Menu;
-using BackToBg.Business.Reader;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Business.Writer;
-using BackToBg.Models.Utilities;
+﻿using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.Menu;
+using BackToBg.Core.Business.Reader;
+using BackToBg.Core.Business.Writer;
+using BackToBg.Core.Models.Utilities;
 
-namespace BackToBg.Business.PlayerActions.Actions
+namespace BackToBg.Core.Business.PlayerActions.Actions
 {
     [PlayerAction("Escape")]
     public class PauseMenuAction : PlayerAction

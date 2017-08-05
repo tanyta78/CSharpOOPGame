@@ -1,15 +1,11 @@
-﻿using System;
-using BackToBg.Business.Common;
-using BackToBg.Business.Menu;
-using BackToBg.Business.Reader;
-using BackToBg.Business.UtilityInterfaces;
-using BackToBg.Business.Writer;
-using BackToBg.Models.Enums;
-using BackToBg.Models.Items;
-using BackToBg.Models.Items.Boots;
-using BackToBg.Models.Utilities;
+﻿using BackToBg.Core.Business.Menu;
+using BackToBg.Core.Business.Reader;
+using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Business.Writer;
+using BackToBg.Core.Models.Items;
+using BackToBg.Core.Models.Utilities;
 
-namespace BackToBg.Models.Buildings.SpecialBuildings
+namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 {
     public class PoliceOffice : SpecialBuilding
     {
@@ -32,7 +28,7 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
 
         public override (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.x, this.y, GetFigure());
+            return (this.x, this.y, this.GetFigure());
         }
 
         //********

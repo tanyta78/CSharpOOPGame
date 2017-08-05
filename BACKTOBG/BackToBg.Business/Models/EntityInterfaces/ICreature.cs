@@ -1,4 +1,4 @@
-﻿namespace BackToBg.Business.Models.EntityInterfaces
+﻿namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface ICreature : IDrawable
     {
