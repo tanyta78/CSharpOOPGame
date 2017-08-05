@@ -18,12 +18,17 @@ namespace BackToBg.Business.Writer
 
         public int ConsoleWidth { get; }
 
-        public void DisplayException(string message)
+        public void DisplayMessageInColor(string message, ConsoleColor color)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
+            Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ResetColor();
+        }
+
+        public void DisplayException(string message)
+        {
+            Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
+            this.DisplayMessageInColor(message, ConsoleColor.Red);
             Thread.Sleep(1000);
         }
 

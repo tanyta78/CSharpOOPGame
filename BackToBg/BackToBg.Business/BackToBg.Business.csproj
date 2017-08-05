@@ -49,9 +49,12 @@
     <Compile Include="Common\Initializer.cs" />
     <Compile Include="Exceptions\InvalidActionException.cs" />
     <Compile Include="Exceptions\PlayerNotNearAnyBuildingException.cs" />
+    <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Menu\PauseMenu.cs" />
     <Compile Include="PlayerActions\Actions\InteractAction.cs" />
     <Compile Include="PlayerActions\Actions\PauseMenuAction.cs" />
     <Compile Include="Reader\ConsoleReader.cs" />
+    <Compile Include="UtilityInterfaces\IMenu.cs" />
     <Compile Include="UtilityInterfaces\IReader.cs" />
     <Compile Include="UtilityInterfaces\IPlayerActionFactory.cs" />
     <Compile Include="Exceptions\InvalidKeyPressException.cs" />
@@ -80,5 +83,6 @@
       <Name>BackToBg.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

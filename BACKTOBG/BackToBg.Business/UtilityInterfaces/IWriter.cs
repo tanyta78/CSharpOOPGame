@@ -1,4 +1,6 @@
-﻿namespace BackToBg.Business.UtilityInterfaces
+﻿using System;
+
+namespace BackToBg.Business.UtilityInterfaces
 {
     public interface IWriter
     {
@@ -8,5 +10,6 @@
         void DisplayException(string message);
         void WriteLine(string message);
         void SetCursorPosition(int left, int top);
+        void DisplayMessageInColor(string message, ConsoleColor color);
     }
 }
