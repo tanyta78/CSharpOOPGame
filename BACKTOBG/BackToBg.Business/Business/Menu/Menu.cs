@@ -45,7 +45,7 @@ namespace BackToBg.Business.Menu
         private void PrintMenu()
         {
             this.writer.Clear();
-            this.writer.SetCursorPosition(Console.WindowWidth / 2 - this.name.Length, (Console.WindowHeight - this.MenuText.Count) / 2 - 1);
+            this.writer.SetCursorPosition((Console.WindowWidth - this.name.Length) / 2, (Console.WindowHeight - this.MenuText.Count) / 2 - 1);
             this.writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
             for (var i = 0; i < this.MenuText.Count; i++)
             {
@@ -76,6 +76,9 @@ namespace BackToBg.Business.Menu
                     if (!this.Actions.ContainsKey(this.selectedIndex))
                         throw new NotImplementedException($"{this.MenuText[this.selectedIndex]} not available yet.");
                     this.Actions[this.selectedIndex]();
+                    break;
+                case ConsoleKey.Escape:
+                    ShouldBeRunning = false;
                     break;
             }
         }

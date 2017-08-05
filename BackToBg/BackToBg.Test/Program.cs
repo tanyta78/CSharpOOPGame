@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackToBg.Models;
-using BackToBg.Models.Buildings.SpecialBuildings;
 using BackToBg.Models.Buildings.SpecialBuildings.Shops;
 using BackToBg.Models.EntityInterfaces;
 using BackToBg.Models.Enums;
@@ -42,8 +41,6 @@ namespace BackToBg.Test
             {
                 Console.WriteLine(figure[i]);
             }
-
-
 
             Console.WriteLine("Praznite redove sa za6toto sym hardcodenal w constanta broq na itemi per page");
             Console.WriteLine("TODO: add pagination + Active inventory selection + Item selection");

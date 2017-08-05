@@ -1,4 +1,8 @@
 ﻿using System;
+using BackToBg.Business.Common;
+using BackToBg.Business.Menu;
+using BackToBg.Business.Reader;
+using BackToBg.Business.Writer;
 using BackToBg.Models.Enums;
 using BackToBg.Models.Items;
 using BackToBg.Models.Items.Boots;
@@ -52,7 +56,8 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
 
         public override void Interact()
         {
-            throw new NotImplementedException("Interacting with a police station is not yet available.");
+            var menu = new TakeOnQuestMenu("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth));
+            menu.StartMenu();
         }
     }
 }

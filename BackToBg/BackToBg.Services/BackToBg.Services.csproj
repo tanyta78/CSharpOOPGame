@@ -50,13 +50,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BackToBg.Business\BackToBg.Business.csproj">
+    <ProjectReference Include="..\BackToBg.Business\BackToBg.Core.csproj">
       <Project>{e5cea5c4-4480-44f5-878f-3d1841daaefb}</Project>
-      <Name>BackToBg.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BackToBg.Models\BackToBg.Models.csproj">
-      <Project>{fbaab8be-f8c6-492a-a4cd-4b13a49da918}</Project>
-      <Name>BackToBg.Models</Name>
+      <Name>BackToBg.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
