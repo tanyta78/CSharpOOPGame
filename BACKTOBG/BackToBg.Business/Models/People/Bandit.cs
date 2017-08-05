@@ -44,7 +44,6 @@ namespace BackToBg.Business.Models.People
             this.health -= damage;
             if (this.IsDead())
             {
-                throw new NullReferenceException("maikamustarawe");
                 this.quest.RemoveBandint(this);
             }
         }

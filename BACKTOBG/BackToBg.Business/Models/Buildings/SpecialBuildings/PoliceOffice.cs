@@ -61,7 +61,7 @@ namespace BackToBg.Models.Buildings.SpecialBuildings
 
         public override void Interact()
         {
-            var menu = new TakeOnQuestMenu("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.map);
+            var menu = new TakeOnBandintQuestMenu("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.map);
             menu.StartMenu();
         }
     }

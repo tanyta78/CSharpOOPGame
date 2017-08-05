@@ -11,5 +11,6 @@ namespace BackToBg.Business.UtilityInterfaces
         void WriteLine(string message);
         void SetCursorPosition(int left, int top);
         void DisplayMessageInColor(string message, ConsoleColor color);
+        void DisplayQuestCompletionMessage(string message);
     }
 }

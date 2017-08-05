@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using BackToBg.Business.Models.EntityInterfaces;
 using BackToBg.Business.Models.People;
 using BackToBg.Business.Models.Quests;
@@ -118,8 +119,9 @@ namespace BackToBg.Business
         {
             if (quest.IsFinished)
             {
-                this.writer.DisplayMessageInColor($"Quest {quest.Name} is finished!", ConsoleColor.Green);
+                this.writer.DisplayQuestCompletionMessage($"Quest {quest.Name} is finished!");
             }
+            this.GenerateMap();
         }
 
         public void AddPunchable(IPunchable punchable)

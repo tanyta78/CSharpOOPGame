@@ -53,7 +53,7 @@
     <Compile Include="Business\Exceptions\PlayerNotNearAnyBuildingException.cs" />
     <Compile Include="Business\Menu\Menu.cs" />
     <Compile Include="Business\Menu\PauseMenu.cs" />
-    <Compile Include="Business\Menu\TakeOnQuestMenu.cs" />
+    <Compile Include="Business\Menu\TakeOnBandintQuestMenu.cs" />
     <Compile Include="Business\PlayerActions\Actions\InteractAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PauseMenuAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PunchAction.cs" />

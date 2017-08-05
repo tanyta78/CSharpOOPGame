@@ -27,7 +27,7 @@ namespace BackToBg.Business.Models.Quests
 
         public override void StartQuest()
         {
-            //write quest started
+            
         }
 
         public void RemoveBandint(IPunchable bandit)

@@ -8,11 +8,11 @@ using BackToBg.Business.UtilityInterfaces;
 
 namespace BackToBg.Business.Menu
 {
-    public class TakeOnQuestMenu : Menu
+    public class TakeOnBandintQuestMenu : Menu
     {
         private IMap map;
 
-        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, IMap map) : base(name, reader, writer)
+        public TakeOnBandintQuestMenu(string name, IReader reader, IWriter writer, IMap map) : base(name, reader, writer)
         {
             this.map = map;
         }

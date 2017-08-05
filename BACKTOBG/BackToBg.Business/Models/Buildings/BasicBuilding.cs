@@ -28,9 +28,6 @@ namespace BackToBg.Models.Buildings
             var size = 5 * this.sizeFactor;
 
             var figure = new string[size];
-            for (var i = 0; i < size; i++)
-            {
-            }
 
             figure[0] = new string(border, size);
             for (var i = 1; i < size - 1; i++)

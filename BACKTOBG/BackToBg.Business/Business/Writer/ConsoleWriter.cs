@@ -25,6 +25,13 @@ namespace BackToBg.Business.Writer
             Console.ResetColor();
         }
 
+        public void DisplayQuestCompletionMessage(string message)
+        {
+            Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
+            this.DisplayMessageInColor(message, ConsoleColor.Green);
+            Thread.Sleep(1000);
+        }
+
         public void DisplayException(string message)
         {
             Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
