@@ -9,9 +9,8 @@ namespace BackToBg.Core.Models
         private int id;
         private string name;
 
-        public Quest(int id, string name, string description, int rewardExperiancePoints, int rewardMoney)
+        public Quest(string name, string description, int rewardExperiancePoints, int rewardMoney)
         {
-            this.ID = id;
             this.Name = name;
             this.Description = description;
             this.RewardExperiancePoints = rewardExperiancePoints;

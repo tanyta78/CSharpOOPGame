@@ -51,9 +51,10 @@
     <Compile Include="Business\Common\Initializer.cs" />
     <Compile Include="Business\Exceptions\InvalidActionException.cs" />
     <Compile Include="Business\Exceptions\PlayerNotNearAnyBuildingException.cs" />
+    <Compile Include="Business\Factories\QuestFactory.cs" />
     <Compile Include="Business\Menu\Menu.cs" />
     <Compile Include="Business\Menu\PauseMenu.cs" />
-    <Compile Include="Business\Menu\TakeOnBandintQuestMenu.cs" />
+    <Compile Include="Business\Menu\TakeOnQuestMenu.cs" />
     <Compile Include="Business\PlayerActions\Actions\InteractAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PauseMenuAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PunchAction.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="Business\PlayerActions\Actions\MoveLeftAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\MoveRightAction.cs" />
     <Compile Include="Business\UtilityInterfaces\IPlayerAction.cs" />
-    <Compile Include="Business\PlayerActions\PlayerActionFactory.cs" />
+    <Compile Include="Business\Factories\PlayerActionFactory.cs" />
     <Compile Include="Business\PlayerActions\Actions\MoveUpAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PlayerAction.cs" />
     <Compile Include="Core\Engine.cs" />

@@ -10,7 +10,7 @@ namespace BackToBg.Core.Models.Quests
         private IList<IPunchable> bandits;
         private IMap map;
 
-        public BanditQuest(int id, string name, string description, int rewardExperiancePoints, int rewardMoney, IMap map) : base(id, name, description, rewardExperiancePoints, rewardMoney)
+        public BanditQuest(string name, string description, int rewardExperiancePoints, int rewardMoney, IMap map) : base(name, description, rewardExperiancePoints, rewardMoney)
         {
             this.map = map;
             this.bandits = new List<IPunchable>() { new Bandit(this, 30, 30) };
@@ -22,7 +22,7 @@ namespace BackToBg.Core.Models.Quests
 
         public override void StartQuest()
         {
-            
+
         }
 
         public void RemoveBandint(IPunchable bandit)

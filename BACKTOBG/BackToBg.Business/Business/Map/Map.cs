@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BackToBg.Core.Business.Factories;
 using BackToBg.Core.Business.PlayerActions;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
@@ -28,7 +29,7 @@ namespace BackToBg.Core.Business.Map
             this.writer = writer;
             this.GenerateMap();
             this.playerActionFactory = new PlayerActionFactory(this, this.player, this.reader, this.writer);
-            this.quests = new List<IQuest>() { };
+            this.quests = new List<IQuest>();
         }
 
         public IEnumerable<IBuilding> Drawables => this.buildings;

@@ -6,7 +6,7 @@ using BackToBg.Core.Business.Exceptions;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
 
-namespace BackToBg.Core.Business.PlayerActions
+namespace BackToBg.Core.Business.Factories
 {
     public class PlayerActionFactory : IPlayerActionFactory
     {
