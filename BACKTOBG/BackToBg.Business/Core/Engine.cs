@@ -30,8 +30,8 @@ namespace BackToBg.Core.Core
                 {
                     this.map.Update(key.Key);
                 }
-                catch (Exception e) when (e is NotImplementedException || e is InvalidActionException ||
-                                          e is NotSupportedException)
+                catch (Exception e)
+                    when (e is NotImplementedException || e is InvalidActionException || e is NotSupportedException)
                 {
                     this.writer.DisplayException(e.Message);
                     this.map.DrawMap();
