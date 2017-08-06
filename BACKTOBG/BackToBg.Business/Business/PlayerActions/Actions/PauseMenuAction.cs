@@ -14,6 +14,9 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
         [Inject]
         private IEngine engine;
 
+        [Inject]
+        private IEngine engine;
+
         public override void Execute()
         {
             var pauseMenu = new PauseMenu("Pause", this.reader, this.writer, this.engine);

@@ -6,11 +6,6 @@ namespace BackToBg.Core.Business.Menu
 {
     public abstract class Menu : IMenu
     {
-        protected static bool ShouldBeRunning = true;
-        private readonly IReader reader;
-        private readonly IWriter writer;
-        private readonly string name;
-        private int selectedIndex;
         private IReader reader;
         private IWriter writer;
 
@@ -42,30 +37,23 @@ namespace BackToBg.Core.Business.Menu
         {
             while (ShouldBeRunning)
             {
-                PrintMenu();
-                ReadKeyInput();
+                this.PrintMenu();
+                this.ReadKeyInput();
             }
             ShouldBeRunning = true;
         }
 
         private void PrintMenu()
         {
-            this.writer.Clear();
-            this.writer.SetCursorPosition((this.writer.ConsoleWidth - this.name.Length) / 2,
-                (this.writer.ConsoleHeight - this.MenuText.Count) / 2 - 1);
-            this.writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
             this.Writer.Clear();
             this.Writer.SetCursorPosition((this.Writer.ConsoleWidth - this.name.Length) / 2, (this.Writer.ConsoleHeight - this.MenuText.Count) / 2 - 1);
             this.Writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
-			
             for (var i = 0; i < this.MenuText.Count; i++)
             {
                 //set-up so that the menu is drawn on the middle of the screen
                 this.Writer.SetCursorPosition(this.Writer.ConsoleWidth / 2 - this.MenuText[0].Length,
                     (this.Writer.ConsoleHeight - this.MenuText.Count) / 2 + i);
                 if (i == this.selectedIndex)
-                    this.writer.WriteLine($">{this.MenuText[i]}<");
-                else
                 {
                     this.Writer.WriteLine($">{this.MenuText[i]}<");
                 }

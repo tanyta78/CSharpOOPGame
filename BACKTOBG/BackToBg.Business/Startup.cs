@@ -8,11 +8,8 @@ using BackToBg.Core.Core;
 using BackToBg.Core.Models;
 using BackToBg.Core.Models.Buildings.SpecialBuildings;
 using BackToBg.Core.Models.EntityInterfaces;
-<<<<<<< HEAD
-=======
 using BackToBg.Core.Models.Quests;
 using BackToBg.Core.Models.Town;
->>>>>>> cd78453d4a543777e45c5275f30c04e921ff3a6b
 using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core
