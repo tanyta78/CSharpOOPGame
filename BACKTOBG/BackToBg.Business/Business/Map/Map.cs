@@ -15,21 +15,17 @@ namespace BackToBg.Core.Business.Map
         private readonly IList<IPunchable> punchables;
         private char[][] map;
         private readonly IPlayer player;
-        private readonly IReader reader;
-        private readonly IWriter writer;
         private readonly IPlayerActionFactory playerActionFactory;
-        private IList<IQuest> quests;
+        private IWriter writer;
 
-        public Map(IList<IBuilding> buildings, IPlayer player, IReader reader, IWriter writer)
+        public Map(IEnumerable<IBuilding> buildings, IPlayer player, IWriter writer, IReader reader)
         {
             this.punchables = new List<IPunchable>();
             this.buildings = new List<IBuilding>(buildings);
-            this.player = player;
-            this.reader = reader;
             this.writer = writer;
+            this.player = player;
             this.GenerateMap();
-            this.playerActionFactory = new PlayerActionFactory(this, this.player, this.reader, this.writer);
-            this.quests = new List<IQuest>();
+            this.playerActionFactory = new PlayerActionFactory(this, player, reader, writer);
         }
 
         public IEnumerable<IBuilding> Drawables => this.buildings;
@@ -111,24 +107,15 @@ namespace BackToBg.Core.Business.Map
             //}
         }
 
-        public void RefreshQuest(IQuest quest)
-        {
-            if (quest.IsFinished)
-            {
-                this.writer.DisplayQuestCompletionMessage($"Quest {quest.Name} is finished!");
-            }
-            this.GenerateMap();
-        }
-
         public void AddPunchable(IPunchable punchable)
         {
             this.punchables.Add(punchable);
             this.GenerateMap();
         }
 
-        public void AddQuest(IQuest quest)
+        public void RemovePunchable(IPunchable punchable)
         {
-            this.quests.Add(quest);
+            this.punchables.Remove(punchable);
             this.GenerateMap();
         }
 
@@ -138,7 +125,7 @@ namespace BackToBg.Core.Business.Map
             this.GenerateMap();
         }
 
-        private void GenerateMap()
+        public void GenerateMap()
         {
             //create the map array
             this.map = new char[mapSize][];
@@ -165,8 +152,8 @@ namespace BackToBg.Core.Business.Map
                 var x = info.row;
                 var y = info.col;
                 for (var row = x; row < Math.Min(x + figure.Length, mapSize - 1); row++)
-                for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
-                    this.map[row][col] = figure[row - x][col - y];
+                    for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
+                        this.map[row][col] = figure[row - x][col - y];
             }
 
             //draw the player

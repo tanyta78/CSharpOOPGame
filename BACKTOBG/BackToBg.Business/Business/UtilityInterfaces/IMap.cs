@@ -13,11 +13,10 @@ namespace BackToBg.Core.Business.UtilityInterfaces
         char[][] GetMap();
 
         void Update(ConsoleKey key);
-
+        void GenerateMap();
         void DrawMap();
-        void RefreshQuest(IQuest quest);
         void AddPunchable(IPunchable punchable);
-        void AddQuest(IQuest quest);
+        void RemovePunchable(IPunchable punchable);
         void AddBuilding(IBuilding building);
     }
 }

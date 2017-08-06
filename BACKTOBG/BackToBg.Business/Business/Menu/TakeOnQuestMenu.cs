@@ -9,14 +9,14 @@ namespace BackToBg.Core.Business.Menu
     public class TakeOnQuestMenu<T> : Menu
         where T : IBuilding
     {
-        private readonly IMap map;
+        private readonly ITown town;
         private readonly QuestFactory questFactory;
 
-        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, IMap map)
+        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, ITown town)
             : base(name, reader, writer)
         {
-            this.map = map;
-            this.questFactory = new QuestFactory(this.map);
+            this.town = town;
+            this.questFactory = new QuestFactory(this.town);
         }
 
         protected override IDictionary<int, Action> Actions => new Dictionary<int, Action>
@@ -24,7 +24,7 @@ namespace BackToBg.Core.Business.Menu
             {0, () => ShouldBeRunning = false },
             {1, () =>
                 {
-                    this.map.AddQuest(this.questFactory.InjectQuest(typeof(T)));
+                    this.town.AddQuest(this.questFactory.InjectQuest(typeof(T)));
                     ShouldBeRunning = false;
                 }
             }

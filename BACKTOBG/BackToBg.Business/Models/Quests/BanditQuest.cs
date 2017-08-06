@@ -11,7 +11,7 @@ namespace BackToBg.Core.Models.Quests
         private IList<IPunchable> bandits;
 
         [Inject]
-        private IMap map;
+        private ITown town;
 
         public BanditQuest(string name, string description, int rewardExperiancePoints, int rewardMoney) 
             : base(name, description, rewardExperiancePoints, rewardMoney)
@@ -24,7 +24,7 @@ namespace BackToBg.Core.Models.Quests
         {
             foreach (var bandit in this.bandits)
             {
-                this.map.AddPunchable(bandit);
+                this.town.Map.AddPunchable(bandit);
             }
         }
 
@@ -40,7 +40,7 @@ namespace BackToBg.Core.Models.Quests
             {
                 this.IsFinished = true;
             }
-            this.map.RefreshQuest(this);
+            this.town.RefreshQuest(this);
         }
     }
 }

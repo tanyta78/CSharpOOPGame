@@ -9,11 +9,11 @@ namespace BackToBg.Core.Business.Factories
 {
     public class QuestFactory
     {
-        private readonly IMap map;
+        private readonly ITown town;
 
-        public QuestFactory(IMap map)
+        public QuestFactory(ITown town)
         {
-            this.map = map;
+            this.town = town;
         }
 
         public IQuest InjectQuest(Type buildingType)
