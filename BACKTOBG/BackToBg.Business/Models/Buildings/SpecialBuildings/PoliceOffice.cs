@@ -3,7 +3,6 @@ using BackToBg.Core.Business.Menu;
 using BackToBg.Core.Business.Reader;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Business.Writer;
-using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Items;
 using BackToBg.Core.Models.Quests;
 using BackToBg.Core.Models.Utilities;
@@ -31,7 +30,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 
         public override (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.x, this.y, this.GetFigure());
+            return (this.x, this.y, GetFigure());
         }
 
         //********
@@ -60,7 +59,8 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 
         public override void Interact()
         {
-            var menu = new TakeOnQuestMenu<PoliceOffice>("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.map);
+            var menu = new TakeOnQuestMenu<PoliceOffice>("Take on police quest", new ConsoleReader(),
+                new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.map);
             menu.StartMenu();
         }
     }

@@ -9,19 +9,15 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
     [PlayerAction("Enter")]
     public class PunchAction : PlayerAction
     {
-        [Inject]
-        private readonly IMap map;
+        [Inject] private readonly IMap map;
 
-        [Inject]
-        private readonly IPlayer player;
+        [Inject] private readonly IPlayer player;
 
         public override void Execute()
         {
             var playerInfo = this.player.GetDrawingInfo();
-            foreach (var punchable in this.GetAdjacentPunchables())
-            {
+            foreach (var punchable in GetAdjacentPunchables())
                 this.player.Attack(punchable);
-            }
         }
 
         private IEnumerable<IPunchable> GetAdjacentPunchables()
@@ -31,10 +27,9 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
             foreach (var punchable in this.map.Punchables)
             {
                 var punchableInfo = punchable.GetDrawingInfo();
-                if (Math.Abs(punchableInfo.row - playerInfo.row) <= 1 && Math.Abs(punchableInfo.col - playerInfo.col) <= 1)
-                {
+                if (Math.Abs(punchableInfo.row - playerInfo.row) <= 1 &&
+                    Math.Abs(punchableInfo.col - playerInfo.col) <= 1)
                     punchables.Add(punchable);
-                }
             }
 
             return punchables;

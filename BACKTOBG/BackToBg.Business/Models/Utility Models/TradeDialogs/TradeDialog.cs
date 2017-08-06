@@ -1,16 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using BackToBg.Core.Business.Writer;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 {
+    public delegate void EventHandler();
+
     /// <summary>
     ///     The whole dialog window to display the trade. Consists of two InventarDialogs (Player's and Trader's)
     /// </summary>
     public class TradeDialog : IDrawable
     {
+        private int activeRow;
+
         /// <summary>
         /// </summary>
         /// <param name="startingLocation">Upper left corner of figure</param>
@@ -18,23 +25,27 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
         /// <param name="trader">The second member of the trade. Could be another player, shop, peddlar, etc.</param>
         public TradeDialog(Point startingLocation, IPlayer player, ITradingEntity trader)
         {
+            this.activeRow = 3;
             this.Location = startingLocation;
             this.Player = player as Player;
             this.Trader = trader;
-            this.PlayerInventoryDialog = new InventoryDialog<Player>(this.Player, new Point(0, 0));
+            this.PlayerInventoryDialog = new InventoryDialog<ITradingEntity>(this.Player, new Point(0, 0));
             this.TraderInventoryDialog = new InventoryDialog<ITradingEntity>(trader,
                 new Point(Constants.TradeDialogItemMaxLength + Constants.TradeDialogSpacingColumns, 0));
+            this.ActiveInventoryDialog = this.TraderInventoryDialog;
         }
 
         public TradeDialog(Point startingLocation, IPlayer player, ITradingEntity trader, Point location)
         {
+            this.activeRow = 3;
             this.Location = startingLocation;
             this.Player = player as Player;
             this.Trader = trader;
-            this.PlayerInventoryDialog = new InventoryDialog<Player>(this.Player, location);
+            this.PlayerInventoryDialog = new InventoryDialog<ITradingEntity>(this.Player, location);
             this.TraderInventoryDialog = new InventoryDialog<ITradingEntity>(trader,
                 new Point(location.X + Constants.TradeDialogItemMaxLength + Constants.TradeDialogSpacingColumns,
                     location.Y));
+            this.ActiveInventoryDialog = this.TraderInventoryDialog;
         }
 
         #region Properties
@@ -47,27 +58,171 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         private InventoryDialog<ITradingEntity> TraderInventoryDialog { get; set; }
 
-        private InventoryDialog<Player> PlayerInventoryDialog { get; set; }
+        private InventoryDialog<ITradingEntity> PlayerInventoryDialog { get; set; }
+
+        private InventoryDialog<ITradingEntity> ActiveInventoryDialog { get; set; }
 
         #endregion
 
         #region Methods
+
+        private bool Input(ConsoleKeyInfo key)
+        {
+            switch (key.Key)
+            {
+                //TODO:arrows change active row !!!
+                case ConsoleKey.UpArrow:
+                    this.ActiveInventoryDialog.Refresh(ConsoleKey.UpArrow);
+                    if (this.activeRow == 3)
+                    {
+                        //todo
+                        Draw();
+                        //activeID.page--;
+                    }
+                    else
+                    {
+                        this.activeRow--;
+                    }
+                    Draw();
+                    return true;
+                case ConsoleKey.DownArrow:
+                    this.ActiveInventoryDialog.Refresh(ConsoleKey.DownArrow);
+                    if (this.activeRow == Constants.TradeDialogItemRows + 3 - 1) //top info rows
+                    {
+                        //todo
+                        this.activeRow = 3;
+                        //activeID.page++;
+                    }
+                    else
+                    {
+                        this.activeRow++;
+                    }
+                    this.activeRow++;
+                    Draw();
+                    return true;
+                case ConsoleKey.RightArrow:
+                    this.ActiveInventoryDialog.Refresh(ConsoleKey.RightArrow);
+                    Draw();
+                    return true;
+
+                case ConsoleKey.LeftArrow:
+                    this.ActiveInventoryDialog.Refresh(ConsoleKey.LeftArrow);
+                    Draw();
+                    return true;
+
+                //TODO: Sends selected item
+                case ConsoleKey.Enter:
+                    this.ActiveInventoryDialog.Refresh(ConsoleKey.Enter);
+
+                    var cw = new ConsoleWriter(Console.WindowHeight, Console.WindowWidth);
+
+                    if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
+                    {
+                        cw.DisplayMessageInColorCentered(
+                            string.Format(Constants.AreYouSureBuy, this.ActiveInventoryDialog.SelectedItem.Name),
+                            Constants.UserPromptColor);
+                    }
+                    else
+                    {
+                        cw.DisplayMessageInColorCentered(
+                            string.Format(Constants.AreYouSureSell, this.ActiveInventoryDialog.SelectedItem.Name),
+                            Constants.UserPromptColor);
+                    }
+
+                    var selectionInput = Console.ReadKey();
+
+                    if (selectionInput.Key == ConsoleKey.Y)
+                    {
+                        Trade(this.ActiveInventoryDialog.SelectedItem);
+                        Draw();
+                    }
+                    else if (selectionInput.Key == ConsoleKey.N)
+                    {
+                        //draw trade dialog again
+                        Draw();
+                    }
+                    else
+                    {
+                        selectionInput = Console.ReadKey();
+                    }
+                    return true;
+
+                case ConsoleKey.S:
+                    SwitchActiveInventoryDialog();
+                    Draw();
+                    return true;
+
+                case ConsoleKey.Escape:
+                    Console.Clear();
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
+        private void Trade(IItem item)
+        {
+            //TODO: UPDATE DATABASE
+            if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
+            {
+                this.Player.Inventory.Add(item);
+            }
+            else if (this.ActiveInventoryDialog == this.PlayerInventoryDialog)
+            {
+                this.Trader.Inventory.Add(item);
+            }
+        }
+
+        public void Use()
+        {
+            Draw();
+            ConsoleKeyInfo input;
+
+            while (Input(input = Console.ReadKey()))
+            {
+                if (input.Key == ConsoleKey.Escape)
+                {
+                    break;
+                }
+            }
+
+            //TODO: show last window (before trading)
+        }
+
+        private void SwitchActiveInventoryDialog()
+        {
+            if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
+            {
+                this.ActiveInventoryDialog = this.PlayerInventoryDialog;
+            }
+            else
+            {
+                this.ActiveInventoryDialog = this.TraderInventoryDialog;
+            }
+
+            this.TraderInventoryDialog.Toggle();
+            this.PlayerInventoryDialog.Toggle();
+        }
 
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
             return (this.Location.X, this.Location.Y, this.GenerateFigure());
         }
 
-        //*Shop items      Player Items
-        //            ---> 
-        //            <---
-        // 1/6 pages       3/3 pages
-        //TODO: should be able to move selection from shop items to player items
+        protected virtual string[] GetFigure()
+        {
+            return this.GenerateFigure();
+        }
+
+        /// <summary>
+        /// Generates the graphic represantation of the TradeDialog (no color)
+        /// </summary>
+        /// <returns></returns>
         private string[] GenerateFigure()
         {
-            var rows = Constants.TradeDialogRows + 2;
             var traderDialogFigure = this.TraderInventoryDialog.GetDrawingInfo().figure;
             var playerDialogFigure = this.PlayerInventoryDialog.GetDrawingInfo().figure;
+            var rows = traderDialogFigure.Length;
 
             IList<string> figureRows = new List<string>(rows);
             figureRows.Add(traderDialogFigure[0] + new string(' ', Constants.TradeDialogSpacingColumns) +
@@ -103,6 +258,66 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             return figureRows.ToArray();
         }
 
+        private void Draw()
+        {
+            Console.Clear();
+
+            Console.SetCursorPosition(this.Location.X, this.Location.Y);
+            var consoleColors = new Color[3];
+            consoleColors[2] = Constants.InventoryActiveRowColor;
+
+            if ((this.ActiveInventoryDialog == this.TraderInventoryDialog))
+            {
+                consoleColors[0] = Constants.InventoryActiveColor;
+                consoleColors[1] = Constants.InventoryInactiveColor;
+            }
+            else
+            {
+                consoleColors[1] = Constants.InventoryActiveColor;
+                consoleColors[0] = Constants.InventoryInactiveColor;
+            }
+
+            var figure = GenerateFigure();
+            var y = this.Location.Y;
+
+            for (int i = 0; i < figure.Length; i++)
+            {
+                int colorId = 0;
+                if (i == this.ActiveInventoryDialog.ActiveRow &&
+                    this.ActiveInventoryDialog == this.TraderInventoryDialog)
+                {
+                    colorId = 2;
+                }
+
+                Colorful.Console.Write(figure[i].Substring(0, Constants.TradeDialogItemMaxLength - 1),
+                    consoleColors[colorId]);
+
+                Console.Write(new string(' ', Constants.TradeDialogSpacingColumns));
+
+                colorId = 1;
+
+                if (i == this.ActiveInventoryDialog.ActiveRow &&
+                    this.ActiveInventoryDialog == this.PlayerInventoryDialog)
+                {
+                    colorId = 2;
+                }
+                Colorful.Console.Write(figure[i]
+                    .Substring(Constants.TradeDialogItemMaxLength - 1 + Constants.TradeDialogSpacingColumns,
+                        Constants.TradeDialogItemMaxLength - 1), consoleColors[colorId]);
+
+                Console.SetCursorPosition(this.Location.X, ++y);
+            }
+
+            //append arrows after having drawn the rest
+            var rows = figure.Length;
+            Console.SetCursorPosition(Constants.TradeDialogItemMaxLength, this.Location.Y + rows / 2);
+            Colorful.Console.Write("--->", Color.Yellow);
+            Console.SetCursorPosition(Constants.TradeDialogItemMaxLength, this.Location.Y + rows / 2 + 1);
+            Colorful.Console.Write("<---", Color.Yellow);
+
+            Console.SetCursorPosition(this.Location.X, this.Location.Y + Constants.TradeDialogItemRows + 4);
+        }
+
         private void AppendSeparatorColumns(StringBuilder sb, int i, int rows)
         {
             var rightArrow = new string('-', Constants.TradeDialogSpacingColumns - 1) + '>';
@@ -114,11 +329,6 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                 sb.Append(leftArrow);
             else
                 sb.Append(new string(' ', Constants.TradeDialogSpacingColumns));
-        }
-
-        protected virtual string[] GetFigure()
-        {
-            return this.GenerateFigure();
         }
 
         #endregion

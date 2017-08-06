@@ -10,13 +10,16 @@
         }
 
         /// <summary>
-        /// Alligns and fills the line (if it's short enough with given filling character) / shortens (with '.' if too long) 
+        ///     Alligns and fills the line (if it's short enough with given filling character) / shortens (with '.' if too long)
         /// </summary>
-        public static string AlignLine(string line, int maxChars, char fillingChar = ' ', Alignment alignment = Alignment.Left)
+        public static string AlignLine(string line, int maxChars, char fillingChar = ' ',
+            Alignment alignment = Alignment.Left)
         {
             if (line.Length > maxChars)
+            {
                 return ShortenLine(line, maxChars);
-            else if (line.Length < maxChars)
+            }
+            if (line.Length < maxChars)
             {
                 switch (alignment)
                 {

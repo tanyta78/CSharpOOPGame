@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using BackToBg.Core.Business.Factories;
-using BackToBg.Core.Business.PlayerActions;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
 
@@ -12,13 +11,13 @@ namespace BackToBg.Core.Business.Map
     {
         private static readonly int mapSize = 100;
         private readonly IList<IBuilding> buildings;
-        private readonly IList<IPunchable> punchables;
-        private char[][] map;
         private readonly IPlayer player;
+        private readonly IPlayerActionFactory playerActionFactory;
+        private readonly IList<IPunchable> punchables;
         private readonly IReader reader;
         private readonly IWriter writer;
-        private readonly IPlayerActionFactory playerActionFactory;
-        private IList<IQuest> quests;
+        private char[][] map;
+        private readonly IList<IQuest> quests;
 
         public Map(IList<IBuilding> buildings, IPlayer player, IReader reader, IWriter writer)
         {
@@ -27,7 +26,7 @@ namespace BackToBg.Core.Business.Map
             this.player = player;
             this.reader = reader;
             this.writer = writer;
-            this.GenerateMap();
+            GenerateMap();
             this.playerActionFactory = new PlayerActionFactory(this, this.player, this.reader, this.writer);
             this.quests = new List<IQuest>();
         }
@@ -114,28 +113,26 @@ namespace BackToBg.Core.Business.Map
         public void RefreshQuest(IQuest quest)
         {
             if (quest.IsFinished)
-            {
                 this.writer.DisplayQuestCompletionMessage($"Quest {quest.Name} is finished!");
-            }
-            this.GenerateMap();
+            GenerateMap();
         }
 
         public void AddPunchable(IPunchable punchable)
         {
             this.punchables.Add(punchable);
-            this.GenerateMap();
+            GenerateMap();
         }
 
         public void AddQuest(IQuest quest)
         {
             this.quests.Add(quest);
-            this.GenerateMap();
+            GenerateMap();
         }
 
         public void AddBuilding(IBuilding building)
         {
             this.buildings.Add(building);
-            this.GenerateMap();
+            GenerateMap();
         }
 
         private void GenerateMap()
@@ -153,8 +150,8 @@ namespace BackToBg.Core.Business.Map
                 var x = info.row;
                 var y = info.col;
                 for (var row = x; row < Math.Min(x + figure.Length, mapSize - 1); row++)
-                    for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
-                        this.map[row][col] = figure[row - x][col - y];
+                for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
+                    this.map[row][col] = figure[row - x][col - y];
             }
 
             //draw all creatures

@@ -7,11 +7,9 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
     [PlayerAction("Escape")]
     public class PauseMenuAction : PlayerAction
     {
-        [Inject]
-        private IReader reader;
+        [Inject] private IReader reader;
 
-        [Inject]
-        private IWriter writer;
+        [Inject] private IWriter writer;
 
         public override void Execute()
         {

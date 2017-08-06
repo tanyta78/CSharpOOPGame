@@ -7,7 +7,6 @@ using BackToBg.Core.Core;
 using BackToBg.Core.Models;
 using BackToBg.Core.Models.Buildings.SpecialBuildings;
 using BackToBg.Core.Models.EntityInterfaces;
-using BackToBg.Core.Models.Quests;
 using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core

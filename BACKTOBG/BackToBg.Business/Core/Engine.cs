@@ -7,10 +7,10 @@ namespace BackToBg.Core.Core
 {
     public class Engine : IEngine
     {
-        private IMap map;
         private readonly IPlayer player;
         private readonly IReader reader;
         private readonly IWriter writer;
+        private readonly IMap map;
 
         public Engine(IPlayer player, IReader reader, IWriter writer, IMap map)
         {

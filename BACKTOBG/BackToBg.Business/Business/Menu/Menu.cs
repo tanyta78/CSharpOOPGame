@@ -6,8 +6,11 @@ namespace BackToBg.Core.Business.Menu
 {
     public abstract class Menu : IMenu
     {
+        protected static bool ShouldBeRunning = true;
         private readonly IReader reader;
         private readonly IWriter writer;
+        private readonly string name;
+        private int selectedIndex;
 
         public Menu(string name, IReader reader, IWriter writer)
         {
@@ -18,16 +21,13 @@ namespace BackToBg.Core.Business.Menu
 
         protected abstract IDictionary<int, Action> Actions { get; }
         protected abstract IList<string> MenuText { get; }
-        protected static bool ShouldBeRunning = true;
-        private int selectedIndex;
-        private string name;
 
         public void StartMenu()
         {
             while (ShouldBeRunning)
             {
-                this.PrintMenu();
-                this.ReadKeyInput();
+                PrintMenu();
+                ReadKeyInput();
             }
             ShouldBeRunning = true;
         }
@@ -35,7 +35,8 @@ namespace BackToBg.Core.Business.Menu
         private void PrintMenu()
         {
             this.writer.Clear();
-            this.writer.SetCursorPosition((this.writer.ConsoleWidth - this.name.Length) / 2, (this.writer.ConsoleHeight - this.MenuText.Count) / 2 - 1);
+            this.writer.SetCursorPosition((this.writer.ConsoleWidth - this.name.Length) / 2,
+                (this.writer.ConsoleHeight - this.MenuText.Count) / 2 - 1);
             this.writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
             for (var i = 0; i < this.MenuText.Count; i++)
             {
@@ -43,13 +44,9 @@ namespace BackToBg.Core.Business.Menu
                 this.writer.SetCursorPosition(this.writer.ConsoleWidth / 2 - this.MenuText[0].Length,
                     (this.writer.ConsoleHeight - this.MenuText.Count) / 2 + i);
                 if (i == this.selectedIndex)
-                {
                     this.writer.WriteLine($">{this.MenuText[i]}<");
-                }
                 else
-                {
                     this.writer.WriteLine(this.MenuText[i]);
-                }
             }
         }
 

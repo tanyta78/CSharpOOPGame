@@ -7,11 +7,10 @@ namespace BackToBg.Core.Models.People
 {
     public class Bandit : IPunchable
     {
-        private int row;
-        private int col;
-        private char figure;
-        private int health;
-        private BanditQuest quest;
+        private readonly int col;
+        private readonly char figure;
+        private readonly BanditQuest quest;
+        private readonly int row;
 
         public Bandit(BanditQuest quest, int row, int col, char figure = Constants.BanditFigure)
         {
@@ -19,27 +18,30 @@ namespace BackToBg.Core.Models.People
             this.row = row;
             this.col = col;
             this.figure = figure;
-            this.health = this.MaxHitPoints;
+            this.CurrentHitPoints = this.MaxHitPoints;
         }
 
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.row, this.col, new string[] { this.figure.ToString() });
+            return (this.row, this.col, new[] {this.figure.ToString()});
         }
 
-        public bool IsDead() => this.health <= 0;
+        public bool IsDead()
+        {
+            return this.CurrentHitPoints <= 0;
+        }
 
         public int ID => throw new NotImplementedException(); //TODO
         public string Name => throw new NotImplementedException(); //TODO
-        public int CurrentHitPoints => this.health;
+        public int CurrentHitPoints { get; private set; }
+
         public int MaxHitPoints => Constants.DefaultBanditHealth;
+
         public void TakeDamage(int damage)
         {
-            this.health -= damage;
-            if (this.IsDead())
-            {
+            this.CurrentHitPoints -= damage;
+            if (IsDead())
                 this.quest.RemoveBandint(this);
-            }
         }
     }
 }

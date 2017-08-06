@@ -13,7 +13,7 @@ namespace BackToBg.Core.Models.Buildings
 
         public override (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.x, this.y, this.GenerateFigure());
+            return (this.x, this.y, GenerateFigure());
         }
 
 

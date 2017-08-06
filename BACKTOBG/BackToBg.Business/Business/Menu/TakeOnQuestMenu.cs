@@ -21,8 +21,9 @@ namespace BackToBg.Core.Business.Menu
 
         protected override IDictionary<int, Action> Actions => new Dictionary<int, Action>
         {
-            {0, () => ShouldBeRunning = false },
-            {1, () =>
+            {0, () => ShouldBeRunning = false},
+            {
+                1, () =>
                 {
                     this.map.AddQuest(this.questFactory.InjectQuest(typeof(T)));
                     ShouldBeRunning = false;
@@ -30,10 +31,10 @@ namespace BackToBg.Core.Business.Menu
             }
         };
 
-        protected override IList<string> MenuText => new List<string>()
+        protected override IList<string> MenuText => new List<string>
         {
             "No",
             "Yes"
-        };        
+        };
     }
 }

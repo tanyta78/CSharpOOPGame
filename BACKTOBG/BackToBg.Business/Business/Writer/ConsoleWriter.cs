@@ -11,7 +11,7 @@ namespace BackToBg.Core.Business.Writer
         {
             this.ConsoleHeight = consoleHeight;
             this.ConsoleWidth = consoleWidth;
-            this.PerformConsoleSetup();
+            PerformConsoleSetup();
         }
 
         public int ConsoleHeight { get; }
@@ -28,14 +28,14 @@ namespace BackToBg.Core.Business.Writer
         public void DisplayQuestCompletionMessage(string message)
         {
             Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
-            this.DisplayMessageInColor(message, ConsoleColor.Green);
+            DisplayMessageInColor(message, ConsoleColor.Green);
             Thread.Sleep(1000);
         }
 
         public void DisplayException(string message)
         {
             Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
-            this.DisplayMessageInColor(message, ConsoleColor.Red);
+            DisplayMessageInColor(message, ConsoleColor.Red);
             Thread.Sleep(1000);
         }
 
@@ -53,7 +53,17 @@ namespace BackToBg.Core.Business.Writer
         {
             Console.SetCursorPosition(left, top);
         }
-        
+
+        public void DisplayMessageInColorCentered(string message, ConsoleColor color)
+        {
+            Console.Clear();
+
+            Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
+            Console.ForegroundColor = color;
+            Console.Write(message);
+            Console.ResetColor();
+        }
+
         private void PerformConsoleSetup()
         {
             Console.CursorVisible = false;

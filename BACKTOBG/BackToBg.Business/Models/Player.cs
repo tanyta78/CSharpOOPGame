@@ -8,9 +8,9 @@ namespace BackToBg.Core.Models
     public class Player : IPlayer
     {
         private readonly char figure;
+        private readonly int attackDamage;
         private int x;
         private int y;
-        private int attackDamage;
 
         public Player(int x, int y, char figure = Constants.DefaultPlayerFigure)
         {
@@ -115,7 +115,7 @@ namespace BackToBg.Core.Models
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
             //TODO: COHERENT IMPLEMENTATION
-            return (this.x, this.y, new[] { this.figure.ToString() });
+            return (this.x, this.y, new[] {this.figure.ToString()});
         }
     }
 }

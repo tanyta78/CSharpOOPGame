@@ -31,12 +31,10 @@ namespace BackToBg.Core.Business.Factories
                 .FirstOrDefault(t => t.GetCustomAttribute<PlayerActionAttribute>().ActionKeyName == key.ToString());
 
             if (actionType == null)
-            {
                 throw new InvalidKeyPressException();
-            }
 
-            var action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { });
-            this.InjectDependencies(action);
+            var action = (IPlayerAction) Activator.CreateInstance(actionType, new object[] { });
+            InjectDependencies(action);
 
             return action;
         }
@@ -51,14 +49,10 @@ namespace BackToBg.Core.Business.Factories
                 .GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
 
             foreach (var field in actionFields)
-            {
                 if (factoryFields.Any(f => f.FieldType == field.FieldType))
-                {
                     field.SetValue(action, factoryFields
                         .First(f => f.FieldType == field.FieldType)
                         .GetValue(this));
-                }
-            }
         }
     }
 }

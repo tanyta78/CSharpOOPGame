@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BackToBg.Core.Models.EntityInterfaces;
@@ -8,15 +9,30 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 {
     public class InventoryDialog<T> : IDrawable where T : ITradingEntity
     {
+        #region Fields
+
+        private bool isActive;
+        private int page;
+        private int activeRow;
+
+        #endregion
+
         public InventoryDialog(T tradingEntity, Point location)
         {
             this.TradingEntity = tradingEntity;
             this.Location = location;
+            this.page = 1;
+            this.activeRow = 3;
+            this.SelectedItem = this.TradingEntity.Inventory[0];
         }
 
         #region Properties
 
+        public IItem SelectedItem { get; set; }
+
         public Point Location { get; set; }
+
+        public int ActiveRow => this.activeRow;
 
         //Could be Shop, Player, Peddlar
         private T TradingEntity { get; }
@@ -25,15 +41,23 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         #region Methods
 
+        public (int row, int col, string[] figure) GetDrawingInfo()
+        {
+            return (this.Location.X, this.Location.Y, this.GenerateFigure());
+        }
+
+        public void Toggle()
+        {
+            this.isActive = !this.isActive;
+        }
+
         private string[] GenerateFigure()
         {
-            var rows = Constants.TradeDialogRows +
-                       2; // one for the name row (top) + two for the ------- lines underneath and above it
-
             string nameRow = $"{this.TradingEntity.Name}'s items" +
                              new string(' ', Constants.TradeDialogSpacingColumns);
             nameRow = Functions.AlignLine(nameRow, Constants.TradeDialogItemMaxLength);
 
+            //add first three info rows
             IList<string> figureRows = new List<string>()
             {
                 $"{new string('-', Constants.TradeDialogItemMaxLength)}",
@@ -41,38 +65,128 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                 $"{new string('-', Constants.TradeDialogItemMaxLength)}"
             };
 
-            if (rows > this.TradingEntity.Inventory.Count)
+            foreach (var row in ListItemsAndPage())
             {
-                rows = this.TradingEntity.Inventory.Count; //info row (top)
+                figureRows.Add(row);
             }
 
-            for (var i = 0; i < rows; i++)
+            return figureRows.ToArray();
+        }
+
+        private IList<string> ListItemsAndPage()
+        {
+            int rows = Constants.TradeDialogItemRows + 1;
+            int toSkip = 0;
+
+            if (this.TradingEntity.Inventory.Count >= Constants.TradeDialogItemRows)
+            {
+                toSkip = (this.page - 1) * Constants.TradeDialogItemRows;
+            }
+
+            var itemsOnPage = this.TradingEntity.Inventory
+                .Skip(toSkip) // 0 if less than items on one page
+                .Take(Constants.TradeDialogItemRows).ToList();
+
+            List<string> figureRows = new List<string>();
+
+            for (var i = 0; i < rows - 1; i++)
             {
                 //Build inventory item string
                 var sb = new StringBuilder();
 
-                if (this.TradingEntity.Inventory.Count - 1 >= i) //entity has such index in items collection
+                if (i <= itemsOnPage.Count - 1) //such index in inventory exists
                 {
-                    var item = this.TradingEntity.Inventory[i];
-                    var shopItemText = $"{i}. {item.Name} {item.Price}";
+                    var item = itemsOnPage[i];
+                    var shopItemText =
+                        $"{(this.page - 1) * Constants.TradeDialogItemRows + i}. {item.Name} ${item.Price}";
 
                     shopItemText = Functions.AlignLine(shopItemText, Constants.TradeDialogItemMaxLength);
 
                     sb.Append(shopItemText);
                 }
 
-                if (!string.IsNullOrEmpty(sb.ToString()))
-                {
-                    figureRows.Add(sb.ToString());
-                }
+                figureRows.Add(Functions.AlignLine(sb.ToString(), Constants.TradeDialogItemMaxLength));
             }
 
-            return figureRows.ToArray();
+            int pages = this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows;
+            if (pages < (double) this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows)
+            {
+                pages++;
+            }
+
+            //add page info row at the bottom
+            figureRows.Add(Functions.AlignLine($"page {this.page}/{pages}", Constants.TradeDialogItemMaxLength));
+
+            return figureRows;
         }
 
-        public (int row, int col, string[] figure) GetDrawingInfo()
+        public void Refresh(ConsoleKey key)
         {
-            return (this.Location.X, this.Location.Y, this.GenerateFigure());
+            int pages = this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows;
+            if (pages < (double) this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows)
+            {
+                pages++;
+            }
+
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    if (this.activeRow > 3)
+                    {
+                        this.activeRow--;
+                    }
+                    else
+                    {
+                        if (this.page > 1) //if not first page
+                        {
+                            this.page--;
+                            this.activeRow = Constants.TradeDialogItemRows + 2;
+                        }
+                    }
+                    break;
+                case ConsoleKey.DownArrow:
+                    if (this.activeRow < Constants.TradeDialogItemRows + 2)
+                    {
+                        //TODO: check if rows under are empty strings
+                        if (ListItemsAndPage()[this.activeRow - 2].Trim() == string.Empty)
+                        {
+                            break;
+                        }
+                        this.activeRow++;
+                    }
+                    else
+                    {
+                        if (this.page < pages) //if not last page
+                        {
+                            this.page++;
+                            this.activeRow = 3;
+                        }
+                    }
+                    break;
+                case ConsoleKey.RightArrow:
+                    if (this.page < pages) //if not last page
+                    {
+                        this.page++;
+                        this.activeRow = 3;
+                    }
+                    break;
+                case ConsoleKey.LeftArrow:
+                    if (this.page > 1) //if not first page
+                    {
+                        this.page--;
+                        this.activeRow = 3;
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    this.SelectedItem = this.TradingEntity.Inventory
+                        .Skip((this.page - 1) * Constants.TradeDialogItemRows + this.activeRow - 3).First();
+                    break;
+                case ConsoleKey.S:
+                    Toggle();
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion

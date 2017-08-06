@@ -16,34 +16,43 @@ namespace BackToBg.Test
     {
         static void Main(string[] args)
         {
-            TradeDialog td = new TradeDialog(new Point(0, 0),
-                new Player("Pesho")
-                {
-                    Inventory = new List<IItem>
-                    {
-                        new Axe(1, "Cepeni4kata", 99, Rarity.Common),
-                        new Encyclopedia(2, "Za dinozavrite", 15, Rarity.Epic)
-                    }
-                },
-                new MallShop(1, "Mall of Sofia", null, 10, 10)
-                {
-                    Inventory = new List<IItem>
-                    {
-                        new Primer(1, "Primer", 55, Rarity.Epic),
-                        new Overshoe(5, "Obushta", 60, Rarity.Epic)
-                    }
-                });
-
-            var figureInfo = td.GetDrawingInfo();
-            var figure = figureInfo.figure;
-
-            for (int i = 0; i < figure.Length; i++)
+            Player pesho = new Player("Pesho")
             {
-                Console.WriteLine(figure[i]);
-            }
+                Inventory = new List<IItem>
+                {
+                    new Axe(1, "Cepeni4kata", 99, Rarity.Common),
+                    new Hammer(2, "Za dinozavrite", 15, Rarity.Epic),
+                    new Sword(3, "Me4a na Ahil", 15, Rarity.Epic),
+                    new Booklet(4, "Priklu4eniq", 15, Rarity.Epic),
+                    new Sneaker(5, "Adidas", 15, Rarity.Epic),
+                    new Sneaker(6, "Nike", 15, Rarity.Epic),
+                    new Sneaker(7, "Reebok", 15, Rarity.Epic),
+                    new Sneaker(8, "Puma", 15, Rarity.Epic),
+                    new Sneaker(9, "Guma", 15, Rarity.Epic),
+                }
+            };
 
-            Console.WriteLine("Praznite redove sa za6toto sym hardcodenal w constanta broq na itemi per page");
-            Console.WriteLine("TODO: add pagination + Active inventory selection + Item selection");
+            var mall = new MallShop(1, "Mall of Sofia", null, 10, 10)
+            {
+                Inventory = new List<IItem>
+                {
+                    new Primer(10, "Primer", 55, Rarity.Epic),
+                    new Overshoe(11, "Obushta", 60, Rarity.Epic)
+                }
+            };
+
+            TradeDialog td = new TradeDialog(new Point(0, 0),
+                pesho,
+                mall
+                );
+
+            var id = new InventoryDialog<Player>(pesho,new Point(0,0));
+
+            td.Use();
+
+//            Console.WriteLine(new string('-',55));
+//            Console.WriteLine("Praznite redove sa za6toto sym hardcodenal w constanta broq na itemi per page");
+//            Console.WriteLine("TODO: add pagination + Active inventory selection + Item selection");
         }
     }
 }

@@ -6,7 +6,12 @@ namespace BackToBg.Core.Business.Menu
 {
     public class PauseMenu : Menu
     {
-        private readonly IDictionary<int, Action> actions = new Dictionary<int, Action>
+        public PauseMenu(IReader reader, IWriter writer)
+            : base("Pause", reader, writer)
+        {
+        }
+
+        protected override IDictionary<int, Action> Actions { get; } = new Dictionary<int, Action>
         {
             {0, () => ShouldBeRunning = false},
             {
@@ -18,7 +23,7 @@ namespace BackToBg.Core.Business.Menu
             }
         };
 
-        private readonly IList<string> menuText = new List<string>
+        protected override IList<string> MenuText { get; } = new List<string>
         {
             "Resume",
             "Switch Town",
@@ -26,13 +31,5 @@ namespace BackToBg.Core.Business.Menu
             "View quests",
             "Exit"
         };
-
-        public PauseMenu(IReader reader, IWriter writer) 
-            : base("Pause", reader, writer)
-        {
-        }
-
-        protected override IDictionary<int, Action> Actions => this.actions;
-        protected override IList<string> MenuText => this.menuText;
     }
 }
