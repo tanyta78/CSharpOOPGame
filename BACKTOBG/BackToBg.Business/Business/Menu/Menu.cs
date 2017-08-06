@@ -11,6 +11,8 @@ namespace BackToBg.Core.Business.Menu
         private readonly IWriter writer;
         private readonly string name;
         private int selectedIndex;
+        private IReader reader;
+        private IWriter writer;
 
         public Menu(string name, IReader reader, IWriter writer)
         {
@@ -21,6 +23,20 @@ namespace BackToBg.Core.Business.Menu
 
         protected abstract IDictionary<int, Action> Actions { get; }
         protected abstract IList<string> MenuText { get; }
+
+        protected IReader Reader
+        {
+            get { return this.reader; }
+        }
+
+        protected IWriter Writer
+        {
+            get { return this.writer; }
+        }
+
+        protected static bool ShouldBeRunning = true;
+        private int selectedIndex;
+        private string name;
 
         public void StartMenu()
         {
@@ -38,40 +54,61 @@ namespace BackToBg.Core.Business.Menu
             this.writer.SetCursorPosition((this.writer.ConsoleWidth - this.name.Length) / 2,
                 (this.writer.ConsoleHeight - this.MenuText.Count) / 2 - 1);
             this.writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
+            this.Writer.Clear();
+            this.Writer.SetCursorPosition((this.Writer.ConsoleWidth - this.name.Length) / 2, (this.Writer.ConsoleHeight - this.MenuText.Count) / 2 - 1);
+            this.Writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
+			
             for (var i = 0; i < this.MenuText.Count; i++)
             {
                 //set-up so that the menu is drawn on the middle of the screen
-                this.writer.SetCursorPosition(this.writer.ConsoleWidth / 2 - this.MenuText[0].Length,
-                    (this.writer.ConsoleHeight - this.MenuText.Count) / 2 + i);
+                this.Writer.SetCursorPosition(this.Writer.ConsoleWidth / 2 - this.MenuText[0].Length,
+                    (this.Writer.ConsoleHeight - this.MenuText.Count) / 2 + i);
                 if (i == this.selectedIndex)
                     this.writer.WriteLine($">{this.MenuText[i]}<");
                 else
-                    this.writer.WriteLine(this.MenuText[i]);
+                {
+                    this.Writer.WriteLine($">{this.MenuText[i]}<");
+                }
+                else
+                {
+                    this.Writer.WriteLine(this.MenuText[i]);
+                }
             }
         }
 
         private void ReadKeyInput()
         {
-            var key = this.reader.ReadKey();
+            var key = this.Reader.ReadKey();
             switch (key.Key)
             {
                 case ConsoleKey.UpArrow:
                     this.selectedIndex--;
-                    this.selectedIndex = (this.MenuText.Count + this.selectedIndex) % this.MenuText.Count;
+                    if (this.selectedIndex < 0)
+                    {
+                        this.selectedIndex = this.MenuText.Count - 1;
+                    }
                     break;
                 case ConsoleKey.DownArrow:
                     this.selectedIndex++;
-                    this.selectedIndex %= this.MenuText.Count;
+                    if (this.selectedIndex > this.MenuText.Count)
+                    {
+                        this.selectedIndex = 0;
+                    }
                     break;
                 case ConsoleKey.Enter:
                     if (!this.Actions.ContainsKey(this.selectedIndex))
                         throw new NotImplementedException($"{this.MenuText[this.selectedIndex]} not available yet.");
-                    this.Actions[this.selectedIndex]();
+                        this.ExecuteCommand(this.selectedIndex);
                     break;
                 case ConsoleKey.Escape:
                     ShouldBeRunning = false;
                     break;
             }
+        }
+
+        protected virtual void ExecuteCommand(int commandNumber)
+        {
+            this.Actions[commandNumber]();
         }
     }
 }

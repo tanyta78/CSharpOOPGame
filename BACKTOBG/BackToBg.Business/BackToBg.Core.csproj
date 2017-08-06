@@ -60,6 +60,7 @@
     <Compile Include="Business\Factories\QuestFactory.cs" />
     <Compile Include="Business\Menu\Menu.cs" />
     <Compile Include="Business\Menu\PauseMenu.cs" />
+    <Compile Include="Business\Menu\SwitchTownMenu.cs" />
     <Compile Include="Business\Menu\TakeOnQuestMenu.cs" />
     <Compile Include="Business\PlayerActions\Actions\InteractAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PauseMenuAction.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Business\Factories\PlayerActionFactory.cs" />
     <Compile Include="Business\PlayerActions\Actions\MoveUpAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PlayerAction.cs" />
+    <Compile Include="Business\UtilityInterfaces\ITown.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Models\Buildings\BasicBuilding.cs" />
     <Compile Include="Models\Buildings\Building.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="Models\PlayerQuest.cs" />
     <Compile Include="Models\Quest.cs" />
     <Compile Include="Models\Quests\BanditQuest.cs" />
+    <Compile Include="Models\Town\Town.cs" />
     <Compile Include="Models\Utilities\Alignment.cs" />
     <Compile Include="Models\Utilities\Constants.cs" />
     <Compile Include="Models\Utilities\Functions.cs" />

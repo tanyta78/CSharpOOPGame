@@ -10,7 +10,12 @@ namespace BackToBg.Core.Models.Quests
     {
         private readonly IList<IPunchable> bandits;
 
+<<<<<<< HEAD
         [Inject] private IMap map;
+=======
+        [Inject]
+        private ITown town;
+>>>>>>> cd78453d4a543777e45c5275f30c04e921ff3a6b
 
         public BanditQuest(string name, string description, int rewardExperiancePoints, int rewardMoney)
             : base(name, description, rewardExperiancePoints, rewardMoney)
@@ -22,7 +27,13 @@ namespace BackToBg.Core.Models.Quests
         private void InitializeMap()
         {
             foreach (var bandit in this.bandits)
+<<<<<<< HEAD
                 this.map.AddPunchable(bandit);
+=======
+            {
+                this.town.Map.AddPunchable(bandit);
+            }
+>>>>>>> cd78453d4a543777e45c5275f30c04e921ff3a6b
         }
 
         public override void StartQuest()
@@ -34,7 +45,12 @@ namespace BackToBg.Core.Models.Quests
             this.bandits.Remove(bandit);
             if (this.bandits.Count == 0)
                 this.IsFinished = true;
+<<<<<<< HEAD
             this.map.RefreshQuest(this);
+=======
+            }
+            this.town.RefreshQuest(this);
+>>>>>>> cd78453d4a543777e45c5275f30c04e921ff3a6b
         }
     }
 }

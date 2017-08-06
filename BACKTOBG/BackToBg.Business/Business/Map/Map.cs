@@ -4,6 +4,7 @@ using System.Linq;
 using BackToBg.Core.Business.Factories;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Business.Map
 {
@@ -18,17 +19,19 @@ namespace BackToBg.Core.Business.Map
         private readonly IWriter writer;
         private char[][] map;
         private readonly IList<IQuest> quests;
+        private IWriter writer;
 
-        public Map(IList<IBuilding> buildings, IPlayer player, IReader reader, IWriter writer)
+
+        public Map(IPlayer player, IWriter writer, IReader reader)
         {
             this.punchables = new List<IPunchable>();
-            this.buildings = new List<IBuilding>(buildings);
-            this.player = player;
-            this.reader = reader;
+            this.buildings = new List<IBuilding>();
             this.writer = writer;
             GenerateMap();
             this.playerActionFactory = new PlayerActionFactory(this, this.player, this.reader, this.writer);
             this.quests = new List<IQuest>();
+            this.player = player;
+            this.GenerateMap();
         }
 
         public IEnumerable<IBuilding> Drawables => this.buildings;
@@ -40,14 +43,11 @@ namespace BackToBg.Core.Business.Map
             return this.map;
         }
 
-        public void Update(ConsoleKey key)
+        public void Update(IPlayerAction action)
         {
-            //crucial code that throws exception
-            var action = this.playerActionFactory.CreateAction(key);
-
             //remove the player from map
             var playerInfo = this.player.GetDrawingInfo();
-            this.map[playerInfo.row][playerInfo.col] = ' ';
+            this.map[playerInfo.row][playerInfo.col] = Constants.RoadChar;
 
             try
             {
@@ -59,7 +59,7 @@ namespace BackToBg.Core.Business.Map
                 //add the updated player to the map again
                 playerInfo = this.player.GetDrawingInfo();
                 this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
-            }
+            }                   
         }
 
         public void DrawMap()
@@ -116,17 +116,18 @@ namespace BackToBg.Core.Business.Map
                 this.writer.DisplayQuestCompletionMessage($"Quest {quest.Name} is finished!");
             GenerateMap();
         }
-
         public void AddPunchable(IPunchable punchable)
         {
             this.punchables.Add(punchable);
             GenerateMap();
         }
 
-        public void AddQuest(IQuest quest)
+        public void RemovePunchable(IPunchable punchable)
         {
             this.quests.Add(quest);
             GenerateMap();
+            this.punchables.Remove(punchable);
+            this.GenerateMap();
         }
 
         public void AddBuilding(IBuilding building)
@@ -135,12 +136,12 @@ namespace BackToBg.Core.Business.Map
             GenerateMap();
         }
 
-        private void GenerateMap()
+        public void GenerateMap()
         {
             //create the map array
             this.map = new char[mapSize][];
             for (var i = 0; i < mapSize; i++)
-                this.map[i] = new string(' ', mapSize).ToCharArray();
+                this.map[i] = new string(Constants.RoadChar, mapSize).ToCharArray();
 
             //draw all buildings
             foreach (var building in this.buildings)
@@ -162,8 +163,8 @@ namespace BackToBg.Core.Business.Map
                 var x = info.row;
                 var y = info.col;
                 for (var row = x; row < Math.Min(x + figure.Length, mapSize - 1); row++)
-                for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
-                    this.map[row][col] = figure[row - x][col - y];
+                    for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
+                        this.map[row][col] = figure[row - x][col - y];
             }
 
             //draw the player
