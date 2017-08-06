@@ -5,7 +5,7 @@
         public const int TradeDialogRows = 6;
         public const int TradeDialogSpacingColumns = 4;
         public const int TradeDialogItemMaxLength = 20;
-
+        public const char RoadChar = ' ';
         public const char DefaultPlayerFigure = '☻';
         public const char BanditFigure = 'B';
         public const int ConsoleHeight = 41;

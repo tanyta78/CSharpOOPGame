@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using BackToBg.Core.Business.UtilityInterfaces;
 
 namespace BackToBg.Core.Business.Menu
 {
     public class PauseMenu : Menu
     {
-        private readonly IDictionary<int, Action> actions = new Dictionary<int, Action>
-        {
-            {0, () => ShouldBeRunning = false},
-            {
-                4, () =>
-                {
-                    Console.Clear();
-                    Environment.Exit(0);
-                }
-            }
-        };
+        private IEngine engine;
 
-        private readonly IList<string> menuText = new List<string>
+        private IDictionary<int, Action> actions;
+
+        private IList<string> menuText = new List<string>
         {
             "Resume",
             "Switch Town",
@@ -27,7 +20,29 @@ namespace BackToBg.Core.Business.Menu
             "Exit"
         };
 
-        public PauseMenu(IReader reader, IWriter writer) 
+        public PauseMenu(string name, IReader reader, IWriter writer, IEngine engine) : base(name, reader, writer)
+        {
+            this.engine = engine;
+            this.actions = new Dictionary<int, Action>
+            {
+                {0, () => ShouldBeRunning = false},
+                {1, () =>
+                {
+                    var stm = new SwitchTownMenu("Switch town", this.Reader, this.Writer, this.engine);
+                    stm.StartMenu();
+                }},
+                {
+                    4, () =>
+                    {
+                        Console.Clear();
+                        Environment.Exit(0);
+                    }
+                }
+            };
+        }
+        
+
+        public PauseMenu(IReader reader, IWriter writer)
             : base("Pause", reader, writer)
         {
         }

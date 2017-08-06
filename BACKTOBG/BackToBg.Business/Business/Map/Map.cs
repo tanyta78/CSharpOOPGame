@@ -5,6 +5,7 @@ using BackToBg.Core.Business.Factories;
 using BackToBg.Core.Business.PlayerActions;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Business.Map
 {
@@ -15,17 +16,15 @@ namespace BackToBg.Core.Business.Map
         private readonly IList<IPunchable> punchables;
         private char[][] map;
         private readonly IPlayer player;
-        private readonly IPlayerActionFactory playerActionFactory;
         private IWriter writer;
 
-        public Map(IEnumerable<IBuilding> buildings, IPlayer player, IWriter writer, IReader reader)
+        public Map(IPlayer player, IWriter writer, IReader reader)
         {
             this.punchables = new List<IPunchable>();
-            this.buildings = new List<IBuilding>(buildings);
+            this.buildings = new List<IBuilding>();
             this.writer = writer;
             this.player = player;
             this.GenerateMap();
-            this.playerActionFactory = new PlayerActionFactory(this, player, reader, writer);
         }
 
         public IEnumerable<IBuilding> Drawables => this.buildings;
@@ -37,14 +36,11 @@ namespace BackToBg.Core.Business.Map
             return this.map;
         }
 
-        public void Update(ConsoleKey key)
+        public void Update(IPlayerAction action)
         {
-            //crucial code that throws exception
-            var action = this.playerActionFactory.CreateAction(key);
-
             //remove the player from map
             var playerInfo = this.player.GetDrawingInfo();
-            this.map[playerInfo.row][playerInfo.col] = ' ';
+            this.map[playerInfo.row][playerInfo.col] = Constants.RoadChar;
 
             try
             {
@@ -56,7 +52,7 @@ namespace BackToBg.Core.Business.Map
                 //add the updated player to the map again
                 playerInfo = this.player.GetDrawingInfo();
                 this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
-            }
+            }                   
         }
 
         public void DrawMap()
@@ -130,7 +126,7 @@ namespace BackToBg.Core.Business.Map
             //create the map array
             this.map = new char[mapSize][];
             for (var i = 0; i < mapSize; i++)
-                this.map[i] = new string(' ', mapSize).ToCharArray();
+                this.map[i] = new string(Constants.RoadChar, mapSize).ToCharArray();
 
             //draw all buildings
             foreach (var building in this.buildings)

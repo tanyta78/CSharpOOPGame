@@ -56,6 +56,7 @@
     <Compile Include="Business\Factories\QuestFactory.cs" />
     <Compile Include="Business\Menu\Menu.cs" />
     <Compile Include="Business\Menu\PauseMenu.cs" />
+    <Compile Include="Business\Menu\SwitchTownMenu.cs" />
     <Compile Include="Business\Menu\TakeOnQuestMenu.cs" />
     <Compile Include="Business\PlayerActions\Actions\InteractAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PauseMenuAction.cs" />

@@ -23,11 +23,20 @@ namespace BackToBg.Core
             IPlayer player = new Player(4, 38);
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
-            IMap map = new Map(buildings, player, writer, reader);
-            ITown town = new Town(map, writer);
-            town.AddBuilding(new PoliceOffice(town, 1, "Police Station", "Just a police station", 30, 15));
+            IMap map = new Map(player, writer, reader);
+            IMap map2 = new Map(player, writer, reader);
 
-            var engine = new Engine(player, reader, writer, town);
+            ITown Sofia = new Town("Sofia", map, writer);
+            Sofia.AddBuilding(new PoliceOffice(Sofia, 1, "Police Station", "Just a police station", 30, 15));
+            foreach (var building in buildings)
+            {
+                Sofia.AddBuilding(building);
+            }
+            
+            ITown Montana = new Town("Montana", map2, writer);
+
+            var engine = new Engine(player, reader, writer, Sofia);
+            engine.AddTown(Montana);
             engine.Run();
         }
     }

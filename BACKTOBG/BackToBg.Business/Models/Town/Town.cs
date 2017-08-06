@@ -14,12 +14,15 @@ namespace BackToBg.Core.Models.Town
         private IList<IQuest> quests;
         private IWriter writer;
 
-        public Town(IMap map, IWriter writer)
+        public Town(string name, IMap map, IWriter writer)
         {
+            this.Name = name;
             this.map = map;
             this.quests = new List<IQuest>();
             this.writer = writer;
         }
+
+        public string Name { get; }
 
         public IMap Map
         {

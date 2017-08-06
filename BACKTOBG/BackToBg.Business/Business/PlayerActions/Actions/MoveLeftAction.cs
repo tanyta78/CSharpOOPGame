@@ -1,6 +1,7 @@
 ﻿using BackToBg.Core.Business.Attributes;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Business.PlayerActions.Actions
 {
@@ -16,7 +17,7 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
             var info = this.player.GetDrawingInfo();
             var x = info.row;
             var y = info.col;
-            if (this.map.GetMap()[x][y - 1] == ' ')
+            if (this.map.GetMap()[x][y - 1] == Constants.RoadChar)
                 this.player.MoveWest();
         }
     }

@@ -4,20 +4,25 @@ using System.Reflection;
 using BackToBg.Core.Business.Attributes;
 using BackToBg.Core.Business.Exceptions;
 using BackToBg.Core.Business.UtilityInterfaces;
+using BackToBg.Core.Core;
 using BackToBg.Core.Models.EntityInterfaces;
 
 namespace BackToBg.Core.Business.Factories
 {
     public class PlayerActionFactory : IPlayerActionFactory
     {
+        private IEngine engine;
+        private ITown town;
         private IMap map;
         private IPlayer player;
         private IReader reader;
         private IWriter writer;
 
-        public PlayerActionFactory(IMap map, IPlayer player, IReader reader, IWriter writer)
+        public PlayerActionFactory(IEngine engine, IPlayer player, IReader reader, IWriter writer)
         {
-            this.map = map;
+            this.engine = engine;
+            this.town = engine.GetCurrentTown();;
+            this.map = this.town.Map;
             this.player = player;
             this.reader = reader;
             this.writer = writer;

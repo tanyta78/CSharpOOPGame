@@ -12,7 +12,7 @@ namespace BackToBg.Core.Business.UtilityInterfaces
 
         char[][] GetMap();
 
-        void Update(ConsoleKey key);
+        void Update(IPlayerAction action);
         void GenerateMap();
         void DrawMap();
         void AddPunchable(IPunchable punchable);

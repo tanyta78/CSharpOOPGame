@@ -9,6 +9,7 @@ namespace BackToBg.Core.Business.UtilityInterfaces
 {
     public interface ITown
     {
+        string Name { get; }
         IMap Map { get; }
 
         void AddQuest(IQuest quest);
