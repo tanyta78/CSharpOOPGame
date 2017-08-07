@@ -20,7 +20,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
         //    "Now you are in Police office.The police need you. Your mission, if you accept it, is to arrest three famous criminals. Go and find them. The mission will end up bringing three pairs of boots. You will receive boot, 50 experience and 500 money",
         //    50, 500);
 
-        public PoliceOffice(ITown town, int id, string name, string description, int x, int y, int sizeFactor = 1)
+        public PoliceOffice(ITown town, int id, string name, string description, int x, int y, int sizeFactor = Constants.DefaultSizeFactor)
             : base(id, name, description, x, y, sizeFactor)
         {
             this.town = town;

@@ -1,13 +1,14 @@
 ﻿using System;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Buildings
 {
     public class BasicBuilding : Building
     {
-        private static readonly char border = '*';
-        private static readonly char inner = 'O';
+        private static readonly char border = Constants.BasicBuildingBorder;
+        private static readonly char inner = Constants.BasicBuildingInner;
 
-        public BasicBuilding(int x, int y, int sizeFactor = 1) : base(x, y, sizeFactor)
+        public BasicBuilding(int x, int y, int sizeFactor = Constants.DefaultSizeFactor) : base(x, y, sizeFactor)
         {
         }
 
@@ -16,10 +17,9 @@ namespace BackToBg.Core.Models.Buildings
             return (this.x, this.y, GenerateFigure());
         }
 
-
         public override void Interact()
         {
-            throw new NotSupportedException("You cannot interact with a basic building.");
+            throw new NotSupportedException(Messages.BasicBuildingInteractEx);
         }
 
         private string[] GenerateFigure()
@@ -32,7 +32,6 @@ namespace BackToBg.Core.Models.Buildings
             for (var i = 1; i < size - 1; i++)
                 figure[i] = $"{border}{new string(inner, size - 2)}{border}";
             figure[size - 1] = new string(border, size);
-
             return figure;
         }
     }

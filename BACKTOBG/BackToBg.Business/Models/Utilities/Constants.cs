@@ -11,10 +11,13 @@ namespace BackToBg.Core.Models.Utilities
         public const char RoadChar = ' ';
         public const char DefaultPlayerFigure = '☻';
         public const char BanditFigure = 'B';
+	    public const char BasicBuildingBorder = '*';
+	    public const char BasicBuildingInner = 'O';
         public const int ConsoleHeight = 41;
         public const int ConsoleWidth = 61;
         public const int DefaultBanditHealth = 10;
-        
+	    public const int DefaultSizeFactor = 1;
+	    public const int DefaultMapSize = 100;
 
         public static Color InventoryActiveColor = Color.Beige;
         public static Color InventoryActiveRowColor = Color.Green;
@@ -29,7 +32,7 @@ namespace BackToBg.Core.Models.Utilities
 	    public const int PlayerStartingAgility = 49;
 	    public const int PlayerStartingStrength = 62;
 	    public const int PlayerStartingIntelligence = 39;
-	    public const int PlayerStartingStamina = 100;
+	    public const int PlayerStartingStamina = 200;
 	    public const int PlayerStartingExpirience = 0;
 	    public const double PlayerStartingMoney = 500;
 	}

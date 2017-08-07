@@ -28,7 +28,7 @@ namespace BackToBg.Core.Business.Factories
 
         public IPlayerAction CreateAction(ConsoleKey key)
         {
-            this.town = engine.GetCurrentTown(); ;
+            this.town = engine.GetCurrentTown();
             this.map = this.town.Map;
             var actionType = Assembly.GetExecutingAssembly()
                 .GetTypes()
@@ -39,7 +39,7 @@ namespace BackToBg.Core.Business.Factories
                 throw new InvalidKeyPressException();
 
             var action = (IPlayerAction) Activator.CreateInstance(actionType, new object[] { });
-            InjectDependencies(action);
+            this.InjectDependencies(action);
 
             return action;
         }

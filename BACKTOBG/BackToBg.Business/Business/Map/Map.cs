@@ -11,7 +11,7 @@ namespace BackToBg.Core.Business.Map
 {
     public class Map : IMap
     {
-        private static readonly int mapSize = 100;
+        private static readonly int mapSize = Constants.DefaultMapSize;
         private readonly IList<IBuilding> buildings;
         private readonly IList<IPunchable> punchables;
         private char[][] map;
@@ -157,7 +157,7 @@ namespace BackToBg.Core.Business.Map
             this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
 
             //draw the borders
-            var border = '*';
+            var border = Constants.BasicBuildingBorder;
             this.map[0] = new string(border, mapSize).ToCharArray();
             for (var i = 1; i < mapSize - 1; i++)
             {

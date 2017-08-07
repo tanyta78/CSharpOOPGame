@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Items
 {
@@ -25,9 +21,7 @@ namespace BackToBg.Core.Models.Items
 
 			private set
 			{
-				if (value <= 0)
-					throw new ArgumentException($"{nameof(this.id)} should be positive integer!");
-
+				Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
 				this.id = value;
 			}
 		}
@@ -38,9 +32,7 @@ namespace BackToBg.Core.Models.Items
 
 			private set
 			{
-				if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-					throw new ArgumentException($"{nameof(this.name)} should not be null empty or white space!");
-
+				Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
 				this.name = value;
 			}
 		}
@@ -50,9 +42,7 @@ namespace BackToBg.Core.Models.Items
 			get => this.price;
 			private set
 			{
-				if (value <= 0)
-					throw new ArgumentException($"{nameof(this.price)} should be positive integer!");
-
+				Validator.IsPositive(value, nameof(this.Price) + Messages.ValueShouldBePositive);
 				this.price = value;
 			}
 		}

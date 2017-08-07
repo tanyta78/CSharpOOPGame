@@ -1,4 +1,5 @@
 ﻿using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Items
 {
@@ -14,7 +15,11 @@ namespace BackToBg.Core.Models.Items
 		public int Stamina
 		{
 			get => this.stamina;
-			set => this.stamina = value;	//Validation
+			set
+			{
+				Validator.IsPositive(value, nameof(this.stamina) + Messages.ValueShouldBePositive);
+				this.stamina = value;
+			}
 		}
 	}
 }

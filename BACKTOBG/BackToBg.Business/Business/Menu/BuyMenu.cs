@@ -18,7 +18,7 @@ namespace BackToBg.Core.Business.Menu
 		public BuyMenu(string name, IReader reader, IWriter writer) : base(name, reader, writer)
 		{
 			this.shopList = new List<IFood>();
-			this.shopList.Add(new Kifla(1,"Kifla s marmalad",2,15));
+			this.shopList.Add(new Kifla(1, "Kifla s marmalad", 2, 15));
 			this.shopList.Add(new Kifla(2, "Kifla s shokolad", 2, 20));
 			this.shopList.Add(new Kifla(4, "Kifla s krem", 2, 13));
 			this.AddToItemsToMenu();										//TODO rework adding items of the shopList

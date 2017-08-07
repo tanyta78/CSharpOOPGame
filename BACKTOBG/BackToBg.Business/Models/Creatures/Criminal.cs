@@ -1,5 +1,6 @@
 ﻿using System;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Creatures
 {
@@ -38,10 +39,8 @@ namespace BackToBg.Core.Models.Creatures
 
             private set
             {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.id)} should be positive integer!");
-
-                this.id = value;
+				Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
+				this.id = value;
             }
         }
 
@@ -51,10 +50,8 @@ namespace BackToBg.Core.Models.Creatures
 
             private set
             {
-                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException($"{nameof(this.name)} should not be null empty or white space!");
-
-                this.name = value;
+				Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
+				this.name = value;
             }
         }
 
@@ -64,10 +61,8 @@ namespace BackToBg.Core.Models.Creatures
 
             private set
             {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.currentHitPoints)} should be positive integer!");
-
-                this.currentHitPoints = value;
+				Validator.IsPositive(value, nameof(this.currentHitPoints) + Messages.ValueShouldBePositive);
+				this.currentHitPoints = value;
             }
         }
 
@@ -77,10 +72,8 @@ namespace BackToBg.Core.Models.Creatures
 
             private set
             {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.maxHitPoints)} should be positive integer!");
-
-                this.maxHitPoints = value;
+				Validator.IsPositive(value, nameof(this.maxHitPoints) + Messages.ValueShouldBePositive);
+				this.maxHitPoints = value;
             }
         }
     }

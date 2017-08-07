@@ -2,6 +2,7 @@
 using System.Text;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Enums;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Items
 {
@@ -25,9 +26,7 @@ namespace BackToBg.Core.Models.Items
             get => this.strengthBonus;
             private set
             {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.strengthBonus)} should be positive integer!");
-
+	            Validator.IsPositive(value, nameof(this.StrengthBonus) + Messages.ValueShouldBePositive);                 
                 this.strengthBonus = value * (int) this.Rarity;
             }
         }
@@ -37,10 +36,8 @@ namespace BackToBg.Core.Models.Items
             get => this.intelligenceBonus;
             private set
             {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.intelligenceBonus)} should be positive integer!");
-
-                this.intelligenceBonus = value * (int) this.Rarity;
+				Validator.IsPositive(value, nameof(this.IntelligenceBonus) + Messages.ValueShouldBePositive);
+				this.intelligenceBonus = value * (int) this.Rarity;
             }
         }
 
@@ -49,10 +46,8 @@ namespace BackToBg.Core.Models.Items
             get => this.agilityBonus;
             private set
             {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.agilityBonus)} should be positive integer!");
-
-                this.agilityBonus = value * (int) this.Rarity;
+				Validator.IsPositive(value, nameof(this.AgilityBonus) + Messages.ValueShouldBePositive);
+				this.agilityBonus = value * (int) this.Rarity;
             }
         }
 

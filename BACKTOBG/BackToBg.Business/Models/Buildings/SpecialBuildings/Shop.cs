@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 {
     public abstract class Shop : SpecialBuilding, ITradingEntity
     {
-        protected Shop(int id, string name, string description, int x, int y, int sizeFactor = 1) : base(id, name,
+        protected Shop(int id, string name, string description, int x, int y, int sizeFactor = Constants.DefaultSizeFactor) : base(id, name,
             description, x, y, sizeFactor)
         {
             this.Inventory = new List<IItem>();

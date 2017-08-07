@@ -70,31 +70,51 @@ namespace BackToBg.Core.Models
 		public double Money
 		{
 			get => this.money;
-			set { this.money = value; } // TO DO Validation
+			set
+			{
+				Validator.IsPositiveDouble(value, nameof(this.money) + Messages.ValueShouldBePositive);
+				this.money = value;
+			}
 		}
 
 		public int Experience
 		{
 			get => this.expirience;
-			set { this.expirience = value; }// TO DO Validation
+			set
+			{
+				Validator.IsPositive(value, nameof(this.expirience) + Messages.ValueShouldBePositive);
+				this.expirience = value;
+			}
 		}
 
 		public int Agility
 		{
 			get => this.agility;
-			set => this.agility = value;// TO DO Validation
+			set
+			{
+				Validator.IsPositive(value, nameof(this.agility) + Messages.ValueShouldBePositive);
+				this.agility = value;
+			}
 		}
 
 		public int Strength
 		{
 			get => this.strength;
-			set => this.strength = value;// TO DO Validation
+			set
+			{
+				Validator.IsPositive(value, nameof(this.strength) + Messages.ValueShouldBePositive);
+				this.agility = value;
+			}
 		}
 
 		public int Intelligence
 		{
 			get => this.intelligence;
-			set => this.intelligence = value;// TO DO Validation
+			set
+			{
+				Validator.IsPositive(value, nameof(this.intelligence) + Messages.ValueShouldBePositive);
+				this.agility = value;
+			}
 		}
 
 		public int Stamina
@@ -102,6 +122,7 @@ namespace BackToBg.Core.Models
 			get { return this.stamina; }
 			set
 			{
+				Validator.IsPositive(value, nameof(this.stamina) + Messages.ValueShouldBePositive);
 				this.stamina = value;
 				if (this.stamina < 0)
 				{

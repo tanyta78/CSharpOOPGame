@@ -1,5 +1,5 @@
-﻿using System;
-using BackToBg.Core.Models.EntityInterfaces;
+﻿using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Buildings
 {
@@ -8,7 +8,7 @@ namespace BackToBg.Core.Models.Buildings
         private int id;
         private string name;
 
-        protected SpecialBuilding(int id, string name, string description, int x, int y, int sizeFactor = 1)
+        protected SpecialBuilding(int id, string name, string description, int x, int y, int sizeFactor = Constants.DefaultSizeFactor)
             : base(x, y, sizeFactor)
         {
             this.ID = id;
@@ -25,10 +25,8 @@ namespace BackToBg.Core.Models.Buildings
 
             private set
             {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.id)} should be positive integer!");
-
-                this.id = value;
+				Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
+				this.id = value;
             }
         }
 
@@ -38,10 +36,8 @@ namespace BackToBg.Core.Models.Buildings
 
             private set
             {
-                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException($"{nameof(this.name)} should not be null empty or white space!");
-
-                this.name = value;
+				Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
+				this.name = value;
             }
         }
 
