@@ -46,7 +46,9 @@ namespace BackToBg.Core.Core
                 try
                 {
                     var action = this.playerActionFactory.CreateAction(key.Key);
-                    this.Town.Map.Update(action); //WORKIN ON THIS SHIT + CHANGE TOWN ACTION
+                    action.Execute();
+                    this.town.Map.GenerateMap();
+                    //this.Town.Map.Update(action);
                 }
                 catch (Exception e)
                     when (e is NotImplementedException || e is InvalidActionException || e is NotSupportedException)
@@ -76,6 +78,7 @@ namespace BackToBg.Core.Core
         {
             this.town = newTown;
             this.town.Map.GenerateMap();
+            this.player.ResetPosition();
         }
     }
 }

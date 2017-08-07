@@ -23,5 +23,7 @@
         bool AdjacentTo(IBuilding building);
 
         void Attack(IPunchable target);
+
+        void ResetPosition();
     }
 }

@@ -21,8 +21,6 @@ namespace BackToBg.Core.Business.Factories
         public PlayerActionFactory(IEngine engine, IPlayer player, IReader reader, IWriter writer)
         {
             this.engine = engine;
-            this.town = engine.GetCurrentTown();;
-            this.map = this.town.Map;
             this.player = player;
             this.reader = reader;
             this.writer = writer;
@@ -30,6 +28,8 @@ namespace BackToBg.Core.Business.Factories
 
         public IPlayerAction CreateAction(ConsoleKey key)
         {
+            this.town = engine.GetCurrentTown(); ;
+            this.map = this.town.Map;
             var actionType = Assembly.GetExecutingAssembly()
                 .GetTypes()
                 .Where(t => t.GetCustomAttribute<PlayerActionAttribute>() != null)

@@ -36,24 +36,24 @@ namespace BackToBg.Core.Business.Map
             return this.map;
         }
 
-        public void Update(IPlayerAction action)
-        {
-            //remove the player from map
-            var playerInfo = this.player.GetDrawingInfo();
-            this.map[playerInfo.row][playerInfo.col] = Constants.RoadChar;
+        //public void Update(IPlayerAction action)
+        //{
+        //    //remove the player from map
+        //    var playerInfo = this.player.GetDrawingInfo();
+        //    this.map[playerInfo.row][playerInfo.col] = Constants.RoadChar;
 
-            try
-            {
-                //update the players coords
-                action.Execute();
-            }
-            finally
-            {
-                //add the updated player to the map again
-                playerInfo = this.player.GetDrawingInfo();
-                this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
-            }                   
-        }
+        //    try
+        //    {
+        //        //update the players coords
+        //        action.Execute();
+        //    }
+        //    finally
+        //    {
+        //        //add the updated player to the map again
+        //        playerInfo = this.player.GetDrawingInfo();
+        //        this.map[playerInfo.row][playerInfo.col] = playerInfo.figure[0][0];
+        //    }                   
+        //}
 
         public void DrawMap()
         {

@@ -107,6 +107,12 @@ namespace BackToBg.Core.Models
             target.TakeDamage(this.attackDamage);
         }
 
+        public void ResetPosition()
+        {
+            this.x = 1;
+            this.y = 1;
+        }
+
         public void MoveWest()
         {
             this.y--;

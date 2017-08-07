@@ -20,7 +20,7 @@ namespace BackToBg.Core
         {
             var buildings = Initializer.InitializeBuildings();
 
-            IPlayer player = new Player(4, 38);
+            IPlayer player = new Player(1, 1);
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
             IMap map = new Map(player, writer, reader);

@@ -11,8 +11,7 @@ namespace BackToBg.Core.Business.UtilityInterfaces
         IEnumerable<IPunchable> Punchables { get; }
 
         char[][] GetMap();
-
-        void Update(IPlayerAction action);
+        
         void GenerateMap();
         void DrawMap();
         void AddPunchable(IPunchable punchable);
