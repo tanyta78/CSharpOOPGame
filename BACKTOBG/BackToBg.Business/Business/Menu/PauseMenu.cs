@@ -31,6 +31,12 @@ namespace BackToBg.Core.Business.Menu
                     var stm = new SwitchTownMenu("Switch town", this.Reader, this.Writer, this.engine);
                     stm.StartMenu();
                 }},
+                {3, () =>
+                    {
+                        var bqm = new BrowseQuestsMenu("Quests menu", this.Reader, this.Writer, this.engine);
+                        bqm.StartMenu();
+                    }
+                },
                 {
                     4, () =>
                     {
@@ -41,11 +47,6 @@ namespace BackToBg.Core.Business.Menu
             };
         }
         
-
-        public PauseMenu(IReader reader, IWriter writer)
-            : base("Pause", reader, writer)
-        {
-        }
 
         protected override IDictionary<int, Action> Actions => this.actions;
         protected override IList<string> MenuText => this.menuText;

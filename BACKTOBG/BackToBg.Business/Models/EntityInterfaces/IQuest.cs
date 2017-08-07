@@ -12,6 +12,5 @@ namespace BackToBg.Core.Models.EntityInterfaces
         IItem RewardItem { get; set; }
         IList<IQuestCompetionItem> QuestCompetionItems { get; set; }
         bool IsFinished { get; }
-        void StartQuest();
     }
 }

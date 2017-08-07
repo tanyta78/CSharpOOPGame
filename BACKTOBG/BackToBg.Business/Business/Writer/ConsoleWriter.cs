@@ -20,6 +20,7 @@ namespace BackToBg.Core.Business.Writer
 
         public void DisplayMessageInColor(string message, ConsoleColor color)
         {
+            //this.CenterCursor(message); 
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ResetColor();
@@ -27,14 +28,14 @@ namespace BackToBg.Core.Business.Writer
 
         public void DisplayQuestCompletionMessage(string message)
         {
-            Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
+            this.CenterCursor(message);
             DisplayMessageInColor(message, ConsoleColor.Green);
             Thread.Sleep(1000);
         }
 
         public void DisplayException(string message)
         {
-            Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
+            this.CenterCursor(message);
             DisplayMessageInColor(message, ConsoleColor.Red);
             Thread.Sleep(1000);
         }
@@ -57,11 +58,13 @@ namespace BackToBg.Core.Business.Writer
         public void DisplayMessageInColorCentered(string message, ConsoleColor color)
         {
             Console.Clear();
+            this.CenterCursor(message);
+            this.DisplayMessageInColor(message, color);
+        }
 
+        private void CenterCursor(string message)
+        {
             Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);
-            Console.ForegroundColor = color;
-            Console.Write(message);
-            Console.ResetColor();
         }
 
         private void PerformConsoleSetup()

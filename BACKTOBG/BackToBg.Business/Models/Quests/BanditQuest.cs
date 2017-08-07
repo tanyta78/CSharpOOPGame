@@ -28,11 +28,6 @@ namespace BackToBg.Core.Models.Quests
             }
         }
 
-        public override void StartQuest()
-        {
-
-        }
-
         public void RemoveBandint(IPunchable bandit)
         {
             this.bandits.Remove(bandit);

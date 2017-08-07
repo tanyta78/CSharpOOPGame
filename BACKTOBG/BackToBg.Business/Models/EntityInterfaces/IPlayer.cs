@@ -1,4 +1,6 @@
-﻿namespace BackToBg.Core.Models.EntityInterfaces
+﻿using System.Collections.Generic;
+
+namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface IPlayer : ICreature, ITradingEntity
     {
@@ -27,5 +29,10 @@
 
         void ResetPosition();
 
+        void AddQuest(IQuest quest);
+
+        void RemoveQuest(IQuest quest);
+
+        IReadOnlyList<IQuest> GetQuests();
     }
 }

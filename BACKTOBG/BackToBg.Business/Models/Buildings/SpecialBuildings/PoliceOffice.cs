@@ -14,16 +14,16 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
     public class PoliceOffice : SpecialBuilding
     {
         private const Item ItemToEnter = null;
-        private readonly ITown town;
+        private readonly IEngine engine;
 
         //private static readonly Quest PoliceQuest = new Quest(1, "Police Quest",
         //    "Now you are in Police office.The police need you. Your mission, if you accept it, is to arrest three famous criminals. Go and find them. The mission will end up bringing three pairs of boots. You will receive boot, 50 experience and 500 money",
         //    50, 500);
 
-        public PoliceOffice(ITown town, int id, string name, string description, int x, int y, int sizeFactor = Constants.DefaultSizeFactor)
+        public PoliceOffice(IEngine engine, int id, string name, string description, int x, int y, int sizeFactor = Constants.DefaultSizeFactor)
             : base(id, name, description, x, y, sizeFactor)
         {
-            this.town = town;
+            this.engine = engine;
             //this.QuestAvailableHere = PoliceQuest;
             //this.ItemRequeredToEnter = ItemToEnter;
             //this.QuestAvailableHere.RewardItem = new HeavyBoot(1, "PoliceBoots", 1, Rarity.Epic);
@@ -60,7 +60,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 
         public override void Interact()
         {
-            var menu = new TakeOnQuestMenu<PoliceOffice>("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.town);
+            var menu = new TakeOnQuestMenu<PoliceOffice>("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.engine);
             menu.StartMenu();
         }
     }

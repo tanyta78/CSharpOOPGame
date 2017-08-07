@@ -52,7 +52,7 @@ namespace BackToBg.Core.Business.Menu
             {
                 //set-up so that the menu is drawn on the middle of the screen
                 this.Writer.SetCursorPosition(this.Writer.ConsoleWidth / 2 - this.MenuText[0].Length,
-                    (this.Writer.ConsoleHeight - this.MenuText.Count) / 2 + i);
+                    (this.Writer.ConsoleHeight - this.MenuText.Count) / 2 + i + 1);
                 if (i == this.selectedIndex)
                 {
                     this.Writer.WriteLine($">{this.MenuText[i]}<");
@@ -78,7 +78,7 @@ namespace BackToBg.Core.Business.Menu
                     break;
                 case ConsoleKey.DownArrow:
                     this.selectedIndex++;
-                    if (this.selectedIndex > this.MenuText.Count)
+                    if (this.selectedIndex >= this.MenuText.Count)
                     {
                         this.selectedIndex = 0;
                     }

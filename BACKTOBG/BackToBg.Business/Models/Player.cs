@@ -7,11 +7,11 @@ namespace BackToBg.Core.Models
 {
 	public class Player : IPlayer
 	{
+	    private IList<IQuest> quests;
 		private readonly char figure;
 		private readonly int attackDamage;
 		private int x;
 		private int y;
-
 		private int agility;
 		private int strength;
 		private int intelligence;
@@ -33,19 +33,18 @@ namespace BackToBg.Core.Models
 			this.Money = Constants.PlayerStartingMoney;
 			this.Stamina = Constants.PlayerStartingStamina;
 			this.Inventory = new List<IItem>();
+            this.quests = new List<IQuest>();
 		}
 
 		public Player()
 		{
-			this.figure = '☻';
+			this.figure = Constants.DefaultPlayerFigure;
 			this.Inventory = new List<IItem>();
 		}
 
-		public Player(string name)
+		public Player(string name) : this()
 		{
 			this.Name = name;
-			this.figure = '☻';
-			this.Inventory = new List<IItem>();
 		}
 		//Properties
 		public int ID { get; }
@@ -131,6 +130,7 @@ namespace BackToBg.Core.Models
 				}
 			}
 		}
+
 		public ILocation CurrentLocation { get; set; }
 		public IList<IItem> Inventory { get; set; }
 
@@ -167,6 +167,7 @@ namespace BackToBg.Core.Models
 		{
 			throw new NotImplementedException();
 		}
+
 		public void MoveTo()
 		{
 			throw new NotImplementedException();
@@ -195,12 +196,29 @@ namespace BackToBg.Core.Models
 		{
 			target.TakeDamage(this.attackDamage);
 		}
+
 		public void ResetPosition()
 		{
 			this.x = 1;
 			this.y = 1;
 		}
-		public (int row, int col, string[] figure) GetDrawingInfo()
+
+	    public void AddQuest(IQuest quest)
+	    {
+	        this.quests.Add(quest);
+	    }
+
+	    public void RemoveQuest(IQuest quest)
+	    {
+	        this.quests.Remove(quest);
+	    }
+
+	    public IReadOnlyList<IQuest> GetQuests()
+	    {
+	        return (IReadOnlyList<IQuest>) this.quests;
+	    }
+
+	    public (int row, int col, string[] figure) GetDrawingInfo()
 		{
 			//TODO: COHERENT IMPLEMENTATION
 			return (this.x, this.y, new[] { this.figure.ToString() });

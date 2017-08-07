@@ -47,6 +47,5 @@ namespace BackToBg.Core.Models
         public IItem RewardItem { get; set; }
         public IList<IQuestCompetionItem> QuestCompetionItems { get; set; }
         public bool IsFinished { get; set; }
-        public abstract void StartQuest();
     }
 }

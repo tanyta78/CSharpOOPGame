@@ -12,5 +12,6 @@ namespace BackToBg.Core.Business.UtilityInterfaces
         void SetCursorPosition(int left, int top);
         void DisplayMessageInColor(string message, ConsoleColor color);
         void DisplayQuestCompletionMessage(string message);
+        void DisplayMessageInColorCentered(string message, ConsoleColor color);
     }
 }

@@ -9,13 +9,15 @@ namespace BackToBg.Core.Business.Menu
     public class TakeOnQuestMenu<T> : Menu
         where T : IBuilding
     {
-        private readonly ITown town;
-        private readonly QuestFactory questFactory;
+        private IEngine engine;
+        private ITown town;
+        private QuestFactory questFactory;
 
-        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, ITown town)
+        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, IEngine engine)
             : base(name, reader, writer)
         {
-            this.town = town;
+            this.engine = engine;
+            this.town = engine.GetCurrentTown();
             this.questFactory = new QuestFactory(this.town);
         }
 
@@ -25,7 +27,7 @@ namespace BackToBg.Core.Business.Menu
             {
                 1, () =>
                 {
-                    this.town.AddQuest(this.questFactory.InjectQuest(typeof(T)));
+                    this.engine.AddQuest(this.questFactory.InjectQuest(typeof(T)));
                     ShouldBeRunning = false;
                 }
             }

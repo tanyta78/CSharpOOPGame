@@ -16,13 +16,12 @@ namespace BackToBg.Core.Core
         private readonly IWriter writer;
         private IPlayerActionFactory playerActionFactory;
 
-        public Engine(IPlayer player, IReader reader, IWriter writer, ITown town)
+        public Engine(IPlayer player, IReader reader, IWriter writer)
         {
             this.player = player;
             this.reader = reader;
             this.writer = writer;
-            this.town = town;
-            this.towns = new List<ITown>() { town };
+            this.towns = new List<ITown>();
             this.playerActionFactory = new PlayerActionFactory(this, this.player, this.reader, this.writer);
         }
 
@@ -59,6 +58,11 @@ namespace BackToBg.Core.Core
             }
         }
 
+        public IPlayer Player
+        {
+            get => this.player;
+        }
+
         public ITown GetCurrentTown()
         {
             return this.town;
@@ -79,6 +83,12 @@ namespace BackToBg.Core.Core
             this.town = newTown;
             this.town.Map.GenerateMap();
             this.player.ResetPosition();
+        }
+
+        public void AddQuest(IQuest quest)
+        {
+            this.town.AddQuest(quest);
+            this.player.AddQuest(quest);
         }
     }
 }
