@@ -7,6 +7,7 @@ using BackToBg.Core.Business.Writer;
 using BackToBg.Core.Core;
 using BackToBg.Core.Models;
 using BackToBg.Core.Models.Buildings.SpecialBuildings;
+using BackToBg.Core.Models.Buildings.SpecialBuildings.Shops;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Quests;
 using BackToBg.Core.Models.Town;
@@ -27,6 +28,7 @@ namespace BackToBg.Core
             IMap map2 = new Map(player, writer, reader);
 
             ITown Sofia = new Town("Sofia", map, writer);
+			Sofia.AddBuilding(new Banicharnitsa(1, "Banicharnitsa", "Topli zakuski", 10, 50));
             Sofia.AddBuilding(new PoliceOffice(Sofia, 1, "Police Station", "Just a police station", 30, 15));
             foreach (var building in buildings)
             {

@@ -4,6 +4,7 @@
     {
         double Money { get; }
         int Experience { get; }
+		int Stamina { get; }
         ILocation CurrentLocation { get; set; }
 
         void MoveHome();
@@ -25,5 +26,6 @@
         void Attack(IPunchable target);
 
         void ResetPosition();
+
     }
 }
