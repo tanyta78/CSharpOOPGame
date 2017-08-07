@@ -5,64 +5,20 @@ using BackToBg.Core.Models.Enums;
 
 namespace BackToBg.Core.Models.Items
 {
-    public abstract class Item : IItem
-    {
+    public abstract class Item : Merchandise,IItem
+	{
         private int agilityBonus;
-        private int id;
-        private int intelligenceBonus;
-        private string name;
-        private int price;
         private int strengthBonus;
-
+        private int intelligenceBonus;
+       
         protected Item(int id, string name, int price, int strengthBonus, int intelligenceBonus, int agilityBonus,
-            Rarity rarity)
+            Rarity rarity) : base(id, name, price)
         {
             this.Rarity = rarity;
-            this.ID = id;
-            this.Name = name;
-            this.Price = price;
             this.StrengthBonus = strengthBonus;
             this.IntelligenceBonus = intelligenceBonus;
             this.AgilityBonus = agilityBonus;
-        }
-
-        public int ID
-        {
-            get => this.id;
-
-            private set
-            {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.id)} should be positive integer!");
-
-                this.id = value;
-            }
-        }
-
-        public string Name
-        {
-            get => this.name;
-
-            private set
-            {
-                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException($"{nameof(this.name)} should not be null empty or white space!");
-
-                this.name = value;
-            }
-        }
-
-        public int Price
-        {
-            get => this.price;
-            private set
-            {
-                if (value <= 0)
-                    throw new ArgumentException($"{nameof(this.price)} should be positive integer!");
-
-                this.price = value;
-            }
-        }
+        }     
 
         public int StrengthBonus
         {
@@ -106,9 +62,9 @@ namespace BackToBg.Core.Models.Items
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine($"Id:{this.id} Name:{this.name} Price:{this.price}");
+            sb.AppendLine($"Id:{this.ID} Name:{this.Name} Price:{this.Price}");
             sb.AppendLine(
-                $"Strength:{this.strengthBonus} Intelligence:{this.intelligenceBonus} Agility:{this.agilityBonus}");
+                $"Strength:{this.StrengthBonus} Intelligence:{this.IntelligenceBonus} Agility:{this.AgilityBonus}");
             sb.AppendLine($"Rarity: {this.Rarity}");
 
             return sb.ToString().Trim();

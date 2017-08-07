@@ -58,6 +58,7 @@
     <Compile Include="Business\Exceptions\InvalidActionException.cs" />
     <Compile Include="Business\Exceptions\PlayerNotNearAnyBuildingException.cs" />
     <Compile Include="Business\Factories\QuestFactory.cs" />
+    <Compile Include="Business\Menu\BuyMenu.cs" />
     <Compile Include="Business\Menu\Menu.cs" />
     <Compile Include="Business\Menu\PauseMenu.cs" />
     <Compile Include="Business\Menu\SwitchTownMenu.cs" />
@@ -86,11 +87,13 @@
     <Compile Include="Models\Buildings\SpecialBuilding.cs" />
     <Compile Include="Models\Buildings\SpecialBuildings\PoliceOffice.cs" />
     <Compile Include="Models\Buildings\SpecialBuildings\Shop.cs" />
+    <Compile Include="Models\Buildings\SpecialBuildings\Shops\Banicharnitsa.cs" />
     <Compile Include="Models\Buildings\SpecialBuildings\Shops\MallShop.cs" />
     <Compile Include="Models\Creatures\Criminal.cs" />
     <Compile Include="Models\EntityInterfaces\IBuilding.cs" />
     <Compile Include="Models\EntityInterfaces\ICreature.cs" />
     <Compile Include="Models\EntityInterfaces\IDrawable.cs" />
+    <Compile Include="Models\EntityInterfaces\IFood.cs" />
     <Compile Include="Models\EntityInterfaces\IInteractable.cs" />
     <Compile Include="Models\EntityInterfaces\IInventoryOwner.cs" />
     <Compile Include="Models\EntityInterfaces\IItem.cs" />
@@ -110,7 +113,10 @@
     <Compile Include="Models\Items\Boots\HeavyBoot.cs" />
     <Compile Include="Models\Items\Boots\Overshoe.cs" />
     <Compile Include="Models\Items\Boots\Sneaker.cs" />
+    <Compile Include="Models\Items\Food.cs" />
+    <Compile Include="Models\Items\Foods\Kifla.cs" />
     <Compile Include="Models\Items\Item.cs" />
+    <Compile Include="Models\Items\Merchandise.cs" />
     <Compile Include="Models\Items\Weapons\Axe.cs" />
     <Compile Include="Models\Items\Weapons\Hammer.cs" />
     <Compile Include="Models\Items\Weapons\Sword.cs" />
@@ -119,7 +125,7 @@
     <Compile Include="Models\People\Peddler.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerQuest.cs" />
-    <Compile Include="Models\Quest.cs" />
+    <Compile Include="Models\Quests\Quest.cs" />
     <Compile Include="Models\Quests\BanditQuest.cs" />
     <Compile Include="Models\Town\Town.cs" />
     <Compile Include="Models\Utilities\Alignment.cs" />
@@ -139,5 +145,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

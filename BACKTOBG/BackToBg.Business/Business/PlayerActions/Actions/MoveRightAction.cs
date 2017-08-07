@@ -2,6 +2,7 @@
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Utilities;
+using Colorful;
 
 namespace BackToBg.Core.Business.PlayerActions.Actions
 {
@@ -14,6 +15,7 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
 
         public override void Execute()
         {
+			Console.WriteLine(this.player.Stamina);
             var info = this.player.GetDrawingInfo();
             var x = info.row;
             var y = info.col;
