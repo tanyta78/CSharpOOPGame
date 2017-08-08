@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Items.Foods;
@@ -14,9 +11,11 @@ namespace BackToBg.Core.Business.Menu
 		private IEngine engine;
 		private IDictionary<int, Action> actions;
 		private IList<IFood> shopList;
+		private IPlayer player;
 
-		public BuyMenu(string name, IReader reader, IWriter writer) : base(name, reader, writer)
+		public BuyMenu(string name, IReader reader, IWriter writer,IPlayer player) : base(name, reader, writer)
 		{
+			this.player = player;
 			this.shopList = new List<IFood>();
 			this.shopList.Add(new Kifla(1, "Kifla s marmalad", 2, 15));
 			this.shopList.Add(new Kifla(2, "Kifla s shokolad", 2, 20));
@@ -26,9 +25,25 @@ namespace BackToBg.Core.Business.Menu
 
 			this.actions = new Dictionary<int, Action>
 					{
-						{0, () => ShouldBeRunning = false},
-
-						{4,() => ShouldBeRunning = false}
+						{0, () =>												//TODO with foreach?
+						{
+							this.player.Stamina+=this.shopList[0].Stamina;
+							this.player.Money -= this.shopList[0].Price;		//TODO if not enough money
+							ShouldBeRunning = false;
+						}},
+						{1, () =>
+						{
+							this.player.Stamina+=this.shopList[1].Stamina;
+							this.player.Money -= this.shopList[1].Price;
+							ShouldBeRunning = false;
+						}},
+						{2, () =>
+						{
+							this.player.Stamina+=this.shopList[2].Stamina;
+							this.player.Money -= this.shopList[2].Price;
+							ShouldBeRunning = false;
+						}},
+						{3,() => ShouldBeRunning = false}
 					};
 		}
 		private IList<string> menuText = new List<string>();

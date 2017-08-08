@@ -4,9 +4,9 @@ namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface IPlayer : ICreature, ITradingEntity
     {
-        double Money { get; }
-        int Experience { get; }
-		int Stamina { get; }
+        double Money { get; set; }
+        int Experience { get; set; }
+		int Stamina { get; set; }
         ILocation CurrentLocation { get; set; }
 
         void MoveHome();

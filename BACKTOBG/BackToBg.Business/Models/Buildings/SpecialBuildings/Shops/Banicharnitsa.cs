@@ -3,6 +3,7 @@ using BackToBg.Core.Business.Menu;
 using BackToBg.Core.Business.Reader;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Business.Writer;
+using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Utilities;
 
 
@@ -12,11 +13,12 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings.Shops
 	{
 		[Inject] private IReader reader = new ConsoleReader();
 		[Inject] private IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
+		private IPlayer player;
 		
-		public Banicharnitsa(int id, string name, string description, int x, int y, int sizeFactor = Constants.DefaultSizeFactor)
+		public Banicharnitsa(int id, string name, string description, int x, int y,IPlayer player, int sizeFactor = Constants.DefaultSizeFactor)
 			: base(id, name, description, x, y, sizeFactor)
 		{
-
+			this.player = player;
 		}
 
 		public override (int row, int col, string[] figure) GetDrawingInfo()
@@ -39,7 +41,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings.Shops
 		}
 		public override void Interact()
 		{
-			var menu = new BuyMenu("Banicharnitsa",this.reader,this.writer);
+			var menu = new BuyMenu("Banicharnitsa",this.reader,this.writer,this.player);
 			menu.StartMenu();
 		}
 	}

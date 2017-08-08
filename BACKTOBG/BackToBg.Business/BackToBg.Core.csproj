@@ -139,6 +139,7 @@
     <Compile Include="Models\Utilities\Constants.cs" />
     <Compile Include="Models\Utilities\Functions.cs" />
     <Compile Include="Models\Utilities\Messages.cs" />
+    <Compile Include="Models\Utilities\RandomNumberGenerator.cs" />
     <Compile Include="Models\Utilities\Validator.cs" />
     <Compile Include="Models\Utility Models\Point.cs" />
     <Compile Include="Models\Utility Models\TradeDialogs\InventoryDialog.cs" />
