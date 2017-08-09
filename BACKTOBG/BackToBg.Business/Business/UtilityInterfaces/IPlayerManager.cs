@@ -7,12 +7,9 @@ using BackToBg.Core.Models.EntityInterfaces;
 
 namespace BackToBg.Core.Business.UtilityInterfaces
 {
-    public interface ITown
+    public interface IPlayerManager
     {
-        string Name { get; }
-        IMap Map { get; }
-        
-        void RefreshQuest(IQuest quest);
-        void AddBuilding(IBuilding building);
+        IPlayer Player { get; }
+        void AddQuest(IQuest quest);
     }
 }

@@ -9,86 +9,42 @@ namespace BackToBg.Core.Core
 {
     public class Engine : IEngine
     {
-        private IList<ITown> towns;
-        private ITown town;
-        private readonly IPlayer player;
+        private ITownsManager townsManager;
+        private IPlayerManager playerManager;
         private readonly IReader reader;
         private readonly IWriter writer;
         private IPlayerActionFactory playerActionFactory;
 
-        public Engine(IPlayer player, IReader reader, IWriter writer)
+        public Engine(IPlayerManager playerManager, ITownsManager townsManager, IReader reader, IWriter writer)
         {
-            this.player = player;
+            this.playerManager = playerManager;
+            this.townsManager = townsManager;
             this.reader = reader;
             this.writer = writer;
-            this.towns = new List<ITown>();
-            this.playerActionFactory = new PlayerActionFactory(this, this.player, this.reader, this.writer);
+            this.playerActionFactory = new PlayerActionFactory(this.townsManager, this.playerManager, reader, writer);
         }
-
-        public ITown Town
-        {
-            get { return this.town; }
-        }
-
-        public IReadOnlyCollection<ITown> Towns
-        {
-            get { return (IReadOnlyCollection<ITown>)this.towns; }
-        }
-
 
         public void Run()
         {
             while (true)
             {
-                this.Town.Map.DrawMap();
+                var town = this.townsManager.GetCurrentTown();
+                town.Map.DrawMap();
                 var key = this.reader.ReadKey();
                 try
                 {
                     var action = this.playerActionFactory.CreateAction(key.Key);
                     action.Execute();
-                    this.town.Map.GenerateMap();
+                    town.Map.GenerateMap();
                     //this.Town.Map.Update(action);
                 }
                 catch (Exception e)
                     when (e is NotImplementedException || e is InvalidActionException || e is NotSupportedException)
                 {
                     this.writer.DisplayException(e.Message);
-                    this.Town.Map.DrawMap();
+                    town.Map.DrawMap();
                 }
             }
-        }
-
-        public IPlayer Player
-        {
-            get => this.player;
-        }
-
-        public ITown GetCurrentTown()
-        {
-            return this.town;
-        }
-
-        public IList<ITown> GetTowns()
-        {
-            return this.towns;
-        }
-
-        public void AddTown(ITown newTown)
-        {
-            this.towns.Add(newTown);
-        }
-
-        public void SetCurrentTown(ITown newTown)
-        {
-            this.town = newTown;
-            this.town.Map.GenerateMap();
-            this.player.ResetPosition();
-        }
-
-        public void AddQuest(IQuest quest)
-        {
-            this.town.AddQuest(quest);
-            this.player.AddQuest(quest);
         }
     }
 }

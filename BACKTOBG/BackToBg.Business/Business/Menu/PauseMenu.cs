@@ -7,7 +7,8 @@ namespace BackToBg.Core.Business.Menu
 {
     public class PauseMenu : Menu
     {
-        private IEngine engine;
+        private ITownsManager townsManager;
+        private IPlayerManager playerManager;
 
         private IDictionary<int, Action> actions;
 
@@ -20,20 +21,21 @@ namespace BackToBg.Core.Business.Menu
             "Exit"
         };
 
-        public PauseMenu(string name, IReader reader, IWriter writer, IEngine engine) : base(name, reader, writer)
+        public PauseMenu(string name, IReader reader, IWriter writer, ITownsManager townsManager, IPlayerManager playerManager) : base(name, reader, writer)
         {
-            this.engine = engine;
+            this.townsManager = townsManager;
+            this.playerManager = playerManager;
             this.actions = new Dictionary<int, Action>
             {
                 {0, () => ShouldBeRunning = false},
                 {1, () =>
                 {
-                    var stm = new SwitchTownMenu("Switch town", this.Reader, this.Writer, this.engine);
+                    var stm = new SwitchTownMenu("Switch town", this.Reader, this.Writer, this.townsManager, playerManager);
                     stm.StartMenu();
                 }},
                 {3, () =>
                     {
-                        var bqm = new BrowseQuestsMenu("Quests menu", this.Reader, this.Writer, this.engine);
+                        var bqm = new BrowseQuestsMenu("Quests menu", this.Reader, this.Writer, this.playerManager);
                         bqm.StartMenu();
                     }
                 },
@@ -46,7 +48,7 @@ namespace BackToBg.Core.Business.Menu
                 }
             };
         }
-        
+
 
         protected override IDictionary<int, Action> Actions => this.actions;
         protected override IList<string> MenuText => this.menuText;

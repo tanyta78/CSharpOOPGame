@@ -11,14 +11,12 @@ namespace BackToBg.Core.Models.Town
     public class Town : ITown
     {
         private IMap map;
-        private IList<IQuest> quests;
         private IWriter writer;
 
         public Town(string name, IMap map, IWriter writer)
         {
             this.Name = name;
             this.map = map;
-            this.quests = new List<IQuest>();
             this.writer = writer;
         }
 
@@ -27,12 +25,6 @@ namespace BackToBg.Core.Models.Town
         public IMap Map
         {
             get => this.map;
-        }
-
-        public void AddQuest(IQuest quest)
-        {
-            this.quests.Add(quest);
-            this.map.GenerateMap();
         }
 
         public void RefreshQuest(IQuest quest)

@@ -11,11 +11,11 @@ namespace BackToBg.Core.Business.Paginators
 {
     public abstract class QuestsPaginator : Paginator<IQuest>
     {
-        private IEngine engine;
+        private IPlayerManager playerManager;
 
-        public QuestsPaginator(IReader reader, IWriter writer, IEngine engine) : base(reader, writer, "Quests")
+        public QuestsPaginator(IReader reader, IWriter writer, IPlayerManager playerManager) : base(reader, writer, "Quests")
         {
-            this.engine = engine;
+            this.playerManager = playerManager;
         }
 
         protected abstract IReadOnlyList<IQuest> Quests { get; }

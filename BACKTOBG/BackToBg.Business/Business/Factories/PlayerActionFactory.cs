@@ -11,24 +11,26 @@ namespace BackToBg.Core.Business.Factories
 {
     public class PlayerActionFactory : IPlayerActionFactory
     {
-        private IEngine engine;
+        private ITownsManager townsManager;
+        private IPlayerManager playerManager;
         private ITown town;
         private IMap map;
         private IPlayer player;
         private IReader reader;
         private IWriter writer;
 
-        public PlayerActionFactory(IEngine engine, IPlayer player, IReader reader, IWriter writer)
+        public PlayerActionFactory(ITownsManager townsManager, IPlayerManager playerManager, IReader reader, IWriter writer)
         {
-            this.engine = engine;
-            this.player = player;
+            this.townsManager = townsManager;
+            this.playerManager = playerManager;
+            this.player = playerManager.Player;
             this.reader = reader;
             this.writer = writer;
         }
 
         public IPlayerAction CreateAction(ConsoleKey key)
         {
-            this.town = engine.GetCurrentTown();
+            this.town = this.townsManager.GetCurrentTown();
             this.map = this.town.Map;
             var actionType = Assembly.GetExecutingAssembly()
                 .GetTypes()
@@ -38,7 +40,7 @@ namespace BackToBg.Core.Business.Factories
             if (actionType == null)
                 throw new InvalidKeyPressException();
 
-            var action = (IPlayerAction) Activator.CreateInstance(actionType, new object[] { });
+            var action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { });
             this.InjectDependencies(action);
 
             return action;

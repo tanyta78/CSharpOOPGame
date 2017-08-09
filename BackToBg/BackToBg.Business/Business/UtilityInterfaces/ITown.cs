@@ -11,8 +11,7 @@ namespace BackToBg.Core.Business.UtilityInterfaces
     {
         string Name { get; }
         IMap Map { get; }
-
-        void AddQuest(IQuest quest);
+        
         void RefreshQuest(IQuest quest);
         void AddBuilding(IBuilding building);
     }

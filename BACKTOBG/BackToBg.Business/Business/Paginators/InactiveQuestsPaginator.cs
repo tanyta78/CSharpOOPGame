@@ -12,9 +12,9 @@ namespace BackToBg.Core.Business.Paginators
     {
         private IReadOnlyList<IQuest> quests;
 
-        public InactiveQuestsPaginator(IReader reader, IWriter writer, IEngine engine) : base(reader, writer, engine)
+        public InactiveQuestsPaginator(IReader reader, IWriter writer, IPlayerManager playerManager) : base(reader, writer, playerManager)
         {
-            this.quests = engine.Player.GetQuests().Where(q => q.IsFinished).ToList();
+            this.quests = playerManager.Player.GetQuests().Where(q => q.IsFinished).ToList();
         }
 
         protected override IReadOnlyList<IQuest> Quests

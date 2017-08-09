@@ -75,6 +75,7 @@
     <Compile Include="Business\Reader\ConsoleReader.cs" />
     <Compile Include="Business\UtilityInterfaces\IMenu.cs" />
     <Compile Include="Business\UtilityInterfaces\IPaginator.cs" />
+    <Compile Include="Business\UtilityInterfaces\IPlayerManager.cs" />
     <Compile Include="Business\UtilityInterfaces\IReader.cs" />
     <Compile Include="Business\UtilityInterfaces\IPlayerActionFactory.cs" />
     <Compile Include="Business\Exceptions\InvalidKeyPressException.cs" />
@@ -88,7 +89,10 @@
     <Compile Include="Business\PlayerActions\Actions\MoveUpAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PlayerAction.cs" />
     <Compile Include="Business\UtilityInterfaces\ITown.cs" />
+    <Compile Include="Business\UtilityInterfaces\ITownsManager.cs" />
     <Compile Include="Core\Engine.cs" />
+    <Compile Include="Business\Managers\PlayerManager.cs" />
+    <Compile Include="Business\Managers\TownsManager.cs" />
     <Compile Include="Models\Buildings\BasicBuilding.cs" />
     <Compile Include="Models\Buildings\Building.cs" />
     <Compile Include="Models\Buildings\SpecialBuilding.cs" />

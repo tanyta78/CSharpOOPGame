@@ -9,16 +9,16 @@ namespace BackToBg.Core.Business.Menu
     public class TakeOnQuestMenu<T> : Menu
         where T : IBuilding
     {
-        private IEngine engine;
-        private ITown town;
+        private ITownsManager townsManager;
+        private IPlayerManager playerManager;
         private QuestFactory questFactory;
 
-        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, IEngine engine)
+        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, ITownsManager townsManager, IPlayerManager playerManager)
             : base(name, reader, writer)
         {
-            this.engine = engine;
-            this.town = engine.GetCurrentTown();
-            this.questFactory = new QuestFactory(this.town);
+            this.townsManager = townsManager;
+            this.playerManager = playerManager;
+            this.questFactory = new QuestFactory(this.townsManager.GetCurrentTown());
         }
 
         protected override IDictionary<int, Action> Actions => new Dictionary<int, Action>
@@ -27,7 +27,7 @@ namespace BackToBg.Core.Business.Menu
             {
                 1, () =>
                 {
-                    this.engine.AddQuest(this.questFactory.InjectQuest(typeof(T)));
+                    this.playerManager.AddQuest(this.questFactory.InjectQuest(typeof(T)));
                     ShouldBeRunning = false;
                 }
             }

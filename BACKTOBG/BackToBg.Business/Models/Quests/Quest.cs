@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Utilities;
 
-namespace BackToBg.Core.Models
+namespace BackToBg.Core.Models.Quests
 {
     public abstract class Quest : IQuest
     {

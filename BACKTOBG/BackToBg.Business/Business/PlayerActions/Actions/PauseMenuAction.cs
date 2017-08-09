@@ -12,11 +12,14 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
         [Inject] private IWriter writer;
 
         [Inject]
-        private IEngine engine;
+        private ITownsManager townsManager;
+
+        [Inject]
+        private IPlayerManager playerManager;
 
         public override void Execute()
         {
-            var pauseMenu = new PauseMenu("Pause", this.reader, this.writer, this.engine);
+            var pauseMenu = new PauseMenu("Pause", this.reader, this.writer, this.townsManager, this.playerManager);
             pauseMenu.StartMenu();
         }
     }

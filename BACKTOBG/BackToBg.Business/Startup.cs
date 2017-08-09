@@ -1,5 +1,6 @@
 ﻿using BackToBg.Core.Business.Common;
 using BackToBg.Core.Business.Factories;
+using BackToBg.Core.Business.Managers;
 using BackToBg.Core.Business.Map;
 using BackToBg.Core.Business.Reader;
 using BackToBg.Core.Business.UtilityInterfaces;
@@ -19,31 +20,33 @@ namespace BackToBg.Core
     {
         public static void Main()
         {
-            var buildings = Initializer.InitializeBuildings();
-
             IPlayer player = new Player(1, 1);
+            IPlayerManager playerManager = new PlayerManager(player);
+
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
 
-            var engine = new Engine(player, reader, writer);
+            ITownsManager townsManager = new TownsManager();
 
             IMap sofiaMap = new Map(player, writer, reader);
             ITown sofia = new Town("Sofia", sofiaMap, writer);
-			sofia.AddBuilding(new Banicharnitsa(1, "Banicharnitsa", "Topli zakuski", 10, 50));
-            sofia.AddBuilding(new PoliceOffice(engine, 1, "Police Station", "Just a police station", 30, 15));
-            foreach (var building in buildings)
+            sofia.AddBuilding(new Banicharnitsa(1, "Banicharnitsa", "Topli zakuski", 10, 50));
+            sofia.AddBuilding(new PoliceOffice(townsManager, playerManager, 1, "Police Station", "Just a police station", 30, 15));
+            foreach (var building in Initializer.InitializeBuildings())
             {
                 sofia.AddBuilding(building);
             }
 
-            engine.AddTown(sofia);
-            engine.SetCurrentTown(sofia);
+            townsManager.AddTown(sofia);
+            townsManager.SetCurrentTown(sofia);
+
 
             IMap montanaMap = new Map(player, writer, reader);
             ITown montana = new Town("Montana", montanaMap, writer);
-            
-            engine.AddTown(montana);
-            
+
+            townsManager.AddTown(montana);
+
+            IEngine engine = new Engine(playerManager, townsManager, reader, writer);
             engine.Run();
         }
     }

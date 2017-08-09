@@ -6,17 +6,19 @@ namespace BackToBg.Core.Business.Menu
 {
     public class SwitchTownMenu : Menu
     {
-        private IEngine engine;
+        private ITownsManager townsManager;
+        private IPlayerManager playerManager;
         private IDictionary<int, Action> actions;
         private IList<string> menuText;
 
-        public SwitchTownMenu(string name, IReader reader, IWriter writer, IEngine engine) : base(name, reader, writer)
+        public SwitchTownMenu(string name, IReader reader, IWriter writer, ITownsManager townsManager, IPlayerManager playerManager) : base(name, reader, writer)
         {
-            this.engine = engine;
+            this.townsManager = townsManager;
+            this.playerManager = playerManager;
 
             //generate the text of the menu
             this.menuText = new List<string>();
-            foreach (var town in engine.GetTowns())
+            foreach (var town in townsManager.GetTowns())
             {
                 this.menuText.Add(town.Name);
             }
@@ -28,12 +30,12 @@ namespace BackToBg.Core.Business.Menu
             {
                 { 0, () =>
                 {
-                    this.engine.SetCurrentTown(this.engine.GetTowns()[0]);
+                    this.townsManager.SetCurrentTown(this.townsManager.GetTowns()[0]);
                     ShouldBeRunning = false;
                 }},
                 { 1, () =>
                 {
-                    this.engine.SetCurrentTown(this.engine.GetTowns()[1]);
+                    this.townsManager.SetCurrentTown(this.townsManager.GetTowns()[1]);
                     ShouldBeRunning = false;
                 }},
             };
@@ -46,7 +48,8 @@ namespace BackToBg.Core.Business.Menu
         
         protected override void ExecuteCommand(int commandNumber)
         {
-            this.engine.SetCurrentTown(this.engine.GetTowns()[commandNumber]);
+            this.playerManager.Player.ResetPosition();
+            this.townsManager.SetCurrentTown(this.townsManager.GetTowns()[commandNumber]);
             ShouldBeRunning = false;
         }
     }
