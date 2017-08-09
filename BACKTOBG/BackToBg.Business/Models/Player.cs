@@ -121,7 +121,6 @@ namespace BackToBg.Core.Models
 			get { return this.stamina; }
 			set
 			{
-				Validator.IsPositive(value, nameof(this.stamina) + Messages.ValueShouldBePositive);
 				this.stamina = value;
 				if (this.stamina < 0)
 				{
