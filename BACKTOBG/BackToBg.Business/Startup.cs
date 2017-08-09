@@ -30,7 +30,7 @@ namespace BackToBg.Core
 
             IMap sofiaMap = new Map(player, writer, reader);
             ITown sofia = new Town("Sofia", sofiaMap, writer);
-            sofia.AddBuilding(new Banicharnitsa(1, "Banicharnitsa", "Topli zakuski", 10, 50));
+            sofia.AddBuilding(new Banicharnitsa(1, "Banicharnica", "Topli zakuski", 10, 50, playerManager));
             sofia.AddBuilding(new PoliceOffice(townsManager, playerManager, 1, "Police Station", "Just a police station", 30, 15));
             foreach (var building in Initializer.InitializeBuildings())
             {

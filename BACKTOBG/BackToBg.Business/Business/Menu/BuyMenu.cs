@@ -13,9 +13,9 @@ namespace BackToBg.Core.Business.Menu
 		private IList<IFood> shopList;
 		private IPlayer player;
 
-		public BuyMenu(string name, IReader reader, IWriter writer,IPlayer player) : base(name, reader, writer)
+		public BuyMenu(string name, IReader reader, IWriter writer, IPlayer player) : base(name, reader, writer)
 		{
-			this.player = player;
+		    this.player = player;
 			this.shopList = new List<IFood>();
 			this.shopList.Add(new Kifla(1, "Kifla s marmalad", 2, 15));
 			this.shopList.Add(new Kifla(2, "Kifla s shokolad", 2, 20));
