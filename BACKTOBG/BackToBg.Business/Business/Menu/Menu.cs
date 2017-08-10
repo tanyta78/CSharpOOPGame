@@ -30,8 +30,8 @@ namespace BackToBg.Core.Business.Menu
         }
 
         protected static bool ShouldBeRunning = true;
-        private int selectedIndex;
-        private string name;
+        protected int selectedIndex;
+        protected string name;
 
         public void StartMenu()
         {
@@ -43,14 +43,14 @@ namespace BackToBg.Core.Business.Menu
             ShouldBeRunning = true;
         }
 
-        private void PrintMenu()
+        protected virtual void PrintMenu()
         {
             this.Writer.Clear();
             this.Writer.SetCursorPosition((this.Writer.ConsoleWidth - this.name.Length) / 2, (this.Writer.ConsoleHeight - this.MenuText.Count) / 2 - 1);
             this.Writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
             for (var i = 0; i < this.MenuText.Count; i++)
             {
-                //set-up so that the menu is drawn on the middle of the screen
+                //set-up so that the menu is drawn on the middle of the screen				
                 this.Writer.SetCursorPosition(this.Writer.ConsoleWidth / 2 - this.MenuText[0].Length,
                     (this.Writer.ConsoleHeight - this.MenuText.Count) / 2 + i + 1);
                 if (i == this.selectedIndex)
@@ -64,7 +64,7 @@ namespace BackToBg.Core.Business.Menu
             }
         }
 
-        private void ReadKeyInput()
+        protected virtual void ReadKeyInput()
         {
             var key = this.Reader.ReadKey();
             switch (key.Key)
@@ -84,9 +84,12 @@ namespace BackToBg.Core.Business.Menu
                     }
                     break;
                 case ConsoleKey.Enter:
-                    if (!this.Actions.ContainsKey(this.selectedIndex))
-                        throw new NotImplementedException($"{this.MenuText[this.selectedIndex]} not available yet.");
-                        this.ExecuteCommand(this.selectedIndex);
+	                if (!this.Actions.ContainsKey(this.selectedIndex))
+	                {
+		                throw new NotImplementedException($"{this.MenuText[this.selectedIndex]} not available yet.");
+	                }
+
+                    this.ExecuteCommand(this.selectedIndex);
                     break;
                 case ConsoleKey.Escape:
                     ShouldBeRunning = false;

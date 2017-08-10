@@ -16,46 +16,78 @@ namespace BackToBg.Core.Business.Menu
 		public BuyMenu(string name, IReader reader, IWriter writer, IPlayer player) : base(name, reader, writer)
 		{
 		    this.player = player;
-			this.shopList = new List<IFood>();
-			this.shopList.Add(new Kifla(1, "Kifla s marmalad", 2, 15));
-			this.shopList.Add(new Kifla(2, "Kifla s shokolad", 2, 20));
-			this.shopList.Add(new Kifla(4, "Kifla s krem", 2, 13));
-			this.AddToItemsToMenu();										//TODO rework adding items of the shopList
+			this.shopList = new List<IFood>
+			{
+				new Kifla(1, "Kifla s marmalad", 2, 15),
+				new Kifla(2, "Kifla s shokolad", 2, 20),
+				new Kifla(4, "Kifla s krem", 2, 13)
+			};
+			this.actions=new Dictionary<int, Action>();
+		}
 
-
-			this.actions = new Dictionary<int, Action>
+		protected override void PrintMenu()
+		{
+			this.Writer.Clear();
+			this.Writer.SetCursorPosition((this.Writer.ConsoleWidth - this.name.Length) / 2, (this.Writer.ConsoleHeight - this.shopList.Count) / 2 - 1);
+			this.Writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
+			for (var i = 0; i < this.shopList.Count; i++)
+			{			
+				this.Writer.SetCursorPosition(this.Writer.ConsoleWidth / 2 - this.shopList[0].Name.Length,
+					(this.Writer.ConsoleHeight - this.shopList.Count) / 2 + i + 1);
+				if (i == this.selectedIndex)
+				{
+					this.Writer.WriteLine($">{this.shopList[i]}<");
+				}
+				else
+				{
+					this.Writer.WriteLine(this.shopList[i].ToString());
+				}
+			}
+		}
+		protected override void ReadKeyInput()
+		{
+			var key = this.Reader.ReadKey();
+			switch (key.Key)
+			{
+				case ConsoleKey.UpArrow:
+					this.selectedIndex--;
+					if (this.selectedIndex < 0)
 					{
-						{0, () =>												//TODO with foreach?
-						{
-							this.player.Stamina+=this.shopList[0].Stamina;
-							this.player.Money -= this.shopList[0].Price;		//TODO if not enough money
-							ShouldBeRunning = false;
-						}},
-						{1, () =>
-						{
-							this.player.Stamina+=this.shopList[1].Stamina;
-							this.player.Money -= this.shopList[1].Price;
-							ShouldBeRunning = false;
-						}},
-						{2, () =>
-						{
-							this.player.Stamina+=this.shopList[2].Stamina;
-							this.player.Money -= this.shopList[2].Price;
-							ShouldBeRunning = false;
-						}},
-						{3,() => ShouldBeRunning = false}
-					};
+						this.selectedIndex = this.shopList.Count - 1;
+					}
+					break;
+				case ConsoleKey.DownArrow:
+					this.selectedIndex++;
+					if (this.selectedIndex >= this.shopList.Count)
+					{
+						this.selectedIndex = 0;
+					}
+					break;
+				case ConsoleKey.Enter:
+					this.BuySelectedFood(this.selectedIndex);
+					ShouldBeRunning = false;
+					break;
+				case ConsoleKey.Escape:
+					ShouldBeRunning = false;
+					break;
+			}
+		}
+
+		private void BuySelectedFood(int selected)
+		{	
+			var restMoney = this.player.Money - this.shopList[selected].Price;
+			if (restMoney >= 0)
+			{
+				this.player.Money -= this.shopList[selected].Price;
+				this.player.Stamina += this.shopList[selected].Stamina;
+			}
+			else
+			{
+				throw new Exception();	//TODO catch ex 
+
+			}
 		}
 		private IList<string> menuText = new List<string>();
-		private void AddToItemsToMenu()
-		{
-			foreach (var food in this.shopList)
-			{
-				string f = $"{food.Name}-{food.Price}$";
-				this.menuText.Add(f);
-			}
-			this.menuText.Add("Exit");
-		}
 		protected override IDictionary<int, Action> Actions => this.actions;
 		protected override IList<string> MenuText => this.menuText;
 	}

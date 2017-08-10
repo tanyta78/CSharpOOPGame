@@ -21,5 +21,9 @@ namespace BackToBg.Core.Models.Items
 				this.stamina = value;
 			}
 		}
+		public override string ToString()
+		{
+			return $"{this.Name} - {this.Price}$";
+		}
 	}
 }

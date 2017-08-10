@@ -4,7 +4,8 @@
 	{
 		int ID { get; }
 		string Name { get; }
-		int Price { get; }
-		int Stamina { get; }		
+		int Price { get; set; }
+		int Stamina { get; }
+		string ToString();
 	}
 }

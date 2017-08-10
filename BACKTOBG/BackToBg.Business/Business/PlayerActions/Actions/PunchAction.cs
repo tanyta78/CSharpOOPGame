@@ -15,9 +15,10 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
 
         public override void Execute()
         {
-            var playerInfo = this.player.GetDrawingInfo();
-            foreach (var punchable in GetAdjacentPunchables())
-                this.player.Attack(punchable);
+	        foreach (var punchable in GetAdjacentPunchables())
+	        {
+		        this.player.Attack(punchable);
+	        }
         }
 
         private IEnumerable<IPunchable> GetAdjacentPunchables()
@@ -27,9 +28,11 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
             foreach (var punchable in this.map.Punchables)
             {
                 var punchableInfo = punchable.GetDrawingInfo();
-                if (Math.Abs(punchableInfo.row - playerInfo.row) <= 1 &&
-                    Math.Abs(punchableInfo.col - playerInfo.col) <= 1)
-                    punchables.Add(punchable);
+	            if (Math.Abs(punchableInfo.row - playerInfo.row) <= 1 &&
+	                Math.Abs(punchableInfo.col - playerInfo.col) <= 1)
+	            {
+		            punchables.Add(punchable);
+	            }
             }
 
             return punchables;
