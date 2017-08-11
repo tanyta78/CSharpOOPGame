@@ -18,7 +18,7 @@ namespace BackToBg.Core.Business.Menu
 		    this.player = player;
 			this.shopList = new List<IFood>
 			{
-				new Kifla(1, "Kifla s marmalad", 2, 15),
+				new Kifla(1, "Kifla s marmalad", 1000, 15),
 				new Kifla(2, "Kifla s shokolad", 2, 20),
 				new Kifla(4, "Kifla s krem", 2, 13)
 			};
@@ -64,7 +64,15 @@ namespace BackToBg.Core.Business.Menu
 					}
 					break;
 				case ConsoleKey.Enter:
-					this.BuySelectedFood(this.selectedIndex);
+					try
+					{
+						this.BuySelectedFood(this.selectedIndex);
+					}
+					catch (Exception e)
+					{
+						this.writer.DisplayException(e.Message);
+					}
+					
 					ShouldBeRunning = false;
 					break;
 				case ConsoleKey.Escape:
@@ -83,7 +91,7 @@ namespace BackToBg.Core.Business.Menu
 			}
 			else
 			{
-				throw new Exception();	//TODO catch ex 
+				throw new Exception($"Not enough money to buy {this.shopList[selected].Name}");	//TODO catch ex 
 
 			}
 		}

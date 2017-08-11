@@ -7,7 +7,7 @@ namespace BackToBg.Core.Business.Menu
     public abstract class Menu : IMenu
     {
         private IReader reader;
-        private IWriter writer;
+        protected IWriter writer;
 
         public Menu(string name, IReader reader, IWriter writer)
         {

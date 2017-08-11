@@ -35,5 +35,15 @@ namespace BackToBg.Core.Models.Utilities
 	    public const int PlayerStartingStamina = 200;
 	    public const int PlayerStartingExpirience = 0;
 	    public const double PlayerStartingMoney = 500;
+
+	    public const int FallinBranchDamage = 15;
+	    public const int BrokenLegDamage = 30;
+	    public const int FoundMoneyAmmount = 50;
+
+	    public static readonly string FallingBranchMsg = $"You got hit by falling branch - you lost {Constants.FallinBranchDamage} hitpoints";
+	    public static readonly string BrokenLegMsg = $"You fell into open shaft - you lost  {Constants.BrokenLegDamage} hitpoints";
+
+	    public static readonly string FoundMoneyMsg = $"Congratilations you found {Constants.FoundMoneyAmmount}$";
+	    
 	}
 }

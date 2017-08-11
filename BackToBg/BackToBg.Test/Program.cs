@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackToBg.Core.Business.Managers;
+using BackToBg.Core.Business.Reader;
+using BackToBg.Core.Business.Writer;
 using BackToBg.Core.Models;
 using BackToBg.Core.Models.Buildings.SpecialBuildings.Shops;
 using BackToBg.Core.Models.EntityInterfaces;
@@ -17,12 +20,12 @@ namespace BackToBg.Test
 	{
 		static void Main(string[] args)
 		{
-			var random = new RandomNumberGenerator(0,50);
-			for (int i = 0; i < 20; i++)
-			{
-				Console.WriteLine(random.GetNumber());
-			}
-			//Player pesho = new Player("Pesho")
+			var writer = new ConsoleWriter(50,50);
+			var reader = new ConsoleReader();
+			Player pesho = new Player("Pesho");
+			var manager = new PlayerManager(pesho);
+			var enc = new RandomEncountersManager(manager,reader,writer);
+			enc.RandomEncounters[5].Invoke();
 			//{
 			//	Inventory = new List<IItem>
 			//	{

@@ -7,7 +7,8 @@ namespace BackToBg.Core.Models.EntityInterfaces
         double Money { get; set; }
         int Experience { get; set; }
 		int Stamina { get; set; }
-        ILocation CurrentLocation { get; set; }
+	    int CurrentHitPoints { get; set; }
+		ILocation CurrentLocation { get; set; }
 
         void MoveHome();
 

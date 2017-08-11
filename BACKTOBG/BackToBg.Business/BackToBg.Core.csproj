@@ -55,10 +55,14 @@
     <Compile Include="Business\Attributes\PlayerActionAttribute.cs" />
     <Compile Include="Business\Attributes\QuestAttribute.cs" />
     <Compile Include="Business\Common\Initializer.cs" />
+    <Compile Include="Business\Encounters\Injures.cs" />
+    <Compile Include="Business\Encounters\ItemsFound.cs" />
     <Compile Include="Business\Exceptions\InvalidActionException.cs" />
     <Compile Include="Business\Exceptions\PlayerNotNearAnyBuildingException.cs" />
     <Compile Include="Business\Factories\QuestFactory.cs" />
+    <Compile Include="Business\Managers\RandomEncountersManager.cs" />
     <Compile Include="Business\Menu\BuyMenu.cs" />
+    <Compile Include="Business\Menu\EncounterMenu.cs" />
     <Compile Include="Business\Menu\Menu.cs" />
     <Compile Include="Business\Menu\PauseMenu.cs" />
     <Compile Include="Business\Menu\BrowseQuestsMenu.cs" />
@@ -76,6 +80,7 @@
     <Compile Include="Business\UtilityInterfaces\IMenu.cs" />
     <Compile Include="Business\UtilityInterfaces\IPaginator.cs" />
     <Compile Include="Business\UtilityInterfaces\IPlayerManager.cs" />
+    <Compile Include="Business\UtilityInterfaces\IRandomEncountersManager.cs" />
     <Compile Include="Business\UtilityInterfaces\IReader.cs" />
     <Compile Include="Business\UtilityInterfaces\IPlayerActionFactory.cs" />
     <Compile Include="Business\Exceptions\InvalidKeyPressException.cs" />
@@ -142,6 +147,7 @@
     <Compile Include="Models\Utilities\Alignment.cs" />
     <Compile Include="Models\Utilities\Constants.cs" />
     <Compile Include="Models\Utilities\Functions.cs" />
+    <Compile Include="Models\Utilities\IRandomNumberGenerator.cs" />
     <Compile Include="Models\Utilities\Messages.cs" />
     <Compile Include="Models\Utilities\RandomNumberGenerator.cs" />
     <Compile Include="Models\Utilities\Validator.cs" />

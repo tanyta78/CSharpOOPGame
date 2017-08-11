@@ -1,26 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BackToBg.Core.Models.Utilities
 {
-	public class RandomNumberGenerator
+	public class RandomNumberGenerator:IRandomNumberGenerator
 	{
+		
+		private static readonly int numOne = 0;
+		private static readonly int numTwo = 500;
 		Random r = new Random();
-		private int numOne;
-		private int numTwo;
 
-		public  RandomNumberGenerator(int numOne, int numTwo)
+		public int GetNextNumber()
 		{
-			this.numOne = numOne;
-			this.numTwo = numTwo;
-		}
-
-		public int GetNumber()
-		{
-			return this.r.Next(this.numOne, this.numTwo);
+			var num =  this.r.Next(numOne, numTwo);
+			return num;
 		}
 	}
 }
