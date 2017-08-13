@@ -84,11 +84,6 @@ namespace BackToBg.Core.Business.Menu
                     }
                     break;
                 case ConsoleKey.Enter:
-	                if (!this.Actions.ContainsKey(this.selectedIndex))
-	                {
-		                throw new NotImplementedException($"{this.MenuText[this.selectedIndex]} not available yet.");
-	                }
-
                     this.ExecuteCommand(this.selectedIndex);
                     break;
                 case ConsoleKey.Escape:
@@ -99,6 +94,11 @@ namespace BackToBg.Core.Business.Menu
 
         protected virtual void ExecuteCommand(int commandNumber)
         {
+            if (!this.Actions.ContainsKey(this.selectedIndex))
+            {
+                throw new NotImplementedException($"{this.MenuText[this.selectedIndex]} not available yet.");
+            }
+
             this.Actions[commandNumber]();
         }
     }

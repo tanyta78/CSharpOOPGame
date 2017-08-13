@@ -24,22 +24,7 @@ namespace BackToBg.Core.Business.Menu
             }
         }
 
-        protected override IDictionary<int, Action> Actions
-        {
-            get => new Dictionary<int, Action>()
-            {
-                { 0, () =>
-                {
-                    this.townsManager.SetCurrentTown(this.townsManager.GetTowns()[0]);
-                    ShouldBeRunning = false;
-                }},
-                { 1, () =>
-                {
-                    this.townsManager.SetCurrentTown(this.townsManager.GetTowns()[1]);
-                    ShouldBeRunning = false;
-                }},
-            };
-        }
+        protected override IDictionary<int, Action> Actions => this.actions;
 
         protected override IList<string> MenuText
         {

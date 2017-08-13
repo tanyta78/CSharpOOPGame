@@ -60,26 +60,38 @@ namespace BackToBg.Core.Business.Map
             this.writer.Clear();
             var map = this.map;
             var playerInfo = this.player.GetDrawingInfo();
+            var consoleWidth = this.writer.ConsoleWidth;
+            var consoleHeight = this.writer.ConsoleHeight;
 
-            var verticalCalculations = map.Length - (this.writer.ConsoleWidth - 1) -
-                                       (playerInfo.col - this.writer.ConsoleWidth / 2);
+
+            //some stupid math for the drawing. only god knows why it works.
+            var verticalCalculations = map.Length - (consoleWidth - 1) -
+                                       (playerInfo.col - consoleWidth / 2);
             if (verticalCalculations > 0)
                 verticalCalculations = 0;
 
-            var horizontalCalculations = map.Length - (this.writer.ConsoleHeight - 1) -
-                                         (playerInfo.row - this.writer.ConsoleHeight / 2);
+            var horizontalCalculations = map.Length - (consoleHeight - 1) -
+                                         (playerInfo.row - consoleHeight / 2);
             if (horizontalCalculations > 0)
                 horizontalCalculations = 0;
 
-            for (int row = Math.Max(0, playerInfo.row - this.writer.ConsoleHeight / 2), counter = 0;
+            var counter = 0;
+            if (horizontalCalculations == 0)
+            {
+                counter = 1;
+            }
+
+            //drawing
+            this.writer.WriteLine($"Player: HP:{this.player.CurrentHitPoints} Money:{this.player.Money} Other stats - Escape >> View stats");
+            for (int row = Math.Max(0, playerInfo.row - consoleHeight / 2);
                 counter < this.writer.ConsoleHeight - 1 + horizontalCalculations;
                 row++, counter++)
             {
                 var line = string.Join("", map[row]);
-                this.writer.WriteLine(line.Substring(Math.Max(0, playerInfo.col - this.writer.ConsoleWidth / 2),
-                    this.writer.ConsoleWidth - 1 + verticalCalculations));
+                this.writer.WriteLine(line.Substring(Math.Max(0, playerInfo.col - consoleWidth / 2),
+                    consoleWidth - 1 + verticalCalculations));
             }
-
+            
             //for (int i = playerInfo.row - ConsoleHeight / 2; i < playerInfo.row; i++)
             //{
             //    if (i >= 0 && i < map.Length)
