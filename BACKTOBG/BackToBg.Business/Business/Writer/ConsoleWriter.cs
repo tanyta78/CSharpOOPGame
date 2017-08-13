@@ -62,6 +62,13 @@ namespace BackToBg.Core.Business.Writer
             this.DisplayMessageInColor(message, color);
         }
 
+        public void DisplayStatsBar(string message, ConsoleColor color)
+        {
+            throw new NotImplementedException();
+            Console.SetCursorPosition(0, 0);
+            //shift everything on the console 1 row downwards
+        }
+
         private void CenterCursor(string message)
         {
             Console.SetCursorPosition((this.ConsoleWidth - message.Length) / 2, this.ConsoleHeight / 2);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Enums;
 using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models
@@ -49,8 +50,21 @@ namespace BackToBg.Core.Models
 		//Properties
 		public int ID { get; }
 		public string Name { get; set; }
-		//intended hiding (to use IInventoryOwner's Name property)
-		string IInventoryOwner.Name
+
+	    public void Trade(IItem item, TradingOption tradingOption)
+	    {
+	        if (tradingOption == TradingOption.Buy)
+	        {
+	            this.Inventory.Add(item);
+	        }
+	        else if (tradingOption == TradingOption.Sell)
+	        {
+	            this.Inventory.Remove(item);
+	        }
+	    }
+
+        //intended hiding (to use IInventoryOwner's Name property)
+        string IInventoryOwner.Name
 		{
 			get { return this.Name; }
 			set { }
@@ -132,11 +146,6 @@ namespace BackToBg.Core.Models
 
 		public ILocation CurrentLocation { get; set; }
 		public IList<IItem> Inventory { get; set; }
-
-		public void Trade()
-		{
-			throw new NotImplementedException();
-		}
 
 		public void MoveEast()
 		{

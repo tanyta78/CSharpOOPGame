@@ -121,6 +121,7 @@
     <Compile Include="Models\EntityInterfaces\IQuestCompetionItem.cs" />
     <Compile Include="Models\EntityInterfaces\ITradingEntity.cs" />
     <Compile Include="Models\Enums\Rarity.cs" />
+    <Compile Include="Models\Enums\TradingOption.cs" />
     <Compile Include="Models\Items\Books\Book.cs" />
     <Compile Include="Models\Items\Books\Booklet.cs" />
     <Compile Include="Models\Items\Books\Encyclopedia.cs" />

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using BackToBg.Core.Business.Writer;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Enums;
 using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
@@ -109,24 +110,15 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
                 case ConsoleKey.Enter:
                     this.ActiveInventoryDialog.Refresh(ConsoleKey.Enter);
-
                     var cw = new ConsoleWriter(Console.WindowHeight, Console.WindowWidth);
 
-                    if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
-                    {
-                        cw.DisplayMessageInColorCentered(
-                            string.Format(Constants.AreYouSureBuy, this.ActiveInventoryDialog.SelectedItem.Name),
-                            Constants.UserPromptColor);
-                    }
-                    else
-                    {
-                        cw.DisplayMessageInColorCentered(
-                            string.Format(Constants.AreYouSureSell, this.ActiveInventoryDialog.SelectedItem.Name),
-                            Constants.UserPromptColor);
-                    }
+                    cw.DisplayMessageInColorCentered(
+                        this.ActiveInventoryDialog == this.TraderInventoryDialog
+                            ? string.Format(Constants.AreYouSureBuy, this.ActiveInventoryDialog.SelectedItem.Name)
+                            : string.Format(Constants.AreYouSureSell, this.ActiveInventoryDialog.SelectedItem.Name),
+                        Constants.UserPromptColor);
 
                     var selectionInput = Console.ReadKey();
-
                     if (selectionInput.Key == ConsoleKey.Y)
                     {
                         Trade(this.ActiveInventoryDialog.SelectedItem);
@@ -161,14 +153,13 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             //TODO: UPDATE DATABASE
             if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
             {
-                this.Player.Inventory.Add(item);
-                //remove from traders inventory
-                this.Trader.Inventory.Remove(item);
+                this.Player.Trade(item,TradingOption.Buy);
+                this.Trader.Trade(item,TradingOption.Sell);
             }
             else if (this.ActiveInventoryDialog == this.PlayerInventoryDialog)
             {
-                this.Player.Inventory.Remove(item);
-                this.Trader.Inventory.Add(item);
+                this.Player.Trade(item,TradingOption.Sell);
+                this.Trader.Trade(item,TradingOption.Buy);
             }
         }
 
