@@ -70,7 +70,6 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
         {
             switch (key.Key)
             {
-                //TODO:arrows change active row !!!
                 case ConsoleKey.UpArrow:
                     this.ActiveInventoryDialog.Refresh(ConsoleKey.UpArrow);
                     if (this.activeRow == 3)
@@ -89,9 +88,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                     this.ActiveInventoryDialog.Refresh(ConsoleKey.DownArrow);
                     if (this.activeRow == Constants.TradeDialogItemRows + 3 - 1) //top info rows
                     {
-                        //todo
                         this.activeRow = 3;
-                        //activeID.page++;
                     }
                     else
                     {
@@ -110,7 +107,6 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                     Draw();
                     return true;
 
-                //TODO: Sends selected item
                 case ConsoleKey.Enter:
                     this.ActiveInventoryDialog.Refresh(ConsoleKey.Enter);
 
@@ -166,9 +162,12 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
             {
                 this.Player.Inventory.Add(item);
+                //remove from traders inventory
+                this.Trader.Inventory.Remove(item);
             }
             else if (this.ActiveInventoryDialog == this.PlayerInventoryDialog)
             {
+                this.Player.Inventory.Remove(item);
                 this.Trader.Inventory.Add(item);
             }
         }
