@@ -46,7 +46,11 @@ namespace BackToBg.Core
 
             townsManager.AddTown(montana);
 
-            IEngine engine = new Engine(playerManager, townsManager, reader, writer);
+            IPlayerActionFactory playerActionFactory = new PlayerActionFactory(townsManager, playerManager, reader, writer);
+            IRandomEncountersManager randomEncountersManager = new RandomEncountersManager(playerManager, reader, writer);
+            IRandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+
+            IEngine engine = new Engine(playerManager, townsManager, reader, writer, playerActionFactory, randomEncountersManager, randomNumberGenerator);
             engine.Run();
         }
     }

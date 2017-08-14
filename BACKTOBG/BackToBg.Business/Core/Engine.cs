@@ -19,15 +19,18 @@ namespace BackToBg.Core.Core
 	    private IRandomEncountersManager randomEncountersManager;
 	    private IRandomNumberGenerator randomNumberGenerator;
 
-        public Engine(IPlayerManager playerManager, ITownsManager townsManager, IReader reader, IWriter writer)
+        public Engine(IPlayerManager playerManager, ITownsManager townsManager, IReader reader, IWriter writer, IPlayerActionFactory playerActionFactory, IRandomEncountersManager randomEncountersManager, IRandomNumberGenerator randomNumberGenerator)
         {
             this.playerManager = playerManager;
             this.townsManager = townsManager;
             this.reader = reader;
             this.writer = writer;
-            this.playerActionFactory = new PlayerActionFactory(this.townsManager, this.playerManager, reader, writer);
-			this.randomEncountersManager = new RandomEncountersManager(this.playerManager,this.reader,this.writer);
-			this.randomNumberGenerator = new RandomNumberGenerator();
+            this.playerActionFactory = playerActionFactory;
+            this.randomEncountersManager = randomEncountersManager;
+            this.randomNumberGenerator = randomNumberGenerator;
+            //this.playerActionFactory = new PlayerActionFactory(this.townsManager, this.playerManager, reader, writer);
+			//this.randomEncountersManager = new RandomEncountersManager(this.playerManager,this.reader,this.writer);
+			//this.randomNumberGenerator = new RandomNumberGenerator();
         }
 
         public void Run()

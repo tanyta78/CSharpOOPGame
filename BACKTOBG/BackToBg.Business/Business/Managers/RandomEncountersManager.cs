@@ -24,7 +24,7 @@ namespace BackToBg.Core.Business.Managers
 
 		private void PopulateEncounters()
 		{
-			this.randomEncounters.Add(5,new Injures(this.playerManager.Player, this.writer,this.reader).FallingBranch);
+			this.randomEncounters.Add(5, new Injures(this.playerManager.Player, this.writer,this.reader).FallingBranch);
 			this.randomEncounters.Add(6, new Injures(this.playerManager.Player, this.writer, this.reader).BrokenLeg);
 			this.randomEncounters.Add(8, new ItemsFound(this.playerManager.Player, this.writer, this.reader).AxeFound);
 			this.randomEncounters.Add(7, new ItemsFound(this.playerManager.Player, this.writer, this.reader).BootsFound);

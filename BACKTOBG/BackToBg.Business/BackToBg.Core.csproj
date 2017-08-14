@@ -58,6 +58,7 @@
     <Compile Include="Business\Encounters\Injures.cs" />
     <Compile Include="Business\Encounters\ItemsFound.cs" />
     <Compile Include="Business\Exceptions\InvalidActionException.cs" />
+    <Compile Include="Business\Exceptions\NotEnoughMoneyException.cs" />
     <Compile Include="Business\Exceptions\PlayerNotNearAnyBuildingException.cs" />
     <Compile Include="Business\Factories\QuestFactory.cs" />
     <Compile Include="Business\Managers\RandomEncountersManager.cs" />
