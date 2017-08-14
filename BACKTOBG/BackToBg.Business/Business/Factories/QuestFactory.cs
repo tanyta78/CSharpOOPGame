@@ -4,16 +4,19 @@ using System.Reflection;
 using BackToBg.Core.Business.Attributes;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
+using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Business.Factories
 {
     public class QuestFactory
     {
         private readonly ITown town;
+        private readonly IRandomNumberGenerator randomNumberGenerator;
 
-        public QuestFactory(ITown town)
+        public QuestFactory(ITown town, IRandomNumberGenerator randomNumberGenerator)
         {
             this.town = town;
+            this.randomNumberGenerator = randomNumberGenerator;
         }
 
         public IQuest InjectQuest(Type buildingType)

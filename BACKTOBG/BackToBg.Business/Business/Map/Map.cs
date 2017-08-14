@@ -11,14 +11,14 @@ namespace BackToBg.Core.Business.Map
 {
     public class Map : IMap
     {
-        private static readonly int mapSize = Constants.DefaultMapSize;
+        private readonly int mapSize = Constants.DefaultMapSize;
         private readonly IList<IBuilding> buildings;
         private readonly IList<IPunchable> punchables;
         private char[][] map;
         private readonly IPlayer player;
         private IWriter writer;
 
-        public Map(IPlayer player, IWriter writer, IReader reader)
+        public Map(IPlayer player, IWriter writer)
         {
             this.punchables = new List<IPunchable>();
             this.buildings = new List<IBuilding>();
@@ -30,6 +30,8 @@ namespace BackToBg.Core.Business.Map
         public IEnumerable<IBuilding> Drawables => this.buildings;
 
         public IEnumerable<IPunchable> Punchables => this.punchables;
+
+        public int Size => this.mapSize;
 
         public char[][] GetMap()
         {
@@ -133,12 +135,38 @@ namespace BackToBg.Core.Business.Map
             this.GenerateMap();
         }
 
+        public bool CanSpawnEntityInSpot(int row, int col)
+        {
+            //check if it tries to spawn in a building
+            foreach (var building in this.buildings)
+            {
+                var buildingInfo = building.GetDrawingInfo();
+                var rowCheck = buildingInfo.row <= row && buildingInfo.row + buildingInfo.figure.Length > row;
+                var colCheck = buildingInfo.col <= col && buildingInfo.col + buildingInfo.figure[0].Length > col;
+                if (rowCheck && colCheck)
+                {
+                    return false;
+                }
+            }
+
+            //check if it tries to spawn on another entity
+            //foreach (var drawable in this.Drawables)
+            //{
+            //    if (drawable.GetDrawingInfo().row == row && drawable.GetDrawingInfo().col == col)
+            //    {
+            //        return true;
+            //    }
+            //}
+
+            return true;
+        }
+
         public void GenerateMap()
         {
             //create the map array
-            this.map = new char[mapSize][];
-            for (var i = 0; i < mapSize; i++)
-                this.map[i] = new string(Constants.RoadChar, mapSize).ToCharArray();
+            this.map = new char[this.mapSize][];
+            for (var i = 0; i < this.mapSize; i++)
+                this.map[i] = new string(Constants.RoadChar, this.mapSize).ToCharArray();
 
             //draw all buildings
             foreach (var building in this.buildings)
@@ -147,8 +175,8 @@ namespace BackToBg.Core.Business.Map
                 var figure = info.figure;
                 var x = info.row;
                 var y = info.col;
-                for (var row = x; row < Math.Min(x + figure.Length, mapSize - 1); row++)
-                    for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
+                for (var row = x; row < Math.Min(x + figure.Length, this.mapSize - 1); row++)
+                    for (var col = y; col < Math.Min(y + figure[0].Length, this.mapSize - 1); col++)
                         this.map[row][col] = figure[row - x][col - y];
             }
 
@@ -159,8 +187,8 @@ namespace BackToBg.Core.Business.Map
                 var figure = info.figure;
                 var x = info.row;
                 var y = info.col;
-                for (var row = x; row < Math.Min(x + figure.Length, mapSize - 1); row++)
-                    for (var col = y; col < Math.Min(y + figure[0].Length, mapSize - 1); col++)
+                for (var row = x; row < Math.Min(x + figure.Length, this.mapSize - 1); row++)
+                    for (var col = y; col < Math.Min(y + figure[0].Length, this.mapSize - 1); col++)
                         this.map[row][col] = figure[row - x][col - y];
             }
 
@@ -170,13 +198,13 @@ namespace BackToBg.Core.Business.Map
 
             //draw the borders
             var border = Constants.BasicBuildingBorder;
-            this.map[0] = new string(border, mapSize).ToCharArray();
-            for (var i = 1; i < mapSize - 1; i++)
+            this.map[0] = new string(border, this.mapSize).ToCharArray();
+            for (var i = 1; i < this.mapSize - 1; i++)
             {
                 this.map[i][0] = border;
                 this.map[i][this.map[0].Length - 1] = border;
             }
-            this.map[mapSize - 1] = new string(border, mapSize).ToCharArray();
+            this.map[this.mapSize - 1] = new string(border, this.mapSize).ToCharArray();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace BackToBg.Core.Business.UtilityInterfaces
         IEnumerable<IBuilding> Drawables { get; }
 
         IEnumerable<IPunchable> Punchables { get; }
+        int Size { get; }
 
         char[][] GetMap();
         
@@ -17,5 +18,6 @@ namespace BackToBg.Core.Business.UtilityInterfaces
         void AddPunchable(IPunchable punchable);
         void RemovePunchable(IPunchable punchable);
         void AddBuilding(IBuilding building);
+        bool CanSpawnEntityInSpot(int row, int col);
     }
 }
