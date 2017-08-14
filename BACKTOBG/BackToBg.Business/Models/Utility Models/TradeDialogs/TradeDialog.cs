@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using BackToBg.Core.Business.Writer;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Enums;
 using BackToBg.Core.Models.Utilities;
+using BackToBg.Core.Business.IO.Writer;
 
 namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 {
@@ -63,7 +63,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         private InventoryDialog<ITradingEntity> ActiveInventoryDialog { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -85,6 +85,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                     }
                     Draw();
                     return true;
+
                 case ConsoleKey.DownArrow:
                     this.ActiveInventoryDialog.Refresh(ConsoleKey.DownArrow);
                     if (this.activeRow == Constants.TradeDialogItemRows + 3 - 1) //top info rows
@@ -98,6 +99,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                     this.activeRow++;
                     Draw();
                     return true;
+
                 case ConsoleKey.RightArrow:
                     this.ActiveInventoryDialog.Refresh(ConsoleKey.RightArrow);
                     Draw();
@@ -143,6 +145,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                 case ConsoleKey.Escape:
                     Console.Clear();
                     return false;
+
                 default:
                     return true;
             }
@@ -153,13 +156,13 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             //TODO: UPDATE DATABASE
             if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
             {
-                this.Player.Trade(item,TradingOption.Buy);
-                this.Trader.Trade(item,TradingOption.Sell);
+                this.Player.Trade(item, TradingOption.Buy);
+                this.Trader.Trade(item, TradingOption.Sell);
             }
             else if (this.ActiveInventoryDialog == this.PlayerInventoryDialog)
             {
-                this.Player.Trade(item,TradingOption.Sell);
-                this.Trader.Trade(item,TradingOption.Buy);
+                this.Player.Trade(item, TradingOption.Sell);
+                this.Trader.Trade(item, TradingOption.Buy);
             }
         }
 
@@ -321,6 +324,6 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                 sb.Append(new string(' ', Constants.TradeDialogSpacingColumns));
         }
 
-        #endregion
+        #endregion Methods
     }
 }

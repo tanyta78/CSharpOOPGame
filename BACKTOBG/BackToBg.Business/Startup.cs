@@ -1,16 +1,15 @@
 ﻿using BackToBg.Core.Business.Common;
 using BackToBg.Core.Business.Factories;
+using BackToBg.Core.Business.IO.Reader;
+using BackToBg.Core.Business.IO.Writer;
 using BackToBg.Core.Business.Managers;
 using BackToBg.Core.Business.Map;
-using BackToBg.Core.Business.Reader;
 using BackToBg.Core.Business.UtilityInterfaces;
-using BackToBg.Core.Business.Writer;
 using BackToBg.Core.Core;
 using BackToBg.Core.Models;
 using BackToBg.Core.Models.Buildings.SpecialBuildings;
 using BackToBg.Core.Models.Buildings.SpecialBuildings.Shops;
 using BackToBg.Core.Models.EntityInterfaces;
-using BackToBg.Core.Models.Quests;
 using BackToBg.Core.Models.Town;
 using BackToBg.Core.Models.Utilities;
 
@@ -48,7 +47,6 @@ namespace BackToBg.Core
 
             IPlayerActionFactory playerActionFactory = new PlayerActionFactory(townsManager, playerManager, reader, writer);
             IRandomEncountersManager randomEncountersManager = new RandomEncountersManager(playerManager, reader, writer);
-
 
             IEngine engine = new Engine(playerManager, townsManager, reader, writer, playerActionFactory, randomEncountersManager, randomNumberGenerator);
             engine.Run();
