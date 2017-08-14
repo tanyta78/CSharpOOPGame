@@ -79,7 +79,7 @@
     <Compile Include="Business\PlayerActions\Actions\InteractAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PauseMenuAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PunchAction.cs" />
-    <Compile Include="Business\Reader\ConsoleReader.cs" />
+    <Compile Include="Business\IO\Reader\ConsoleReader.cs" />
     <Compile Include="Business\UtilityInterfaces\IInfoDisplayer.cs" />
     <Compile Include="Business\UtilityInterfaces\IMenu.cs" />
     <Compile Include="Business\UtilityInterfaces\IPaginator.cs" />
@@ -163,7 +163,7 @@
     <Compile Include="Business\ServiceInterfaces\EntityServiceInterfaces\IPlayerDataService.cs" />
     <Compile Include="Business\ServiceInterfaces\IGenericDataService.cs" />
     <Compile Include="Business\UtilityInterfaces\IEngine.cs" />
-    <Compile Include="Business\Writer\ConsoleWriter.cs" />
+    <Compile Include="Business\IO\Writer\ConsoleWriter.cs" />
     <Compile Include="Business\UtilityInterfaces\IWriter.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

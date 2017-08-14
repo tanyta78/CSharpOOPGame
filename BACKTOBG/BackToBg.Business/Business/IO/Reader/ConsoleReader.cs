@@ -1,7 +1,7 @@
 ﻿using System;
 using BackToBg.Core.Business.UtilityInterfaces;
 
-namespace BackToBg.Core.Business.Reader
+namespace BackToBg.Core.Business.IO.Reader
 {
     public class ConsoleReader : IReader
     {

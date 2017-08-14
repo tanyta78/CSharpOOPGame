@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading;
 using BackToBg.Core.Business.UtilityInterfaces;
 
-namespace BackToBg.Core.Business.Writer
+namespace BackToBg.Core.Business.IO.Writer
 {
     public class ConsoleWriter : IWriter
     {
@@ -20,7 +20,7 @@ namespace BackToBg.Core.Business.Writer
 
         public void DisplayMessageInColor(string message, ConsoleColor color)
         {
-            //this.CenterCursor(message); 
+            //this.CenterCursor(message);
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ResetColor();
