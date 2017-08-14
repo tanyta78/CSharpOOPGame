@@ -61,6 +61,8 @@
     <Compile Include="Business\Exceptions\NotEnoughMoneyException.cs" />
     <Compile Include="Business\Exceptions\PlayerNotNearAnyBuildingException.cs" />
     <Compile Include="Business\Factories\QuestFactory.cs" />
+    <Compile Include="Business\InfoDisplayer\InfoDisplayer.cs" />
+    <Compile Include="Business\InfoDisplayer\PlayerInfoDisplayer.cs" />
     <Compile Include="Business\Managers\RandomEncountersManager.cs" />
     <Compile Include="Business\Menu\BuyMenu.cs" />
     <Compile Include="Business\Menu\EncounterMenu.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Business\PlayerActions\Actions\PauseMenuAction.cs" />
     <Compile Include="Business\PlayerActions\Actions\PunchAction.cs" />
     <Compile Include="Business\Reader\ConsoleReader.cs" />
+    <Compile Include="Business\UtilityInterfaces\IInfoDisplayer.cs" />
     <Compile Include="Business\UtilityInterfaces\IMenu.cs" />
     <Compile Include="Business\UtilityInterfaces\IPaginator.cs" />
     <Compile Include="Business\UtilityInterfaces\IPlayerManager.cs" />

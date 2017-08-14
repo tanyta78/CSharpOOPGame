@@ -84,7 +84,7 @@ namespace BackToBg.Core.Business.Map
             }
 
             //drawing
-            this.writer.WriteLine($"Player: HP:{this.player.CurrentHitPoints} Money:{this.player.Money} Other stats - Escape >> View stats");
+            this.writer.WriteLine($"Player: HP:{this.player.CurrentHitPoints} Stamina:{this.player.Stamina}");
             for (int row = Math.Max(0, playerInfo.row - consoleHeight / 2);
                 counter < this.writer.ConsoleHeight - 1 + horizontalCalculations;
                 row++, counter++)

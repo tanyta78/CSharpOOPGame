@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackToBg.Core.Business.InfoDisplayer;
 using BackToBg.Core.Business.UtilityInterfaces;
 
 namespace BackToBg.Core.Business.Menu
@@ -31,6 +32,11 @@ namespace BackToBg.Core.Business.Menu
                 {
                     var stm = new SwitchTownMenu("Switch town", this.Reader, this.Writer, this.townsManager, playerManager);
                     stm.StartMenu();
+                }},
+                {2, () =>
+                {
+                    var pid = new PlayerInfoDisplayer(this.Reader, this.Writer, this.playerManager.Player);
+                    pid.Display();
                 }},
                 {3, () =>
                     {
