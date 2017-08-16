@@ -39,14 +39,33 @@ namespace BackToBg.Core.Models
         public Player()
         {
             this.figure = Constants.DefaultPlayerFigure;
-            this.Inventory = new List<IItem>();
             this.x = 1;
             this.y = 1;
+            this.attackDamage = Constants.DefaultPlayerAttack;
+            this.Intelligence = Constants.PlayerStartingIntelligence;
+            this.Experience = Constants.PlayerStartingExpirience;
+            this.Strength = Constants.PlayerStartingStrength;
+            this.Agility = Constants.PlayerStartingAgility;
+            this.Money = Constants.PlayerStartingMoney;
+            this.Stamina = Constants.PlayerStartingStamina;
+            this.Inventory = new List<IItem>();
+            this.quests = new List<IQuest>();
         }
 
         public Player(string name) : this()
         {
             this.Name = name;
+            this.x = 1;
+            this.y = 1;
+            this.attackDamage = Constants.DefaultPlayerAttack;
+            this.Intelligence = Constants.PlayerStartingIntelligence;
+            this.Experience = Constants.PlayerStartingExpirience;
+            this.Strength = Constants.PlayerStartingStrength;
+            this.Agility = Constants.PlayerStartingAgility;
+            this.Money = Constants.PlayerStartingMoney;
+            this.Stamina = Constants.PlayerStartingStamina;
+            this.Inventory = new List<IItem>();
+            this.quests = new List<IQuest>();
         }
 
         public int Agility
