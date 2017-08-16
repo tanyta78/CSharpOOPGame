@@ -41,6 +41,8 @@ namespace BackToBg.Core.Models
 		{
 			this.figure = Constants.DefaultPlayerFigure;
 			this.Inventory = new List<IItem>();
+		    this.x = 1;
+		    this.y = 1;
 		}
 
 		public Player(string name) : this()

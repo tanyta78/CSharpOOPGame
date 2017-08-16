@@ -35,14 +35,8 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
             }
         }
 
-        public override (int row, int col, string[] figure) GetDrawingInfo()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract override (int row, int col, string[] figure) GetDrawingInfo();
 
-        public override void Interact()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract override void Interact();
     }
 }

@@ -162,8 +162,6 @@
     <Compile Include="Models\Utility Models\TradeDialogs\InventoryDialog.cs" />
     <Compile Include="Models\Utility Models\TradeDialogs\TradeDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Business\ServiceInterfaces\EntityServiceInterfaces\IPlayerDataService.cs" />
-    <Compile Include="Business\ServiceInterfaces\IGenericDataService.cs" />
     <Compile Include="Business\UtilityInterfaces\IEngine.cs" />
     <Compile Include="Business\IO\Writer\ConsoleWriter.cs" />
     <Compile Include="Business\UtilityInterfaces\IWriter.cs" />

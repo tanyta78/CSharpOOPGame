@@ -44,6 +44,10 @@ namespace BackToBg.Core.Models.Utilities
 	    public static readonly string BrokenLegMsg = $"You fell into open shaft - you lost  {Constants.BrokenLegDamage} hitpoints";
 
 	    public static readonly string FoundMoneyMsg = $"Congratilations you found {Constants.FoundMoneyAmmount}$";
-	    
-	}
+
+        public const int ShoppingMallWidth = 15;
+        public const int ShoppingMallHeight = 5;
+
+
+    }
 }

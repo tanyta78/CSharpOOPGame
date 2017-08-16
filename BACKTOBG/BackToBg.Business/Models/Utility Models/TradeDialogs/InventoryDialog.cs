@@ -23,7 +23,11 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             this.Location = location;
             this.page = 1;
             this.activeRow = 3;
-            this.SelectedItem = this.TradingEntity.Inventory[0];
+
+            if (tradingEntity.Inventory.Any())
+            {
+                this.SelectedItem = this.TradingEntity.Inventory[0];
+            }
         }
 
         #region Properties

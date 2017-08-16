@@ -24,6 +24,8 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
         /// <param name="startingLocation">Upper left corner of figure</param>
         /// <param name="player">The first member of the trade.</param>
         /// <param name="trader">The second member of the trade. Could be another player, shop, peddlar, etc.</param>
+        /// 
+        /// 
         public TradeDialog(Point startingLocation, IPlayer player, ITradingEntity trader)
         {
             this.activeRow = 3;

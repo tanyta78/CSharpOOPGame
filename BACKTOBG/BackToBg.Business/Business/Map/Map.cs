@@ -65,7 +65,6 @@ namespace BackToBg.Core.Business.Map
             var consoleWidth = this.writer.ConsoleWidth;
             var consoleHeight = this.writer.ConsoleHeight;
 
-
             //some stupid math for the drawing. only god knows why it works.
             var verticalCalculations = map.Length - (consoleWidth - 1) -
                                        (playerInfo.col - consoleWidth / 2);
