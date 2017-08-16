@@ -2,7 +2,7 @@
 
 namespace BackToBg.Core.Business.Common
 {
-    public class CustomEventHandler
+    public class CustomEventHandler : ICustomEventHandler
     {
         private readonly IWriter writer;
 

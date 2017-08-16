@@ -12,13 +12,13 @@ namespace BackToBg.Core.Business.Menu
         where T : IBuilding
     {
         private readonly IRandomNumberGenerator randomNumberGenerator;
-        private CustomEventHandler handler;
+        private ICustomEventHandler handler;
         private readonly IPlayerManager playerManager;
         private readonly QuestFactory questFactory;
         private readonly ITownsManager townsManager;
 
         public TakeOnQuestMenu(string name, IReader reader, IWriter writer, ITownsManager townsManager,
-            IPlayerManager playerManager, IRandomNumberGenerator randomNumberGenerator, CustomEventHandler handler)
+            IPlayerManager playerManager, IRandomNumberGenerator randomNumberGenerator, ICustomEventHandler handler)
             : base(name, reader, writer)
         {
             this.townsManager = townsManager;

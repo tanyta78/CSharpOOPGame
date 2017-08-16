@@ -17,7 +17,7 @@ namespace BackToBg.Core.Models.Quests
         [Inject] private ITown town;
 
         public BanditQuest(string name, string description, int rewardExperiancePoints, int rewardMoney,
-            CustomEventHandler handler) : base(name, description, rewardExperiancePoints, rewardMoney, handler)
+            ICustomEventHandler handler) : base(name, description, rewardExperiancePoints, rewardMoney, handler)
         {
         }
 

@@ -20,8 +20,13 @@ namespace BackToBg.Core.Models
         private int x;
         private int y;
 
-        public Player(int x, int y, char figure = Constants.DefaultPlayerFigure)
+        public Player(string name) : this(name, 1, 1)
         {
+        }
+
+        public Player(string name, int x, int y, char figure = Constants.DefaultPlayerFigure)
+        {
+            this.Name = name;
             this.x = x;
             this.y = y;
             this.figure = figure;
@@ -32,41 +37,11 @@ namespace BackToBg.Core.Models
             this.Agility = Constants.PlayerStartingAgility;
             this.Money = Constants.PlayerStartingMoney;
             this.Stamina = Constants.PlayerStartingStamina;
+            this.CurrentHitPoints = Constants.PlayerStartingHitPoints;
             this.Inventory = new List<IItem>();
             this.quests = new List<IQuest>();
         }
-
-        public Player()
-        {
-            this.figure = Constants.DefaultPlayerFigure;
-            this.x = 1;
-            this.y = 1;
-            this.attackDamage = Constants.DefaultPlayerAttack;
-            this.Intelligence = Constants.PlayerStartingIntelligence;
-            this.Experience = Constants.PlayerStartingExpirience;
-            this.Strength = Constants.PlayerStartingStrength;
-            this.Agility = Constants.PlayerStartingAgility;
-            this.Money = Constants.PlayerStartingMoney;
-            this.Stamina = Constants.PlayerStartingStamina;
-            this.Inventory = new List<IItem>();
-            this.quests = new List<IQuest>();
-        }
-
-        public Player(string name) : this()
-        {
-            this.Name = name;
-            this.x = 1;
-            this.y = 1;
-            this.attackDamage = Constants.DefaultPlayerAttack;
-            this.Intelligence = Constants.PlayerStartingIntelligence;
-            this.Experience = Constants.PlayerStartingExpirience;
-            this.Strength = Constants.PlayerStartingStrength;
-            this.Agility = Constants.PlayerStartingAgility;
-            this.Money = Constants.PlayerStartingMoney;
-            this.Stamina = Constants.PlayerStartingStamina;
-            this.Inventory = new List<IItem>();
-            this.quests = new List<IQuest>();
-        }
+        
 
         public int Agility
         {
@@ -235,13 +210,13 @@ namespace BackToBg.Core.Models
 
         public IReadOnlyList<IQuest> GetQuests()
         {
-            return (IReadOnlyList<IQuest>) this.quests;
+            return (IReadOnlyList<IQuest>)this.quests;
         }
 
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
             //TODO: COHERENT IMPLEMENTATION
-            return (this.x, this.y, new[] {this.figure.ToString()});
+            return (this.x, this.y, new[] { this.figure.ToString() });
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BackToBg.Core.Business.Common;
+using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Utilities;
 
@@ -9,13 +10,13 @@ namespace BackToBg.Core.Models.Quests
 
     public abstract class Quest : IQuest
     {
-        protected CustomEventHandler handler;
+        protected ICustomEventHandler handler;
         private int id;
         private bool isFinished;
         private string name;
 
         public Quest(string name, string description, int rewardExperiancePoints, int rewardMoney,
-            CustomEventHandler handler)
+            ICustomEventHandler handler)
         {
             this.Name = name;
             this.Description = description;

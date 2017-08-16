@@ -11,11 +11,11 @@ namespace BackToBg.Core.Business.Factories
 {
     public class QuestFactory
     {
-        private readonly CustomEventHandler handler;
+        private readonly ICustomEventHandler handler;
         private readonly IRandomNumberGenerator randomNumberGenerator;
         private readonly ITown town;
 
-        public QuestFactory(ITown town, IRandomNumberGenerator randomNumberGenerator, CustomEventHandler handler)
+        public QuestFactory(ITown town, IRandomNumberGenerator randomNumberGenerator, ICustomEventHandler handler)
         {
             this.town = town;
             this.randomNumberGenerator = randomNumberGenerator;

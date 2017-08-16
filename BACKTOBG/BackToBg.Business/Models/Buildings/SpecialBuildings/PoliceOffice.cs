@@ -14,7 +14,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
     public class PoliceOffice : SpecialBuilding
     {
         private const Item ItemToEnter = null;
-        private readonly CustomEventHandler handler;
+        private readonly ICustomEventHandler handler;
         private readonly IPlayerManager playerManager;
         private readonly IRandomNumberGenerator randomNumberGenerator;
         private readonly ITownsManager townsManager;
@@ -25,7 +25,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 
         public PoliceOffice(ITownsManager townsManager, IPlayerManager playerManager,
             IRandomNumberGenerator randomNumberGenerator, int id, string name, string description, int x, int y,
-            CustomEventHandler handler, int sizeFactor = Constants.DefaultSizeFactor)
+            ICustomEventHandler handler, int sizeFactor = Constants.DefaultSizeFactor)
             : base(id, name, description, x, y, sizeFactor)
         {
             this.townsManager = townsManager;

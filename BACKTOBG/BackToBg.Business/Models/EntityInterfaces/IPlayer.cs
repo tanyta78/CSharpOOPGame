@@ -2,7 +2,7 @@
 
 namespace BackToBg.Core.Models.EntityInterfaces
 {
-    public interface IPlayer : ICreature, ITradingEntity
+    public interface IPlayer : IDrawable, ITradingEntity
     {
         double Money { get; set; }
         int Experience { get; set; }

@@ -8,6 +8,7 @@ using BackToBg.Core.Business.Map;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Core;
 using BackToBg.Core.Models;
+using BackToBg.Core.Models.Buildings;
 using BackToBg.Core.Models.Buildings.SpecialBuildings;
 using BackToBg.Core.Models.Buildings.SpecialBuildings.Shops;
 using BackToBg.Core.Models.EntityInterfaces;
@@ -25,9 +26,8 @@ namespace BackToBg.Core
         public static void Main()
         {
             IRandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-            IPlayer player = new Player
+            IPlayer player = new Player("Pesho")
             {
-                Name = "Pesho",
                 Inventory = new List<IItem>
                 {
                     new Axe(1, "Cepeni4kata", 99, Rarity.Common),
@@ -47,7 +47,7 @@ namespace BackToBg.Core
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
 
-            var handler = new CustomEventHandler(writer);
+            ICustomEventHandler handler = new CustomEventHandler(writer);
 
             ITownsManager townsManager = new TownsManager();
 
@@ -58,7 +58,7 @@ namespace BackToBg.Core
             sofia.AddBuilding(new PoliceOffice(townsManager, playerManager, randomNumberGenerator, 1, "Police Station",
                 "Just a police station", 30, 15, handler));
 
-            Shop mall = new MallShop(playerManager, 1, "Mall of Sofia", null, 30, 50)
+            IBuilding mall = new MallShop(playerManager, 1, "Mall of Sofia", null, 30, 50)
             {
                 Inventory = new List<IItem>
                 {
@@ -76,7 +76,9 @@ namespace BackToBg.Core
             townsManager.SetCurrentTown(sofia);
 
             IMap montanaMap = new Map(player, writer);
+
             ITown montana = new Town("Montana", montanaMap, writer);
+            montana.AddBuilding(new BasicBuilding(10, 10, 3));
 
             townsManager.AddTown(montana);
 
