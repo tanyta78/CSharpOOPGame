@@ -4,6 +4,6 @@ namespace BackToBg.Core.Models.EntityInterfaces
 {
     public interface ITradingEntity : IInventoryOwner
     {
-        void Trade(IItem item,TradingOption tradingOption);
+        void Trade(IItem item, TradingOption tradingOption);
     }
 }

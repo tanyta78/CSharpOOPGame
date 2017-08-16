@@ -9,26 +9,23 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 {
     public class InventoryDialog<T> : IDrawable where T : ITradingEntity
     {
-        #region Fields
-
-        private bool isActive;
-        private int page;
-        private int activeRow;
-
-        #endregion
-
         public InventoryDialog(T tradingEntity, Point location)
         {
             this.TradingEntity = tradingEntity;
             this.Location = location;
             this.page = 1;
-            this.activeRow = 3;
+            this.ActiveRow = 3;
 
             if (tradingEntity.Inventory.Any())
-            {
                 this.SelectedItem = this.TradingEntity.Inventory[0];
-            }
         }
+
+        #region Fields
+
+        private bool isActive;
+        private int page;
+
+        #endregion
 
         #region Properties
 
@@ -36,7 +33,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         public Point Location { get; set; }
 
-        public int ActiveRow => this.activeRow;
+        public int ActiveRow { get; private set; }
 
         //Could be Shop, Player, Peddlar
         private T TradingEntity { get; }
@@ -47,7 +44,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.Location.X, this.Location.Y, this.GenerateFigure());
+            return (this.Location.X, this.Location.Y, GenerateFigure());
         }
 
         public void Toggle()
@@ -57,12 +54,12 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         private string[] GenerateFigure()
         {
-            string nameRow = $"{this.TradingEntity.Name}'s items" +
-                             new string(' ', Constants.TradeDialogSpacingColumns);
+            var nameRow = $"{this.TradingEntity.Name}'s items" +
+                          new string(' ', Constants.TradeDialogSpacingColumns);
             nameRow = Functions.AlignLine(nameRow, Constants.TradeDialogItemMaxLength);
 
             //add first three info rows
-            IList<string> figureRows = new List<string>()
+            IList<string> figureRows = new List<string>
             {
                 $"{new string('-', Constants.TradeDialogItemMaxLength)}",
                 nameRow,
@@ -70,28 +67,24 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             };
 
             foreach (var row in ListItemsAndPage())
-            {
                 figureRows.Add(row);
-            }
 
             return figureRows.ToArray();
         }
 
         private IList<string> ListItemsAndPage()
         {
-            int rows = Constants.TradeDialogItemRows + 1;
-            int toSkip = 0;
+            var rows = Constants.TradeDialogItemRows + 1;
+            var toSkip = 0;
 
             if (this.TradingEntity.Inventory.Count >= Constants.TradeDialogItemRows)
-            {
                 toSkip = (this.page - 1) * Constants.TradeDialogItemRows;
-            }
 
             var itemsOnPage = this.TradingEntity.Inventory
                 .Skip(toSkip) // 0 if less than items on one page
                 .Take(Constants.TradeDialogItemRows).ToList();
 
-            List<string> figureRows = new List<string>();
+            var figureRows = new List<string>();
 
             for (var i = 0; i < rows - 1; i++)
             {
@@ -112,11 +105,9 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                 figureRows.Add(Functions.AlignLine(sb.ToString(), Constants.TradeDialogItemMaxLength));
             }
 
-            int pages = this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows;
+            var pages = this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows;
             if (pages < (double) this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows)
-            {
                 pages++;
-            }
 
             //add page info row at the bottom
             figureRows.Add(Functions.AlignLine($"page {this.page}/{pages}", Constants.TradeDialogItemMaxLength));
@@ -126,44 +117,40 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         public void Refresh(ConsoleKey key)
         {
-            int pages = this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows;
+            var pages = this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows;
             if (pages < (double) this.TradingEntity.Inventory.Count / Constants.TradeDialogItemRows)
-            {
                 pages++;
-            }
 
             switch (key)
             {
                 case ConsoleKey.UpArrow:
-                    if (this.activeRow > 3)
+                    if (this.ActiveRow > 3)
                     {
-                        this.activeRow--;
+                        this.ActiveRow--;
                     }
                     else
                     {
                         if (this.page > 1) //if not first page
                         {
                             this.page--;
-                            this.activeRow = Constants.TradeDialogItemRows + 2;
+                            this.ActiveRow = Constants.TradeDialogItemRows + 2;
                         }
                     }
                     break;
                 case ConsoleKey.DownArrow:
-                    if (this.activeRow < Constants.TradeDialogItemRows + 2)
+                    if (this.ActiveRow < Constants.TradeDialogItemRows + 2)
                     {
                         //TODO: check if rows under are empty strings
-                        if (ListItemsAndPage()[this.activeRow - 2].Trim() == string.Empty)
-                        {
+                        if (ListItemsAndPage()[this.ActiveRow - 2].Trim() == string.Empty)
                             break;
-                        }
-                        this.activeRow++;
+                        this.ActiveRow++;
                     }
                     else
                     {
                         if (this.page < pages) //if not last page
                         {
                             this.page++;
-                            this.activeRow = 3;
+                            this.ActiveRow = 3;
                         }
                     }
                     break;
@@ -171,19 +158,19 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                     if (this.page < pages) //if not last page
                     {
                         this.page++;
-                        this.activeRow = 3;
+                        this.ActiveRow = 3;
                     }
                     break;
                 case ConsoleKey.LeftArrow:
                     if (this.page > 1) //if not first page
                     {
                         this.page--;
-                        this.activeRow = 3;
+                        this.ActiveRow = 3;
                     }
                     break;
                 case ConsoleKey.Enter:
                     this.SelectedItem = this.TradingEntity.Inventory
-                        .Skip((this.page - 1) * Constants.TradeDialogItemRows + this.activeRow - 3).First();
+                        .Skip((this.page - 1) * Constants.TradeDialogItemRows + this.ActiveRow - 3).First();
                     break;
                 case ConsoleKey.S:
                     Toggle();

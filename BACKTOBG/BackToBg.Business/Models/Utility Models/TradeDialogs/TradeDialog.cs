@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using BackToBg.Core.Business.IO.Writer;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Enums;
 using BackToBg.Core.Models.Utilities;
-using BackToBg.Core.Business.IO.Writer;
 
 namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 {
@@ -24,8 +24,6 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
         /// <param name="startingLocation">Upper left corner of figure</param>
         /// <param name="player">The first member of the trade.</param>
         /// <param name="trader">The second member of the trade. Could be another player, shop, peddlar, etc.</param>
-        /// 
-        /// 
         public TradeDialog(Point startingLocation, IPlayer player, ITradingEntity trader)
         {
             this.activeRow = 3;
@@ -59,9 +57,9 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         private Player Player { get; }
 
-        private InventoryDialog<ITradingEntity> TraderInventoryDialog { get; set; }
+        private InventoryDialog<ITradingEntity> TraderInventoryDialog { get; }
 
-        private InventoryDialog<ITradingEntity> PlayerInventoryDialog { get; set; }
+        private InventoryDialog<ITradingEntity> PlayerInventoryDialog { get; }
 
         private InventoryDialog<ITradingEntity> ActiveInventoryDialog { get; set; }
 
@@ -76,28 +74,18 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                 case ConsoleKey.UpArrow:
                     this.ActiveInventoryDialog.Refresh(ConsoleKey.UpArrow);
                     if (this.activeRow == 3)
-                    {
-                        //todo
                         Draw();
-                        //activeID.page--;
-                    }
                     else
-                    {
                         this.activeRow--;
-                    }
                     Draw();
                     return true;
 
                 case ConsoleKey.DownArrow:
                     this.ActiveInventoryDialog.Refresh(ConsoleKey.DownArrow);
                     if (this.activeRow == Constants.TradeDialogItemRows + 3 - 1) //top info rows
-                    {
                         this.activeRow = 3;
-                    }
                     else
-                    {
                         this.activeRow++;
-                    }
                     this.activeRow++;
                     Draw();
                     return true;
@@ -174,12 +162,8 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             ConsoleKeyInfo input;
 
             while (Input(input = Console.ReadKey()))
-            {
                 if (input.Key == ConsoleKey.Escape)
-                {
                     break;
-                }
-            }
 
             //TODO: show last window (before trading)
         }
@@ -187,13 +171,9 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
         private void SwitchActiveInventoryDialog()
         {
             if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
-            {
                 this.ActiveInventoryDialog = this.PlayerInventoryDialog;
-            }
             else
-            {
                 this.ActiveInventoryDialog = this.TraderInventoryDialog;
-            }
 
             this.TraderInventoryDialog.Toggle();
             this.PlayerInventoryDialog.Toggle();
@@ -201,16 +181,16 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
         public (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.Location.X, this.Location.Y, this.GenerateFigure());
+            return (this.Location.X, this.Location.Y, GenerateFigure());
         }
 
         protected virtual string[] GetFigure()
         {
-            return this.GenerateFigure();
+            return GenerateFigure();
         }
 
         /// <summary>
-        /// Generates the graphic represantation of the TradeDialog (no color)
+        ///     Generates the graphic represantation of the TradeDialog (no color)
         /// </summary>
         /// <returns></returns>
         private string[] GenerateFigure()
@@ -228,26 +208,18 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
                 var sb = new StringBuilder();
 
                 if (i <= traderDialogFigure.Length - 1)
-                {
                     sb.Append(traderDialogFigure[i]);
-                }
                 else
-                {
                     sb.Append(Functions.AlignLine("", Constants.TradeDialogItemMaxLength));
-                }
 
                 //append middle separators that are for the ---> <--- arrows
-                this.AppendSeparatorColumns(sb, i, rows);
+                AppendSeparatorColumns(sb, i, rows);
 
                 if (i <= playerDialogFigure.Length - 1)
-                {
                     sb.Append(playerDialogFigure[i]);
-                }
 
                 if (!string.IsNullOrEmpty(sb.ToString()))
-                {
                     figureRows.Add(sb.ToString());
-                }
             }
 
             return figureRows.ToArray();
@@ -261,7 +233,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             var consoleColors = new Color[3];
             consoleColors[2] = Constants.InventoryActiveRowColor;
 
-            if ((this.ActiveInventoryDialog == this.TraderInventoryDialog))
+            if (this.ActiveInventoryDialog == this.TraderInventoryDialog)
             {
                 consoleColors[0] = Constants.InventoryActiveColor;
                 consoleColors[1] = Constants.InventoryInactiveColor;
@@ -275,14 +247,12 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
             var figure = GenerateFigure();
             var y = this.Location.Y;
 
-            for (int i = 0; i < figure.Length; i++)
+            for (var i = 0; i < figure.Length; i++)
             {
-                int colorId = 0;
+                var colorId = 0;
                 if (i == this.ActiveInventoryDialog.ActiveRow &&
                     this.ActiveInventoryDialog == this.TraderInventoryDialog)
-                {
                     colorId = 2;
-                }
 
                 Colorful.Console.Write(figure[i].Substring(0, Constants.TradeDialogItemMaxLength - 1),
                     consoleColors[colorId]);
@@ -293,9 +263,7 @@ namespace BackToBg.Core.Models.Utility_Models.TradeDialogs
 
                 if (i == this.ActiveInventoryDialog.ActiveRow &&
                     this.ActiveInventoryDialog == this.PlayerInventoryDialog)
-                {
                     colorId = 2;
-                }
                 Colorful.Console.Write(figure[i]
                     .Substring(Constants.TradeDialogItemMaxLength - 1 + Constants.TradeDialogSpacingColumns,
                         Constants.TradeDialogItemMaxLength - 1), consoleColors[colorId]);

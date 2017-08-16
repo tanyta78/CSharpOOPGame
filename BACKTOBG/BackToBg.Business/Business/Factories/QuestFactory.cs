@@ -11,9 +11,9 @@ namespace BackToBg.Core.Business.Factories
 {
     public class QuestFactory
     {
-        private readonly ITown town;
-        private readonly IRandomNumberGenerator randomNumberGenerator;
         private readonly CustomEventHandler handler;
+        private readonly IRandomNumberGenerator randomNumberGenerator;
+        private readonly ITown town;
 
         public QuestFactory(ITown town, IRandomNumberGenerator randomNumberGenerator, CustomEventHandler handler)
         {
@@ -37,7 +37,7 @@ namespace BackToBg.Core.Business.Factories
             };
 
             var quest = (IQuest) Activator.CreateInstance(fieldAttribute.QuestType, parameters);
-            this.InjectDependencies(quest);
+            InjectDependencies(quest);
 
             return quest;
         }

@@ -39,8 +39,8 @@ namespace BackToBg.Core.Models.Creatures
 
             private set
             {
-				Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
-				this.id = value;
+                Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
+                this.id = value;
             }
         }
 
@@ -50,8 +50,8 @@ namespace BackToBg.Core.Models.Creatures
 
             private set
             {
-				Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
-				this.name = value;
+                Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
+                this.name = value;
             }
         }
 
@@ -61,8 +61,8 @@ namespace BackToBg.Core.Models.Creatures
 
             private set
             {
-				Validator.IsPositive(value, nameof(this.currentHitPoints) + Messages.ValueShouldBePositive);
-				this.currentHitPoints = value;
+                Validator.IsPositive(value, nameof(this.currentHitPoints) + Messages.ValueShouldBePositive);
+                this.currentHitPoints = value;
             }
         }
 
@@ -72,8 +72,8 @@ namespace BackToBg.Core.Models.Creatures
 
             private set
             {
-				Validator.IsPositive(value, nameof(this.maxHitPoints) + Messages.ValueShouldBePositive);
-				this.maxHitPoints = value;
+                Validator.IsPositive(value, nameof(this.maxHitPoints) + Messages.ValueShouldBePositive);
+                this.maxHitPoints = value;
             }
         }
     }

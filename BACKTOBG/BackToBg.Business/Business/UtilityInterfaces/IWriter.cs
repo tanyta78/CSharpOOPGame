@@ -13,6 +13,5 @@ namespace BackToBg.Core.Business.UtilityInterfaces
         void DisplayMessageInColor(string message, ConsoleColor color);
         void DisplayQuestCompletionMessage(string message);
         void DisplayMessageInColorCentered(string message, ConsoleColor color);
-        void DisplayStatsBar(string message, ConsoleColor color);
     }
 }

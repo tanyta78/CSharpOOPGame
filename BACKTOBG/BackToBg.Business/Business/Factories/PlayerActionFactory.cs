@@ -4,22 +4,22 @@ using System.Reflection;
 using BackToBg.Core.Business.Attributes;
 using BackToBg.Core.Business.Exceptions;
 using BackToBg.Core.Business.UtilityInterfaces;
-using BackToBg.Core.Core;
 using BackToBg.Core.Models.EntityInterfaces;
 
 namespace BackToBg.Core.Business.Factories
 {
     public class PlayerActionFactory : IPlayerActionFactory
     {
-        private ITownsManager townsManager;
-        private IPlayerManager playerManager;
-        private ITown town;
         private IMap map;
         private IPlayer player;
+        private IPlayerManager playerManager;
         private IReader reader;
+        private ITown town;
+        private readonly ITownsManager townsManager;
         private IWriter writer;
 
-        public PlayerActionFactory(ITownsManager townsManager, IPlayerManager playerManager, IReader reader, IWriter writer)
+        public PlayerActionFactory(ITownsManager townsManager, IPlayerManager playerManager, IReader reader,
+            IWriter writer)
         {
             this.townsManager = townsManager;
             this.playerManager = playerManager;
@@ -40,8 +40,8 @@ namespace BackToBg.Core.Business.Factories
             if (actionType == null)
                 throw new InvalidKeyPressException();
 
-            var action = (IPlayerAction)Activator.CreateInstance(actionType, new object[] { });
-            this.InjectDependencies(action);
+            var action = (IPlayerAction) Activator.CreateInstance(actionType, new object[] { });
+            InjectDependencies(action);
 
             return action;
         }

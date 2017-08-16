@@ -7,30 +7,38 @@ namespace BackToBg.Core.Business.Menu
 {
     public class BrowseQuestsMenu : Menu
     {
-        private IPlayerManager playerManager;
+        private readonly IPlayerManager playerManager;
 
-        public BrowseQuestsMenu(string name, IReader reader, IWriter writer, IPlayerManager playerManager) : base(name, reader, writer)
+        public BrowseQuestsMenu(string name, IReader reader, IWriter writer, IPlayerManager playerManager) : base(name,
+            reader, writer)
         {
             this.playerManager = playerManager;
         }
 
         protected override IDictionary<int, Action> Actions => new Dictionary<int, Action>
         {
-            {0, () =>
             {
-                var allQuestsPaginator = new AllQuestsPaginator(this.Reader, this.Writer, this.playerManager);
-                allQuestsPaginator.Start();
-            }},
-            {1, () =>
+                0, () =>
+                {
+                    var allQuestsPaginator = new AllQuestsPaginator(this.Reader, this.Writer, this.playerManager);
+                    allQuestsPaginator.Start();
+                }
+            },
             {
-                var activeQuestsPaginator = new ActiveQuestsPaginator(this.Reader, this.Writer, this.playerManager);
-                activeQuestsPaginator.Start();
-            }},
-            {2, () =>
+                1, () =>
+                {
+                    var activeQuestsPaginator = new ActiveQuestsPaginator(this.Reader, this.Writer, this.playerManager);
+                    activeQuestsPaginator.Start();
+                }
+            },
             {
-                var inactiveQuestsPaginator = new InactiveQuestsPaginator(this.Reader, this.Writer, this.playerManager);
-                inactiveQuestsPaginator.Start();
-            }},
+                2, () =>
+                {
+                    var inactiveQuestsPaginator =
+                        new InactiveQuestsPaginator(this.Reader, this.Writer, this.playerManager);
+                    inactiveQuestsPaginator.Start();
+                }
+            }
         };
 
         protected override IList<string> MenuText => new List<string>

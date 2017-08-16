@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Enums;
 using BackToBg.Core.Models.Utilities;
@@ -23,16 +22,12 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
             set { }
         }
 
-        public void Trade(IItem item,TradingOption tradingOption)
+        public void Trade(IItem item, TradingOption tradingOption)
         {
             if (tradingOption == TradingOption.Buy)
-            {
                 this.Inventory.Add(item);
-            }
             else if (tradingOption == TradingOption.Sell)
-            {
                 this.Inventory.Remove(item);
-            }
         }
 
         public abstract override (int row, int col, string[] figure) GetDrawingInfo();

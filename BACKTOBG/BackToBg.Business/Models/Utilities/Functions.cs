@@ -16,9 +16,7 @@
             Alignment alignment = Alignment.Left)
         {
             if (line.Length > maxChars)
-            {
                 return ShortenLine(line, maxChars);
-            }
             if (line.Length < maxChars)
             {
                 switch (alignment)

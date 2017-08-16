@@ -15,7 +15,7 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
 
         public override void Execute()
         {
-			Console.WriteLine(this.player.Stamina);
+            Console.WriteLine(this.player.Stamina);
             var info = this.player.GetDrawingInfo();
             var x = info.row;
             var y = info.col;

@@ -5,27 +5,20 @@ namespace BackToBg.Core.Business.Managers
 {
     public class TownsManager : ITownsManager
     {
-        private IList<ITown> towns;
-        private ITown town;
+        private readonly IList<ITown> towns;
 
         public TownsManager()
         {
             this.towns = new List<ITown>();
         }
 
-        public ITown Town
-        {
-            get { return this.town; }
-        }
+        public ITown Town { get; private set; }
 
-        public IReadOnlyCollection<ITown> Towns
-        {
-            get { return (IReadOnlyCollection<ITown>)this.towns; }
-        }
+        public IReadOnlyCollection<ITown> Towns => (IReadOnlyCollection<ITown>) this.towns;
 
         public ITown GetCurrentTown()
         {
-            return this.town;
+            return this.Town;
         }
 
         public IList<ITown> GetTowns()
@@ -40,8 +33,8 @@ namespace BackToBg.Core.Business.Managers
 
         public void SetCurrentTown(ITown newTown)
         {
-            this.town = newTown;
-            this.town.Map.GenerateMap();
+            this.Town = newTown;
+            this.Town.Map.GenerateMap();
         }
     }
 }

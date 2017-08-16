@@ -5,21 +5,16 @@ namespace BackToBg.Core.Business.Managers
 {
     public class PlayerManager : IPlayerManager
     {
-        private readonly IPlayer player;
-
         public PlayerManager(IPlayer player)
         {
-            this.player = player;
+            this.Player = player;
         }
 
-        public IPlayer Player
-        {
-            get => this.player;
-        }
-        
+        public IPlayer Player { get; }
+
         public void AddQuest(IQuest quest)
         {
-            this.player.AddQuest(quest);
+            this.Player.AddQuest(quest);
         }
     }
 }

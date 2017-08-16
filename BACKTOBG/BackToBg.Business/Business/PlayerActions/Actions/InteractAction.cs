@@ -17,14 +17,12 @@ namespace BackToBg.Core.Business.PlayerActions.Actions
             var building = GetAdjacentBuilding();
             this.player.Interact(building);
         }
-		
+
         private IBuilding GetAdjacentBuilding()
         {
             foreach (var building in this.map.Drawables)
-	            if (this.player.AdjacentTo(building))
-	            {
-		            return building;
-	            }
+                if (this.player.AdjacentTo(building))
+                    return building;
             throw new PlayerNotNearAnyBuildingException();
         }
     }

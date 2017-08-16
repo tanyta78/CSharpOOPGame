@@ -1,17 +1,16 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Enums;
 using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Models.Items
 {
-    public abstract class Item : Merchandise,IItem
-	{
+    public abstract class Item : Merchandise, IItem
+    {
         private int agilityBonus;
-        private int strengthBonus;
         private int intelligenceBonus;
-       
+        private int strengthBonus;
+
         protected Item(int id, string name, int price, int strengthBonus, int intelligenceBonus, int agilityBonus,
             Rarity rarity) : base(id, name, price)
         {
@@ -19,14 +18,14 @@ namespace BackToBg.Core.Models.Items
             this.StrengthBonus = strengthBonus;
             this.IntelligenceBonus = intelligenceBonus;
             this.AgilityBonus = agilityBonus;
-        }     
+        }
 
         public int StrengthBonus
         {
             get => this.strengthBonus;
             private set
             {
-	            Validator.IsPositive(value, nameof(this.StrengthBonus) + Messages.ValueShouldBePositive);                 
+                Validator.IsPositive(value, nameof(this.StrengthBonus) + Messages.ValueShouldBePositive);
                 this.strengthBonus = value * (int) this.Rarity;
             }
         }
@@ -36,8 +35,8 @@ namespace BackToBg.Core.Models.Items
             get => this.intelligenceBonus;
             private set
             {
-				Validator.IsPositive(value, nameof(this.IntelligenceBonus) + Messages.ValueShouldBePositive);
-				this.intelligenceBonus = value * (int) this.Rarity;
+                Validator.IsPositive(value, nameof(this.IntelligenceBonus) + Messages.ValueShouldBePositive);
+                this.intelligenceBonus = value * (int) this.Rarity;
             }
         }
 
@@ -46,8 +45,8 @@ namespace BackToBg.Core.Models.Items
             get => this.agilityBonus;
             private set
             {
-				Validator.IsPositive(value, nameof(this.AgilityBonus) + Messages.ValueShouldBePositive);
-				this.agilityBonus = value * (int) this.Rarity;
+                Validator.IsPositive(value, nameof(this.AgilityBonus) + Messages.ValueShouldBePositive);
+                this.agilityBonus = value * (int) this.Rarity;
             }
         }
 

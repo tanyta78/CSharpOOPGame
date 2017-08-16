@@ -6,7 +6,7 @@ namespace BackToBg.Core.Models.Utilities
     {
         private static readonly int numOne = 0;
         private static readonly int numTwo = 500;
-        Random r = new Random();
+        private readonly Random r = new Random();
 
         public int GetNextNumber()
         {

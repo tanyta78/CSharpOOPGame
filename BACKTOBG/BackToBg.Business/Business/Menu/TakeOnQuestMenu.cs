@@ -11,20 +11,22 @@ namespace BackToBg.Core.Business.Menu
     public class TakeOnQuestMenu<T> : Menu
         where T : IBuilding
     {
-        private ITownsManager townsManager;
-        private IPlayerManager playerManager;
-        private QuestFactory questFactory;
         private readonly IRandomNumberGenerator randomNumberGenerator;
         private CustomEventHandler handler;
+        private readonly IPlayerManager playerManager;
+        private readonly QuestFactory questFactory;
+        private readonly ITownsManager townsManager;
 
-        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, ITownsManager townsManager, IPlayerManager playerManager, IRandomNumberGenerator randomNumberGenerator, CustomEventHandler handler)
+        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, ITownsManager townsManager,
+            IPlayerManager playerManager, IRandomNumberGenerator randomNumberGenerator, CustomEventHandler handler)
             : base(name, reader, writer)
         {
             this.townsManager = townsManager;
             this.playerManager = playerManager;
             this.randomNumberGenerator = randomNumberGenerator;
             this.handler = handler;
-            this.questFactory = new QuestFactory(this.townsManager.GetCurrentTown(), this.randomNumberGenerator, handler);
+            this.questFactory = new QuestFactory(this.townsManager.GetCurrentTown(), this.randomNumberGenerator,
+                handler);
         }
 
         protected override IDictionary<int, Action> Actions => new Dictionary<int, Action>

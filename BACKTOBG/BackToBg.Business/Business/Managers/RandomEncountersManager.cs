@@ -7,31 +7,29 @@ namespace BackToBg.Core.Business.Managers
 {
     public class RandomEncountersManager : IRandomEncountersManager
     {
-        private IDictionary<int, Action> randomEncounters;
-        private IPlayerManager playerManager;
-        private IReader reader;
-        private IWriter writer;
+        private readonly IPlayerManager playerManager;
+        private readonly IReader reader;
+        private readonly IWriter writer;
 
         public RandomEncountersManager(IPlayerManager playerManager, IReader reader, IWriter writer)
         {
             this.writer = writer;
             this.reader = reader;
             this.playerManager = playerManager;
-            this.randomEncounters = new Dictionary<int, Action>();
-            this.PopulateEncounters();
+            this.RandomEncounters = new Dictionary<int, Action>();
+            PopulateEncounters();
         }
+
+        public IDictionary<int, Action> RandomEncounters { get; }
 
         private void PopulateEncounters()
         {
-            this.randomEncounters.Add(5, new Injures(this.playerManager.Player, this.writer, this.reader).FallingBranch);
-            this.randomEncounters.Add(6, new Injures(this.playerManager.Player, this.writer, this.reader).BrokenLeg);
-            this.randomEncounters.Add(8, new ItemsFound(this.playerManager.Player, this.writer, this.reader).AxeFound);
-            this.randomEncounters.Add(7, new ItemsFound(this.playerManager.Player, this.writer, this.reader).BootsFound);
-        }
-
-        public IDictionary<int, Action> RandomEncounters
-        {
-            get { return this.randomEncounters; }
+            this.RandomEncounters.Add(5,
+                new Injures(this.playerManager.Player, this.writer, this.reader).FallingBranch);
+            this.RandomEncounters.Add(6, new Injures(this.playerManager.Player, this.writer, this.reader).BrokenLeg);
+            this.RandomEncounters.Add(8, new ItemsFound(this.playerManager.Player, this.writer, this.reader).AxeFound);
+            this.RandomEncounters.Add(7,
+                new ItemsFound(this.playerManager.Player, this.writer, this.reader).BootsFound);
         }
     }
 }

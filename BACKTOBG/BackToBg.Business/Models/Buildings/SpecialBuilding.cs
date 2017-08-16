@@ -8,7 +8,8 @@ namespace BackToBg.Core.Models.Buildings
         private int id;
         private string name;
 
-        protected SpecialBuilding(int id, string name, string description, int x, int y, int sizeFactor = Constants.DefaultSizeFactor)
+        protected SpecialBuilding(int id, string name, string description, int x, int y,
+            int sizeFactor = Constants.DefaultSizeFactor)
             : base(x, y, sizeFactor)
         {
             this.ID = id;
@@ -25,8 +26,8 @@ namespace BackToBg.Core.Models.Buildings
 
             private set
             {
-				Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
-				this.id = value;
+                Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
+                this.id = value;
             }
         }
 
@@ -36,8 +37,8 @@ namespace BackToBg.Core.Models.Buildings
 
             private set
             {
-				Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
-				this.name = value;
+                Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
+                this.name = value;
             }
         }
 

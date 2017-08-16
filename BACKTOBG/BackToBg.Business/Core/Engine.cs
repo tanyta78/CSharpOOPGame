@@ -1,25 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using BackToBg.Core.Business.Exceptions;
-using BackToBg.Core.Business.Factories;
-using BackToBg.Core.Business.Managers;
 using BackToBg.Core.Business.UtilityInterfaces;
-using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Core
 {
     public class Engine : IEngine
     {
-        private ITownsManager townsManager;
-        private IPlayerManager playerManager;
         private readonly IReader reader;
         private readonly IWriter writer;
-        private IPlayerActionFactory playerActionFactory;
-	    private IRandomEncountersManager randomEncountersManager;
-	    private IRandomNumberGenerator randomNumberGenerator;
+        private readonly IPlayerActionFactory playerActionFactory;
+        private IPlayerManager playerManager;
+        private readonly IRandomEncountersManager randomEncountersManager;
+        private readonly IRandomNumberGenerator randomNumberGenerator;
+        private readonly ITownsManager townsManager;
 
-        public Engine(IPlayerManager playerManager, ITownsManager townsManager, IReader reader, IWriter writer, IPlayerActionFactory playerActionFactory, IRandomEncountersManager randomEncountersManager, IRandomNumberGenerator randomNumberGenerator)
+        public Engine(IPlayerManager playerManager, ITownsManager townsManager, IReader reader, IWriter writer,
+            IPlayerActionFactory playerActionFactory, IRandomEncountersManager randomEncountersManager,
+            IRandomNumberGenerator randomNumberGenerator)
         {
             this.playerManager = playerManager;
             this.townsManager = townsManager;
@@ -29,8 +27,8 @@ namespace BackToBg.Core.Core
             this.randomEncountersManager = randomEncountersManager;
             this.randomNumberGenerator = randomNumberGenerator;
             //this.playerActionFactory = new PlayerActionFactory(this.townsManager, this.playerManager, reader, writer);
-			//this.randomEncountersManager = new RandomEncountersManager(this.playerManager,this.reader,this.writer);
-			//this.randomNumberGenerator = new RandomNumberGenerator();
+            //this.randomEncountersManager = new RandomEncountersManager(this.playerManager,this.reader,this.writer);
+            //this.randomNumberGenerator = new RandomNumberGenerator();
         }
 
         public void Run()
@@ -44,12 +42,10 @@ namespace BackToBg.Core.Core
                 {
                     var action = this.playerActionFactory.CreateAction(key.Key);
                     action.Execute();
-	                var randomNumber = this.randomNumberGenerator.GetNextNumber();
-					Console.WriteLine(randomNumber);
-					if (this.randomEncountersManager.RandomEncounters.ContainsKey(randomNumber))
-					{
-						this.randomEncountersManager.RandomEncounters[randomNumber].Invoke();
-					}
+                    var randomNumber = this.randomNumberGenerator.GetNextNumber();
+                    Console.WriteLine(randomNumber);
+                    if (this.randomEncountersManager.RandomEncounters.ContainsKey(randomNumber))
+                        this.randomEncountersManager.RandomEncounters[randomNumber].Invoke();
                     town.Map.GenerateMap();
                     //this.Town.Map.Update(action);
                 }

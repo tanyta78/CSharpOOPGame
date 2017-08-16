@@ -28,14 +28,14 @@ namespace BackToBg.Core.Business.IO.Writer
 
         public void DisplayQuestCompletionMessage(string message)
         {
-            this.CenterCursor(message);
+            CenterCursor(message);
             DisplayMessageInColor(message, ConsoleColor.Green);
             Thread.Sleep(1000);
         }
 
         public void DisplayException(string message)
         {
-            this.CenterCursor(message);
+            CenterCursor(message);
             DisplayMessageInColor(message, ConsoleColor.Red);
             Thread.Sleep(1000);
         }
@@ -58,15 +58,8 @@ namespace BackToBg.Core.Business.IO.Writer
         public void DisplayMessageInColorCentered(string message, ConsoleColor color)
         {
             Console.Clear();
-            this.CenterCursor(message);
-            this.DisplayMessageInColor(message, color);
-        }
-
-        public void DisplayStatsBar(string message, ConsoleColor color)
-        {
-            throw new NotImplementedException();
-            Console.SetCursorPosition(0, 0);
-            //shift everything on the console 1 row downwards
+            CenterCursor(message);
+            DisplayMessageInColor(message, color);
         }
 
         private void CenterCursor(string message)

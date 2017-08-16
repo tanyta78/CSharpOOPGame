@@ -38,7 +38,7 @@ namespace BackToBg.Core
                     new Sneaker(6, "Nike", 15, Rarity.Epic),
                     new Sneaker(7, "Reebok", 15, Rarity.Epic),
                     new Sneaker(8, "Puma", 15, Rarity.Epic),
-                    new Sneaker(9, "Guma", 15, Rarity.Epic),
+                    new Sneaker(9, "Guma", 15, Rarity.Epic)
                 }
             };
 
@@ -47,7 +47,7 @@ namespace BackToBg.Core
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
 
-            CustomEventHandler handler = new CustomEventHandler(writer);
+            var handler = new CustomEventHandler(writer);
 
             ITownsManager townsManager = new TownsManager();
 
@@ -55,7 +55,8 @@ namespace BackToBg.Core
             ITown sofia = new Town("Sofia", sofiaMap, writer);
 
             sofia.AddBuilding(new Banicharnitsa(1, "Banicharnica", "Topli zakuski", 10, 50, playerManager));
-            sofia.AddBuilding(new PoliceOffice(townsManager, playerManager, randomNumberGenerator, 1, "Police Station", "Just a police station", 30, 15, handler));
+            sofia.AddBuilding(new PoliceOffice(townsManager, playerManager, randomNumberGenerator, 1, "Police Station",
+                "Just a police station", 30, 15, handler));
 
             Shop mall = new MallShop(playerManager, 1, "Mall of Sofia", null, 30, 50)
             {
@@ -69,9 +70,7 @@ namespace BackToBg.Core
             sofia.AddBuilding(mall);
 
             foreach (var building in Initializer.InitializeBuildings())
-            {
                 sofia.AddBuilding(building);
-            }
 
             townsManager.AddTown(sofia);
             townsManager.SetCurrentTown(sofia);
@@ -81,10 +80,13 @@ namespace BackToBg.Core
 
             townsManager.AddTown(montana);
 
-            IPlayerActionFactory playerActionFactory = new PlayerActionFactory(townsManager, playerManager, reader, writer);
-            IRandomEncountersManager randomEncountersManager = new RandomEncountersManager(playerManager, reader, writer);
+            IPlayerActionFactory playerActionFactory =
+                new PlayerActionFactory(townsManager, playerManager, reader, writer);
+            IRandomEncountersManager randomEncountersManager =
+                new RandomEncountersManager(playerManager, reader, writer);
 
-            IEngine engine = new Engine(playerManager, townsManager, reader, writer, playerActionFactory, randomEncountersManager, randomNumberGenerator);
+            IEngine engine = new Engine(playerManager, townsManager, reader, writer, playerActionFactory,
+                randomEncountersManager, randomNumberGenerator);
             engine.Run();
         }
     }

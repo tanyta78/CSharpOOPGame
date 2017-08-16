@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BackToBg.Core.Business.Common;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Utilities;
@@ -10,20 +9,20 @@ namespace BackToBg.Core.Models.Quests
 
     public abstract class Quest : IQuest
     {
-        public event QuestFinishedEventHandler QuestCompletionEvent; 
-        private int id;
-        private string name;
         protected CustomEventHandler handler;
+        private int id;
         private bool isFinished;
+        private string name;
 
-        public Quest(string name, string description, int rewardExperiancePoints, int rewardMoney, CustomEventHandler handler)
+        public Quest(string name, string description, int rewardExperiancePoints, int rewardMoney,
+            CustomEventHandler handler)
         {
             this.Name = name;
             this.Description = description;
             this.RewardExperiancePoints = rewardExperiancePoints;
             this.RewardMoney = rewardMoney;
             this.handler = handler;
-            this.QuestCompletionEvent += handler.QuestCompletion;
+            QuestCompletionEvent += handler.QuestCompletion;
             this.QuestCompetionItems = new List<IQuestCompetionItem>();
         }
 
@@ -33,8 +32,8 @@ namespace BackToBg.Core.Models.Quests
 
             private set
             {
-				Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
-				this.id = value;
+                Validator.IsPositive(value, nameof(this.ID) + Messages.ValueShouldBePositive);
+                this.id = value;
             }
         }
 
@@ -44,8 +43,8 @@ namespace BackToBg.Core.Models.Quests
 
             private set
             {
-				Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
-				this.name = value;
+                Validator.IsNullEmptyOrWhiteSpace(value, nameof(this.name) + Messages.ValueShouldNotBeEmptyOrNull);
+                this.name = value;
             }
         }
 
@@ -57,20 +56,20 @@ namespace BackToBg.Core.Models.Quests
 
         public bool IsFinished
         {
-            get { return this.isFinished; }
+            get => this.isFinished;
             set
             {
                 this.isFinished = value;
                 if (value)
-                {
-                    this.OnQuestCompletionEvent(new QuestCompletionEventArgs(this.name));
-                }   
+                    OnQuestCompletionEvent(new QuestCompletionEventArgs(this.name));
             }
         }
 
+        public event QuestFinishedEventHandler QuestCompletionEvent;
+
         protected virtual void OnQuestCompletionEvent(QuestCompletionEventArgs args)
         {
-            this.QuestCompletionEvent?.Invoke(this, args);
+            QuestCompletionEvent?.Invoke(this, args);
         }
     }
 }

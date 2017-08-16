@@ -12,10 +12,8 @@ namespace BackToBg.Core.Business.Menu
     public class BuyMenu : Menu
     {
         private IEngine engine;
-        private IDictionary<int, Action> actions;
-        private IList<IFood> shopList;
-        private IPlayer player;
-        private IList<string> menuText = new List<string>();
+        private readonly IPlayer player;
+        private readonly IList<IFood> shopList;
 
         public BuyMenu(string name, IReader reader, IWriter writer, IPlayer player) : base(name, reader, writer)
         {
@@ -26,27 +24,28 @@ namespace BackToBg.Core.Business.Menu
                 new Kifla(2, "Kifla s shokolad", 2, 20),
                 new Kifla(4, "Kifla s krem", 2, 13)
             };
-            this.menuText = this.shopList.Select(i => i.Name).ToList();
-            this.actions = new Dictionary<int, Action>();
+            this.MenuText = this.shopList.Select(i => i.Name).ToList();
+            this.Actions = new Dictionary<int, Action>();
         }
+
+        protected override IDictionary<int, Action> Actions { get; }
+
+        protected override IList<string> MenuText { get; } = new List<string>();
 
         protected override void PrintMenu()
         {
             this.Writer.Clear();
-            this.Writer.SetCursorPosition((this.Writer.ConsoleWidth - this.name.Length) / 2, (this.Writer.ConsoleHeight - this.shopList.Count) / 2 - 1);
+            this.Writer.SetCursorPosition((this.Writer.ConsoleWidth - this.name.Length) / 2,
+                (this.Writer.ConsoleHeight - this.shopList.Count) / 2 - 1);
             this.Writer.DisplayMessageInColor(this.name, ConsoleColor.Green);
             for (var i = 0; i < this.shopList.Count; i++)
             {
                 this.Writer.SetCursorPosition(this.Writer.ConsoleWidth / 2 - this.shopList[0].Name.Length,
                     (this.Writer.ConsoleHeight - this.shopList.Count) / 2 + i + 1);
                 if (i == this.selectedIndex)
-                {
                     this.Writer.WriteLine($">{this.shopList[i]}<");
-                }
                 else
-                {
                     this.Writer.WriteLine(this.shopList[i].ToString());
-                }
             }
         }
 
@@ -57,20 +56,20 @@ namespace BackToBg.Core.Business.Menu
             {
                 this.player.Money -= this.shopList[selected].Price;
                 this.player.Stamina += this.shopList[selected].Stamina;
-                this.writer.DisplayMessageInColorCentered($"You just bought a {this.shopList[selected].Name}", ConsoleColor.Green);
+                this.writer.DisplayMessageInColorCentered($"You just bought a {this.shopList[selected].Name}",
+                    ConsoleColor.Green);
                 Thread.Sleep(1000);
             }
             else
             {
-                throw new NotEnoughMoneyException($"Not enough money to buy {this.shopList[selected].Name}");   //TODO catch ex 
+                throw new NotEnoughMoneyException(
+                    $"Not enough money to buy {this.shopList[selected].Name}"); //TODO catch ex 
             }
         }
 
-        protected override IDictionary<int, Action> Actions => this.actions;
-        protected override IList<string> MenuText => this.menuText;
         protected override void ExecuteCommand(int commandNumber)
         {
-            this.BuySelectedFood(this.selectedIndex);
+            BuySelectedFood(this.selectedIndex);
         }
     }
 }

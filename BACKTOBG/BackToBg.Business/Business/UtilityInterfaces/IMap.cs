@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BackToBg.Core.Models.EntityInterfaces;
 
 namespace BackToBg.Core.Business.UtilityInterfaces
@@ -12,7 +11,7 @@ namespace BackToBg.Core.Business.UtilityInterfaces
         int Size { get; }
 
         char[][] GetMap();
-        
+
         void GenerateMap();
         void DrawMap();
         void AddPunchable(IPunchable punchable);

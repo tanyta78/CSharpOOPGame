@@ -10,11 +10,12 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings.Shops
 {
     public class Banicharnitsa : Shop
     {
-        [Inject] private IReader reader = new ConsoleReader();
-        [Inject] private IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
-        private IPlayer player;
+        private readonly IPlayer player;
+        [Inject] private readonly IReader reader = new ConsoleReader();
+        [Inject] private readonly IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
 
-        public Banicharnitsa(int id, string name, string description, int x, int y, IPlayerManager playerManager, int sizeFactor = Constants.DefaultSizeFactor)
+        public Banicharnitsa(int id, string name, string description, int x, int y, IPlayerManager playerManager,
+            int sizeFactor = Constants.DefaultSizeFactor)
             : base(id, name, description, x, y, sizeFactor)
         {
             this.player = playerManager.Player;
@@ -22,7 +23,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings.Shops
 
         public override (int row, int col, string[] figure) GetDrawingInfo()
         {
-            return (this.x, this.y, this.GetFigure());
+            return (this.x, this.y, GetFigure());
         }
 
         private string[] GetFigure()

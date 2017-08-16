@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
-using BackToBg.Core.Models.Utilities;
 
 namespace BackToBg.Core.Business.Paginators
 {
@@ -13,17 +9,15 @@ namespace BackToBg.Core.Business.Paginators
     {
         private IPlayerManager playerManager;
 
-        public QuestsPaginator(IReader reader, IWriter writer, IPlayerManager playerManager) : base(reader, writer, "Quests")
+        public QuestsPaginator(IReader reader, IWriter writer, IPlayerManager playerManager) : base(reader, writer,
+            "Quests")
         {
             this.playerManager = playerManager;
         }
 
         protected abstract IReadOnlyList<IQuest> Quests { get; }
 
-        protected override IReadOnlyList<IQuest> Items
-        {
-            get => this.Quests;
-        }
+        protected override IReadOnlyList<IQuest> Items => this.Quests;
 
         protected override void ExecuteAction()
         {
