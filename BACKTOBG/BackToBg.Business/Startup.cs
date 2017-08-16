@@ -19,6 +19,8 @@ namespace BackToBg.Core
     {
         public static void Main()
         {
+            
+
             IRandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
             IPlayer player = new Player(1, 1);
             IPlayerManager playerManager = new PlayerManager(player);
@@ -26,12 +28,14 @@ namespace BackToBg.Core
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
 
+            CustomEventHandler handler = new CustomEventHandler(writer);
+
             ITownsManager townsManager = new TownsManager();
 
             IMap sofiaMap = new Map(player, writer);
             ITown sofia = new Town("Sofia", sofiaMap, writer);
             sofia.AddBuilding(new Banicharnitsa(1, "Banicharnica", "Topli zakuski", 10, 50, playerManager));
-            sofia.AddBuilding(new PoliceOffice(townsManager, playerManager, randomNumberGenerator, 1, "Police Station", "Just a police station", 30, 15));
+            sofia.AddBuilding(new PoliceOffice(townsManager, playerManager, randomNumberGenerator, 1, "Police Station", "Just a police station", 30, 15, handler));
             foreach (var building in Initializer.InitializeBuildings())
             {
                 sofia.AddBuilding(building);

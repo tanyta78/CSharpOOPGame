@@ -3,6 +3,7 @@ using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.People;
 using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.Common;
 using BackToBg.Core.Business.Map;
 using BackToBg.Core.Models.Utilities;
 
@@ -18,8 +19,7 @@ namespace BackToBg.Core.Models.Quests
         [Inject]
         private IRandomNumberGenerator randomNumberGenerator;
 
-        public BanditQuest(string name, string description, int rewardExperiancePoints, int rewardMoney)
-            : base(name, description, rewardExperiancePoints, rewardMoney)
+        public BanditQuest(string name, string description, int rewardExperiancePoints, int rewardMoney, CustomEventHandler handler) : base(name, description, rewardExperiancePoints, rewardMoney, handler)
         {
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackToBg.Core.Business.Common;
 using BackToBg.Core.Business.Factories;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
@@ -14,14 +15,16 @@ namespace BackToBg.Core.Business.Menu
         private IPlayerManager playerManager;
         private QuestFactory questFactory;
         private readonly IRandomNumberGenerator randomNumberGenerator;
+        private CustomEventHandler handler;
 
-        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, ITownsManager townsManager, IPlayerManager playerManager, IRandomNumberGenerator randomNumberGenerator)
+        public TakeOnQuestMenu(string name, IReader reader, IWriter writer, ITownsManager townsManager, IPlayerManager playerManager, IRandomNumberGenerator randomNumberGenerator, CustomEventHandler handler)
             : base(name, reader, writer)
         {
             this.townsManager = townsManager;
             this.playerManager = playerManager;
             this.randomNumberGenerator = randomNumberGenerator;
-            this.questFactory = new QuestFactory(this.townsManager.GetCurrentTown(), this.randomNumberGenerator);
+            this.handler = handler;
+            this.questFactory = new QuestFactory(this.townsManager.GetCurrentTown(), this.randomNumberGenerator, handler);
         }
 
         protected override IDictionary<int, Action> Actions => new Dictionary<int, Action>

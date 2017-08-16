@@ -29,10 +29,6 @@ namespace BackToBg.Core.Models.Town
 
         public void RefreshQuest(IQuest quest)
         {
-            if (quest.IsFinished)
-            {
-                this.writer.DisplayQuestCompletionMessage($"Quest {quest.Name} is finished!");
-            }
             this.map.GenerateMap();
         }
 

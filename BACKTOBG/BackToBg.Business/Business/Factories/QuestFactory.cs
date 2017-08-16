@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.Common;
 using BackToBg.Core.Business.UtilityInterfaces;
 using BackToBg.Core.Models.EntityInterfaces;
 using BackToBg.Core.Models.Utilities;
@@ -12,11 +13,13 @@ namespace BackToBg.Core.Business.Factories
     {
         private readonly ITown town;
         private readonly IRandomNumberGenerator randomNumberGenerator;
+        private readonly CustomEventHandler handler;
 
-        public QuestFactory(ITown town, IRandomNumberGenerator randomNumberGenerator)
+        public QuestFactory(ITown town, IRandomNumberGenerator randomNumberGenerator, CustomEventHandler handler)
         {
             this.town = town;
             this.randomNumberGenerator = randomNumberGenerator;
+            this.handler = handler;
         }
 
         public IQuest InjectQuest(Type buildingType)
@@ -29,11 +32,12 @@ namespace BackToBg.Core.Business.Factories
                 fieldAttribute.Name,
                 fieldAttribute.Description,
                 fieldAttribute.RewardExperiancePoints,
-                fieldAttribute.RewardMoney
+                fieldAttribute.RewardMoney,
+                this.handler
             };
 
             var quest = (IQuest) Activator.CreateInstance(fieldAttribute.QuestType, parameters);
-            InjectDependencies(quest);
+            this.InjectDependencies(quest);
 
             return quest;
         }

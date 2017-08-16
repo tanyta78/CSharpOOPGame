@@ -54,7 +54,9 @@
     <Compile Include="Business\Attributes\InvokeAttribute.cs" />
     <Compile Include="Business\Attributes\PlayerActionAttribute.cs" />
     <Compile Include="Business\Attributes\QuestAttribute.cs" />
+    <Compile Include="Business\Common\CustomEventHandler.cs" />
     <Compile Include="Business\Common\Initializer.cs" />
+    <Compile Include="Business\Common\QuestCompletionEventArgs.cs" />
     <Compile Include="Business\Encounters\Injures.cs" />
     <Compile Include="Business\Encounters\ItemsFound.cs" />
     <Compile Include="Business\Exceptions\InvalidActionException.cs" />

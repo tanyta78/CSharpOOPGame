@@ -1,4 +1,5 @@
 ﻿using BackToBg.Core.Business.Attributes;
+using BackToBg.Core.Business.Common;
 using BackToBg.Core.Business.IO.Reader;
 using BackToBg.Core.Business.IO.Writer;
 using BackToBg.Core.Business.Menu;
@@ -16,17 +17,19 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
         private ITownsManager townsManager;
         private IPlayerManager playerManager;
         private IRandomNumberGenerator randomNumberGenerator;
+        private CustomEventHandler handler;
 
         //private static readonly Quest PoliceQuest = new Quest(1, "Police Quest",
         //    "Now you are in Police office.The police need you. Your mission, if you accept it, is to arrest three famous criminals. Go and find them. The mission will end up bringing three pairs of boots. You will receive boot, 50 experience and 500 money",
         //    50, 500);
 
-        public PoliceOffice(ITownsManager townsManager, IPlayerManager playerManager, IRandomNumberGenerator randomNumberGenerator, int id, string name, string description, int x, int y, int sizeFactor = Constants.DefaultSizeFactor)
+        public PoliceOffice(ITownsManager townsManager, IPlayerManager playerManager, IRandomNumberGenerator randomNumberGenerator, int id, string name, string description, int x, int y, CustomEventHandler handler, int sizeFactor = Constants.DefaultSizeFactor)
             : base(id, name, description, x, y, sizeFactor)
         {
             this.townsManager = townsManager;
             this.playerManager = playerManager;
             this.randomNumberGenerator = randomNumberGenerator;
+            this.handler = handler;
             //this.QuestAvailableHere = PoliceQuest;
             //this.ItemRequeredToEnter = ItemToEnter;
             //this.QuestAvailableHere.RewardItem = new HeavyBoot(1, "PoliceBoots", 1, Rarity.Epic);
@@ -63,7 +66,7 @@ namespace BackToBg.Core.Models.Buildings.SpecialBuildings
 
         public override void Interact()
         {
-            var menu = new TakeOnQuestMenu<PoliceOffice>("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.townsManager, this.playerManager, this.randomNumberGenerator);
+            var menu = new TakeOnQuestMenu<PoliceOffice>("Take on police quest", new ConsoleReader(), new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth), this.townsManager, this.playerManager, this.randomNumberGenerator, this.handler);
             menu.StartMenu();
         }
     }
