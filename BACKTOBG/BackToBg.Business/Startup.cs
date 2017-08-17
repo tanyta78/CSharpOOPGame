@@ -25,7 +25,11 @@ namespace BackToBg.Core
     {
         public static void Main()
         {
-            IRandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+            //IO
+            IReader reader = new ConsoleReader();
+            IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
+
+            //player
             IPlayer player = new Player("Pesho")
             {
                 Inventory = new List<IItem>
@@ -42,22 +46,22 @@ namespace BackToBg.Core
                 }
             };
 
-            IPlayerManager playerManager = new PlayerManager(player);
-
-            IReader reader = new ConsoleReader();
-            IWriter writer = new ConsoleWriter(Constants.ConsoleHeight, Constants.ConsoleWidth);
-
+            //MANAGERS AND UTILITIES
+            IRandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
             ICustomEventHandler handler = new CustomEventHandler(writer);
-
+            IPlayerManager playerManager = new PlayerManager(player);
             ITownsManager townsManager = new TownsManager();
+            IRandomEncountersManager randomEncountersManager =
+                new RandomEncountersManager(playerManager, reader, writer);
+            IPlayerActionFactory playerActionFactory =
+                new PlayerActionFactory(townsManager, playerManager, reader, writer);
 
+            //SOFIA
             IMap sofiaMap = new Map(player, writer);
             ITown sofia = new Town("Sofia", sofiaMap, writer);
-
             sofia.AddBuilding(new Banicharnitsa(1, "Banicharnica", "Topli zakuski", 10, 50, playerManager));
             sofia.AddBuilding(new PoliceOffice(townsManager, playerManager, randomNumberGenerator, 1, "Police Station",
                 "Just a police station", 30, 15, handler));
-
             IBuilding mall = new MallShop(playerManager, 1, "Mall of Sofia", null, 30, 50)
             {
                 Inventory = new List<IItem>
@@ -66,27 +70,19 @@ namespace BackToBg.Core
                     new Overshoe(11, "Obushta", 60, Rarity.Epic)
                 }
             };
-
             sofia.AddBuilding(mall);
-
             foreach (var building in Initializer.InitializeBuildings())
                 sofia.AddBuilding(building);
-
             townsManager.AddTown(sofia);
             townsManager.SetCurrentTown(sofia);
 
+            //MONTANA
             IMap montanaMap = new Map(player, writer);
-
             ITown montana = new Town("Montana", montanaMap, writer);
             montana.AddBuilding(new BasicBuilding(10, 10, 3));
-
             townsManager.AddTown(montana);
 
-            IPlayerActionFactory playerActionFactory =
-                new PlayerActionFactory(townsManager, playerManager, reader, writer);
-            IRandomEncountersManager randomEncountersManager =
-                new RandomEncountersManager(playerManager, reader, writer);
-
+            //ENGINE
             IEngine engine = new Engine(playerManager, townsManager, reader, writer, playerActionFactory,
                 randomEncountersManager, randomNumberGenerator);
             engine.Run();

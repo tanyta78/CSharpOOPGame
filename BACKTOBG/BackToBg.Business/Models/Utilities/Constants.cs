@@ -13,7 +13,7 @@ namespace BackToBg.Core.Models.Utilities
         public const char BanditFigure = 'B';
         public const char BasicBuildingBorder = '*';
         public const char BasicBuildingInner = 'O';
-        public const int ConsoleHeight = 41;
+        public const int ConsoleHeight = 31;
         public const int ConsoleWidth = 61;
         public const int DefaultBanditHealth = 10;
         public const int DefaultSizeFactor = 1;

@@ -14,6 +14,7 @@ namespace BackToBg.Core.Models.Quests
         private int id;
         private bool isFinished;
         private string name;
+        public event QuestFinishedEventHandler QuestCompletionEvent;
 
         public Quest(string name, string description, int rewardExperiancePoints, int rewardMoney,
             ICustomEventHandler handler)
@@ -65,8 +66,6 @@ namespace BackToBg.Core.Models.Quests
                     OnQuestCompletionEvent(new QuestCompletionEventArgs(this.name));
             }
         }
-
-        public event QuestFinishedEventHandler QuestCompletionEvent;
 
         protected virtual void OnQuestCompletionEvent(QuestCompletionEventArgs args)
         {
